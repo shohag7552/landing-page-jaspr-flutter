@@ -1,0 +1,746 @@
+Analyzing food_delivery_landing...
+
+  error - lib/components/counter.dart:25:13 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/counter.dart:25:13 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/counter.dart:27:16 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/counter.dart:27:16 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/counter.dart:32:13 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/counter.dart:32:13 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/features_section.dart:8:23 - 'FeaturesSection.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/features_section.dart:8:23 - 'FeaturesSection.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/features_section.dart:50:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/features_section.dart:50:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/features_section.dart:50:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:50:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:54:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/features_section.dart:54:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/features_section.dart:58:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:58:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:64:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:64:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:71:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:71:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:77:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/features_section.dart:77:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/features_section.dart:77:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:77:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:78:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:78:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:79:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:79:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:80:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:80:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:82:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:82:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:84:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/features_section.dart:84:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/features_section.dart:84:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:84:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:91:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/features_section.dart:91:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/features_section.dart:91:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:91:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/features_section.dart:92:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/features_section.dart:92:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/features_section.dart:93:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/features_section.dart:93:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/features_section.dart:93:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:93:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:98:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/features_section.dart:98:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/features_section.dart:98:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/features_section.dart:98:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/features_section.dart:108:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/features_section.dart:108:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/features_section.dart:112:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:112:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:113:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/features_section.dart:113:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/features_section.dart:114:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/features_section.dart:114:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/features_section.dart:114:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:114:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:118:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:118:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:123:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:123:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:127:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:127:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:128:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/features_section.dart:128:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/features_section.dart:131:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:131:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/features_section.dart:135:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/features_section.dart:135:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/features_section.dart:135:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:135:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:140:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/features_section.dart:140:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/features_section.dart:140:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/features_section.dart:140:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:9:23 - 'FooterSection.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/footer.dart:9:23 - 'FooterSection.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/footer.dart:44:45 - The named parameter 'placeholder' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'placeholder'. - undefined_named_parameter
+  error - lib/components/footer.dart:44:45 - The named parameter 'placeholder' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'placeholder'. - undefined_named_parameter
+  error - lib/components/footer.dart:44:103 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:44:103 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:81:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:81:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:83:7 - The named parameter 'paddingTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:83:7 - The named parameter 'paddingTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:84:7 - The named parameter 'paddingBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:84:7 - The named parameter 'paddingBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:85:7 - The named parameter 'marginTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:85:7 - The named parameter 'marginTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:89:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/footer.dart:89:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/footer.dart:89:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:89:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:90:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:90:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:90:67 - The method 'FlexBasis' isn't defined for the type 'FooterSection'. Try correcting the name to the name of an existing method, or defining a method named 'FlexBasis'. - undefined_method
+  error - lib/components/footer.dart:90:67 - The method 'FlexBasis' isn't defined for the type 'FooterSection'. Try correcting the name to the name of an existing method, or defining a method named 'FlexBasis'. - undefined_method
+  error - lib/components/footer.dart:91:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:91:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:91:67 - The method 'FlexBasis' isn't defined for the type 'FooterSection'. Try correcting the name to the name of an existing method, or defining a method named 'FlexBasis'. - undefined_method
+  error - lib/components/footer.dart:91:67 - The method 'FlexBasis' isn't defined for the type 'FooterSection'. Try correcting the name to the name of an existing method, or defining a method named 'FlexBasis'. - undefined_method
+  error - lib/components/footer.dart:92:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:92:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:92:67 - The method 'FlexBasis' isn't defined for the type 'FooterSection'. Try correcting the name to the name of an existing method, or defining a method named 'FlexBasis'. - undefined_method
+  error - lib/components/footer.dart:92:67 - The method 'FlexBasis' isn't defined for the type 'FooterSection'. Try correcting the name to the name of an existing method, or defining a method named 'FlexBasis'. - undefined_method
+  error - lib/components/footer.dart:94:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:94:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:95:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:95:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:98:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:98:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:104:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:104:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:106:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:106:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:111:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:111:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:116:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:116:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:117:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/footer.dart:117:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/footer.dart:122:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/footer.dart:122:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/footer.dart:122:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:122:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:126:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:126:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:131:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/footer.dart:131:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/footer.dart:131:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:131:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:132:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:132:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:133:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:133:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:134:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:134:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:136:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:136:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:141:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:141:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:145:34 - The class 'ListStyle' doesn't have a constant constructor 'value'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:145:34 - The class 'ListStyle' doesn't have a constant constructor 'value'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:145:40 - Undefined name 'ListStyleType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:145:40 - Undefined name 'ListStyleType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:146:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:146:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:146:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:146:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:147:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:147:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:147:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:147:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:150:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:150:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:153:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:153:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:155:45 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/footer.dart:155:45 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/footer.dart:155:55 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:155:55 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:159:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:159:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:162:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:162:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:164:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:164:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/footer.dart:173:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:173:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:175:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/footer.dart:175:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/footer.dart:176:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:176:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:176:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:176:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:182:37 - Invalid constant value. - invalid_constant
+  error - lib/components/footer.dart:182:37 - Invalid constant value. - invalid_constant
+  error - lib/components/footer.dart:182:43 - The method 'hex' isn't defined for the type 'Color'. Try correcting the name to the name of an existing method, or defining a method named 'hex'. - undefined_method
+  error - lib/components/footer.dart:182:43 - The method 'hex' isn't defined for the type 'Color'. Try correcting the name to the name of an existing method, or defining a method named 'hex'. - undefined_method
+  error - lib/components/footer.dart:182:66 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/footer.dart:182:66 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/footer.dart:182:66 - The argument type 'Unit' can't be assigned to the parameter type 'OutlineWidth?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:182:66 - The argument type 'Unit' can't be assigned to the parameter type 'OutlineWidth?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:188:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:188:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/footer.dart:188:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:188:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/footer.dart:189:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/footer.dart:189:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/footer.dart:198:7 - The named parameter 'paddingTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:198:7 - The named parameter 'paddingTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:199:7 - The named parameter 'borderTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:199:7 - The named parameter 'borderTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderTop'. - undefined_named_parameter
+  error - lib/components/footer.dart:199:29 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:199:29 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:199:59 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:199:59 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:202:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:202:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:208:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:208:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:211:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:211:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:214:45 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/footer.dart:214:45 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/footer.dart:214:55 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:214:55 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:217:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:217:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:220:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:220:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/footer.dart:223:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:223:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:223:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:223:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:229:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:229:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/footer.dart:229:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/footer.dart:229:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/header.dart:22:42 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/header.dart:22:42 - The static getter 'Component' isn't defined for the context type 'Component'. Try correcting the name to the name of an existing static getter, or defining a getter or field named 'Component'. - dot_shorthand_undefined_member
+  error - lib/components/hero_section.dart:8:23 - 'HeroSection.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/hero_section.dart:8:23 - 'HeroSection.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/hero_section.dart:77:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:77:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:77:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:77:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:78:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:78:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:87:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:87:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:87:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:87:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:87:60 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:87:60 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:87:102 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:87:102 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:88:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:88:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:91:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:91:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:91:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:91:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:92:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:92:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:92:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:92:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:97:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:97:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:98:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:98:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:98:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:98:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:99:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:99:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:100:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:100:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:101:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:101:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:104:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:104:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:111:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:111:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:112:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:112:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:117:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:117:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:119:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:119:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:124:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:124:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:125:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:125:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:128:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:128:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:128:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:128:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:133:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:133:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:134:26 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:134:26 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:134:56 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:134:56 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:135:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:135:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:135:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:135:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:138:7 - The named parameter 'borderColor' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderColor'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:138:7 - The named parameter 'borderColor' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderColor'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:138:32 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:138:32 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:139:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:139:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:140:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:140:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:148:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:148:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:150:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:150:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:155:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:155:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:156:7 - The named parameter 'borderTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderTop'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:156:7 - The named parameter 'borderTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderTop'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:156:29 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:156:29 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:156:59 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:156:59 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:157:7 - The named parameter 'paddingTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingTop'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:157:7 - The named parameter 'paddingTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'paddingTop'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:162:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:162:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:172:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:172:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:173:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:173:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:173:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:173:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:181:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:181:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:185:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:185:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:192:60 - The operator 'unary-' isn't defined for the type 'Unit'. Try defining the operator 'unary-'. - undefined_operator
+  error - lib/components/hero_section.dart:192:60 - The operator 'unary-' isn't defined for the type 'Unit'. Try defining the operator 'unary-'. - undefined_operator
+  error - lib/components/hero_section.dart:192:83 - The operator 'unary-' isn't defined for the type 'Unit'. Try defining the operator 'unary-'. - undefined_operator
+  error - lib/components/hero_section.dart:192:83 - The operator 'unary-' isn't defined for the type 'Unit'. Try defining the operator 'unary-'. - undefined_operator
+  error - lib/components/hero_section.dart:193:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:193:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:194:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:194:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:201:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:201:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:202:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:202:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:202:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:202:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:204:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:204:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:209:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:209:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/hero_section.dart:209:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:209:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:210:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:210:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:213:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:213:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:214:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:214:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:214:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:214:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/hero_section.dart:215:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:215:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:216:7 - The named parameter 'animationName' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationName'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:216:7 - The named parameter 'animationName' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationName'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:217:7 - The named parameter 'animationDuration' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationDuration'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:217:7 - The named parameter 'animationDuration' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationDuration'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:218:7 - The named parameter 'animationIterationCount' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationIterationCount'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:218:7 - The named parameter 'animationIterationCount' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationIterationCount'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:218:38 - Undefined name 'IterationCount'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:218:38 - Undefined name 'IterationCount'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:219:7 - The named parameter 'animationTimingFunction' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationTimingFunction'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:219:7 - The named parameter 'animationTimingFunction' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'animationTimingFunction'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:219:32 - Undefined name 'TimingFunction'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:219:32 - Undefined name 'TimingFunction'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/hero_section.dart:223:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:223:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:229:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:229:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/hero_section.dart:237:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:237:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:240:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:240:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/hero_section.dart:245:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:245:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:245:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:245:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:255:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:255:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/hero_section.dart:255:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/hero_section.dart:255:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:20:7 - Undefined name 'window'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:20:7 - Undefined name 'window'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:21:26 - Undefined name 'window'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:21:26 - Undefined name 'window'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:76:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:76:15 - The argument type 'int' can't be assigned to the parameter type 'ZIndex?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:77:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:77:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:77:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:77:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:78:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:78:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:78:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:78:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:82:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:82:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:82:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:82:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:85:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/navbar.dart:85:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/navbar.dart:85:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/navbar.dart:85:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/navbar.dart:92:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:92:22 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:92:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:92:26 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:93:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:93:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:93:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:93:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:100:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:100:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:106:15 - The named parameter 'offsetX' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument
+  error - lib/components/navbar.dart:106:15 - The named parameter 'offsetX' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument
+  error - lib/components/navbar.dart:106:15 - The named parameter 'offsetY' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument
+  error - lib/components/navbar.dart:106:15 - The named parameter 'offsetY' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument
+  error - lib/components/navbar.dart:106:33 - The named parameter 'dx' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'dx'. - undefined_named_parameter
+  error - lib/components/navbar.dart:106:33 - The named parameter 'dx' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'dx'. - undefined_named_parameter
+  error - lib/components/navbar.dart:106:43 - The named parameter 'dy' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'dy'. - undefined_named_parameter
+  error - lib/components/navbar.dart:106:43 - The named parameter 'dy' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'dy'. - undefined_named_parameter
+  error - lib/components/navbar.dart:106:53 - The named parameter 'blurRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'blurRadius'. - undefined_named_parameter
+  error - lib/components/navbar.dart:106:53 - The named parameter 'blurRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'blurRadius'. - undefined_named_parameter
+  error - lib/components/navbar.dart:112:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:112:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:116:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:116:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:120:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:120:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:125:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:125:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:126:45 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:126:45 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:126:55 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:126:55 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:130:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:130:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:133:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:133:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:139:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:139:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:142:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:142:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/navbar.dart:142:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:142:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/navbar.dart:143:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/navbar.dart:143:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/navbar.dart:146:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:146:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:146:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:146:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:149:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:149:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:152:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:152:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:155:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:155:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:156:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:156:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:159:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:159:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:161:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/navbar.dart:161:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/navbar.dart:161:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/navbar.dart:161:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/navbar.dart:165:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/navbar.dart:165:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/navbar.dart:165:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/navbar.dart:165:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/navbar.dart:168:49 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:168:49 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/navbar.dart:168:59 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:168:59 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:177:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/navbar.dart:177:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/navbar.dart:177:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:177:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/navbar.dart:183:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/navbar.dart:183:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:8:23 - 'PopularDishes.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/popular_dishes.dart:8:23 - 'PopularDishes.build' ('Iterable<Component> Function(BuildContext)') isn't a valid override of 'StatelessComponent.build' ('Component Function(BuildContext)'). - invalid_override
+           - The member being overridden at ../../.pub-cache/hosted/pub.dev/jaspr-0.22.3/lib/src/framework/stateless_component.dart:120:13.
+  error - lib/components/popular_dishes.dart:104:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/popular_dishes.dart:104:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/popular_dishes.dart:104:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:104:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:105:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:105:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:110:30 - There's no constant named 'flexEnd' in 'AlignItems'. Try correcting the name to the name of an existing constant, or defining a constant named 'flexEnd'. - undefined_enum_constant
+  error - lib/components/popular_dishes.dart:110:30 - There's no constant named 'flexEnd' in 'AlignItems'. Try correcting the name to the name of an existing constant, or defining a constant named 'flexEnd'. - undefined_enum_constant
+  error - lib/components/popular_dishes.dart:111:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:111:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:116:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:116:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:120:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:120:7 - The named parameter 'gridTemplateColumns' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'gridTemplateColumns'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:120:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:120:34 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:121:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:121:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:122:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:122:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:123:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:123:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:124:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:124:9 - Undefined name 'GridTemplateColumns'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:126:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:126:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:130:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:130:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:132:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:132:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:132:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/popular_dishes.dart:132:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/popular_dishes.dart:133:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:133:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:133:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:133:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:138:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:138:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:138:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/popular_dishes.dart:138:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/popular_dishes.dart:149:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:149:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:149:7 - Undefined name 'ObjectFit'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:149:7 - Undefined name 'ObjectFit'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:150:49 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:150:49 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:150:59 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:150:59 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:160:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:160:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:164:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:164:7 - The named parameter 'boxShadow' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'boxShadow'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:164:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/popular_dishes.dart:164:43 - Extension methods can't be used in constant expressions. - const_eval_extension_method
+  error - lib/components/popular_dishes.dart:165:49 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:165:49 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:165:59 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:165:59 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:173:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/popular_dishes.dart:173:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/popular_dishes.dart:173:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:173:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:179:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:179:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:182:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:182:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:183:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:183:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:184:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/popular_dishes.dart:184:23 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/components/popular_dishes.dart:184:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:184:27 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/components/popular_dishes.dart:185:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:185:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:188:36 - There's no constant named 'uppercase' in 'TextTransform'. Try correcting the name to the name of an existing constant, or defining a constant named 'uppercase'. - undefined_enum_constant
+  error - lib/components/popular_dishes.dart:188:36 - There's no constant named 'uppercase' in 'TextTransform'. Try correcting the name to the name of an existing constant, or defining a constant named 'uppercase'. - undefined_enum_constant
+  error - lib/components/popular_dishes.dart:193:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:193:12 - The argument type 'Unit' can't be assigned to the parameter type 'Gap?'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:200:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:200:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:204:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:204:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:209:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:209:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:210:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:210:7 - The named parameter 'marginBottom' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginBottom'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:221:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:221:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:226:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:226:26 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:227:7 - The named parameter 'marginTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginTop'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:227:7 - The named parameter 'marginTop' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'marginTop'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:236:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:236:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:238:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:238:7 - The named parameter 'borderRadius' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'borderRadius'. - undefined_named_parameter
+  error - lib/components/popular_dishes.dart:242:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:242:43 - A value of type 'int' can't be assigned to a parameter of type 'Duration' in a const constructor. Try using a subtype, or removing the keyword 'const'. - const_constructor_param_type_mismatch
+  error - lib/components/popular_dishes.dart:242:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:242:53 - The argument type 'int' can't be assigned to the parameter type 'Duration'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:245:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:245:36 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/components/popular_dishes.dart:253:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:253:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:253:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:253:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:258:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:258:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:258:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:258:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:264:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:264:7 - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named
+  error - lib/components/popular_dishes.dart:264:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/components/popular_dishes.dart:264:11 - The argument type 'Map<String, String>' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable
+  error - lib/main.server.dart:18:3 - Undefined name 'jaspr'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:18:3 - Undefined name 'jaspr'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:38:9 - The named parameter 'scrollBehavior' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'scrollBehavior'. - undefined_named_parameter
+  error - lib/main.server.dart:38:9 - The named parameter 'scrollBehavior' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'scrollBehavior'. - undefined_named_parameter
+  error - lib/main.server.dart:38:25 - Undefined name 'ScrollBehavior'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:38:25 - Undefined name 'ScrollBehavior'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:41:24 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/main.server.dart:41:24 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/main.server.dart:41:28 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:41:28 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:42:25 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/main.server.dart:42:25 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/main.server.dart:42:29 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:42:29 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:45:28 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/main.server.dart:45:28 - The class 'Color' doesn't have a constant constructor 'hex'. Try calling a different constructor. - const_with_undefined_constructor
+  error - lib/main.server.dart:46:9 - The named parameter 'overflowX' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'overflowX'. - undefined_named_parameter
+  error - lib/main.server.dart:46:9 - The named parameter 'overflowX' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'overflowX'. - undefined_named_parameter
+  error - lib/main.server.dart:50:24 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/main.server.dart:50:24 - The method 'box' isn't defined for the type 'Styles'. Try correcting the name to the name of an existing method, or defining a method named 'box'. - undefined_method
+  error - lib/main.server.dart:50:28 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:50:28 - Undefined name 'EdgeInsets'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/main.server.dart:55:23 - The getter 'inherit' isn't defined for the type 'Colors'. Try importing the library that defines 'inherit', correcting the name to the name of an existing getter, or defining a getter or field named 'inherit'. - undefined_getter
+  error - lib/main.server.dart:55:23 - The getter 'inherit' isn't defined for the type 'Colors'. Try importing the library that defines 'inherit', correcting the name to the name of an existing getter, or defining a getter or field named 'inherit'. - undefined_getter
+warning - lib/components/counter.dart:3:8 - Duplicate import. Try removing all but one import of the library. - duplicate_import
+warning - lib/components/counter.dart:3:8 - Duplicate import. Try removing all but one import of the library. - duplicate_import
+warning - lib/components/header.dart:3:8 - Duplicate import. Try removing all but one import of the library. - duplicate_import
+warning - lib/components/header.dart:3:8 - Duplicate import. Try removing all but one import of the library. - duplicate_import
+warning - lib/components/navbar.dart:73:16 - The value of the field 'styles' isn't used. Try removing the field, or using it. - unused_field
+warning - lib/components/navbar.dart:73:16 - The value of the field 'styles' isn't used. Try removing the field, or using it. - unused_field
+   info - lib/app.dart:44:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:48:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
+   info - lib/components/features_section.dart:67:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:71:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:83:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:91:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:99:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:105:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:114:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:122:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:127:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/features_section.dart:135:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/features_section.dart:135:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/features_section.dart:140:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/features_section.dart:140:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:79:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
+   info - lib/components/footer.dart:82:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:107:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:118:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:127:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:142:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:146:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:155:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:168:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:174:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:190:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:213:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/footer.dart:223:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:223:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:229:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:229:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:75:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
+   info - lib/components/hero_section.dart:79:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:89:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:98:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:106:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:111:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:117:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:133:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:145:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:167:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:181:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:195:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:203:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:209:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:224:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:237:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/hero_section.dart:245:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:245:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:255:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:255:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/navbar.dart:73:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
+   info - lib/components/navbar.dart:91:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/navbar.dart:101:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/navbar.dart:106:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/navbar.dart:112:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/navbar.dart:125:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/navbar.dart:146:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/navbar.dart:160:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/navbar.dart:177:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/navbar.dart:177:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/navbar.dart:184:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:102:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
+   info - lib/components/popular_dishes.dart:131:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:143:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:161:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:184:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:200:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:209:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:226:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:237:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:246:7 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/components/popular_dishes.dart:253:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:253:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:258:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:258:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:264:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:264:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/main.server.dart:42:9 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/main.server.dart:50:9 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/main.server.dart:55:9 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/main.server.dart:59:9 - Styles are not ordered. Try sorting them. - styles_ordering
+   info - lib/pages/home.dart:33:31 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:33:31 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:35:33 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:35:33 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:36:29 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:36:29 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:37:32 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:37:32 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:43:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:43:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:44:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:44:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:47:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:47:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:50:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:50:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:57:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:57:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:67:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:67:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:75:30 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:75:30 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:76:11 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:76:11 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:77:10 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:77:10 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+
+734 issues found.
