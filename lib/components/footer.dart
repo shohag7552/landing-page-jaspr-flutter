@@ -78,23 +78,22 @@ class FooterSection extends StatelessComponent {
   }
 
   @css
-  static final styles = [
+  static List<StyleRule> get styles => [
     css('.footer').styles(
-      backgroundColor: Color('#0F172A'),
-      color: Colors.white,
       padding: Spacing.only(top: 80.px, bottom: 24.px),
-      
       margin: Spacing.only(top: 80.px),
+      color: Colors.white,
+      backgroundColor: Color('#0F172A'),
     ),
     css('.footer-content').styles(
       display: Display.grid,
+      margin: Spacing.only(bottom: 64.px, left: 24.px, right: 24.px),
       gridTemplate: GridTemplate(columns: GridTracks([
         GridTrack(TrackSize.auto),
         GridTrack(TrackSize.fr(1)),
         GridTrack(TrackSize.auto),
       ])),
       gap: Gap.all(64.px),
-      margin: Spacing.only(bottom: 64.px),
     ),
     css('.mb-4').styles(
       margin: Spacing.only(bottom: 16.px),
@@ -184,23 +183,24 @@ class FooterSection extends StatelessComponent {
       raw: {'outline': '1px solid #FF5E1E'},
     ),
     css('.subscribe-btn').styles(
+      display: Display.flex,
       position: Position.absolute(right: 6.px),
       width: 40.px,
       height: 40.px,
       padding: Spacing.zero,
       radius: BorderRadius.circular(50.percent),
-      display: Display.flex,
-      alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
+      alignItems: AlignItems.center,
     ),
     css('.footer-bottom').styles(
       display: Display.flex,
+      padding: Spacing.only(top: 32.px),
       justifyContent: JustifyContent.spaceBetween,
       alignItems: AlignItems.center,
-      padding: Spacing.only(top: 32.px),
       raw: {'border-top': '1px solid #1E293B'},
     ),
     css('.copyright').styles(
+      margin: Spacing.only(left: 24.px, right: 24.px),
       color: Color('#64748B'),
       fontSize: 0.875.rem,
     ),

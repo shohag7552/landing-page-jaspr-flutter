@@ -74,16 +74,16 @@ class HeroSection extends StatelessComponent {
   }
 
   @css
-  static final styles = [
+  static List<StyleRule> get styles => [
     css('.hero').styles(
-      padding: Spacing.only(top: 140.px, bottom: 80.px),
-      // backgroundColor: Color('#6836E7'),
-      backgroundColor: Color('#F8FAFC'),
-      position: Position.relative(),
-      overflow: Overflow.hidden,
-      minHeight: 100.vh,
       display: Display.flex,
+      // backgroundColor: Color('#6836E7'),
+      position: Position.relative(),
+      minHeight: 100.vh,
+      padding: Spacing.only(top: 5.px, bottom: 80.px),
+      overflow: Overflow.hidden,
       alignItems: AlignItems.center,
+      backgroundColor: Color('#F8FAFC'),
     ),
     css('.hero-container').styles(
       display: Display.grid,

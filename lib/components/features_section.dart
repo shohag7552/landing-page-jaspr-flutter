@@ -76,14 +76,14 @@ class FeaturesSection extends StatelessComponent {
     ),
     css('.features-grid').styles(
       display: Display.grid,
+      maxWidth: 1000.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
       gridTemplate: const GridTemplate(columns: GridTracks([
         GridTrack(TrackSize.fr(1)),
         GridTrack(TrackSize.fr(1)),
         GridTrack(TrackSize.fr(1)),
       ])),
       gap: Gap.all(40.px),
-      maxWidth: 1000.px,
-      margin: Spacing.symmetric(horizontal: Unit.auto),
     ),
     css('.feature-card').styles(
       display: Display.flex,
