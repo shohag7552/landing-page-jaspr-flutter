@@ -645,10 +645,10 @@ warning - lib/components/navbar.dart:73:16 - The value of the field 'styles' isn
    info - lib/components/features_section.dart:114:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/features_section.dart:122:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/features_section.dart:127:7 - Styles are not ordered. Try sorting them. - styles_ordering
-   info - lib/components/features_section.dart:135:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/features_section.dart:135:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/features_section.dart:140:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/features_section.dart:140:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/features_section.dart:135:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/features_section.dart:135:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/features_section.dart:140:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/features_section.dart:140:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
    info - lib/components/footer.dart:79:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
    info - lib/components/footer.dart:82:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/footer.dart:107:7 - Styles are not ordered. Try sorting them. - styles_ordering
@@ -661,10 +661,10 @@ warning - lib/components/navbar.dart:73:16 - The value of the field 'styles' isn
    info - lib/components/footer.dart:174:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/footer.dart:190:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/footer.dart:213:7 - Styles are not ordered. Try sorting them. - styles_ordering
-   info - lib/components/footer.dart:223:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/footer.dart:223:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/footer.dart:229:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/footer.dart:229:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:223:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:223:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:229:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/footer.dart:229:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
    info - lib/components/hero_section.dart:75:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
    info - lib/components/hero_section.dart:79:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/hero_section.dart:89:7 - Styles are not ordered. Try sorting them. - styles_ordering
@@ -681,10 +681,10 @@ warning - lib/components/navbar.dart:73:16 - The value of the field 'styles' isn
    info - lib/components/hero_section.dart:209:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/hero_section.dart:224:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/hero_section.dart:237:7 - Styles are not ordered. Try sorting them. - styles_ordering
-   info - lib/components/hero_section.dart:245:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/hero_section.dart:245:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/hero_section.dart:255:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/hero_section.dart:255:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:245:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:245:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:255:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/hero_section.dart:255:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
    info - lib/components/navbar.dart:73:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
    info - lib/components/navbar.dart:91:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/navbar.dart:101:7 - Styles are not ordered. Try sorting them. - styles_ordering
@@ -693,8 +693,8 @@ warning - lib/components/navbar.dart:73:16 - The value of the field 'styles' isn
    info - lib/components/navbar.dart:125:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/navbar.dart:146:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/navbar.dart:160:7 - Styles are not ordered. Try sorting them. - styles_ordering
-   info - lib/components/navbar.dart:177:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/navbar.dart:177:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/navbar.dart:177:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/navbar.dart:177:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
    info - lib/components/navbar.dart:184:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/popular_dishes.dart:102:3 - Prefer using a getter over a variable declaration for style rules to support hot-reload. - prefer_styles_getter
    info - lib/components/popular_dishes.dart:131:7 - Styles are not ordered. Try sorting them. - styles_ordering
@@ -706,41 +706,41 @@ warning - lib/components/navbar.dart:73:16 - The value of the field 'styles' isn
    info - lib/components/popular_dishes.dart:226:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/popular_dishes.dart:237:7 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/components/popular_dishes.dart:246:7 - Styles are not ordered. Try sorting them. - styles_ordering
-   info - lib/components/popular_dishes.dart:253:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/popular_dishes.dart:253:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/popular_dishes.dart:258:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/popular_dishes.dart:258:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/popular_dishes.dart:264:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/components/popular_dishes.dart:264:7 - 'raw' is deprecated and shouldn't be used. Use RawText() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:253:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:253:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:258:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:258:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:264:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/components/popular_dishes.dart:264:7 - 'raw' is deprecated and shouldn't be used. Use RawComponent.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
    info - lib/main.server.dart:42:9 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/main.server.dart:50:9 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/main.server.dart:55:9 - Styles are not ordered. Try sorting them. - styles_ordering
    info - lib/main.server.dart:59:9 - Styles are not ordered. Try sorting them. - styles_ordering
-   info - lib/pages/home.dart:33:31 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:33:31 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:35:33 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:35:33 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:36:29 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:36:29 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:37:32 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:37:32 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:43:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:43:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:44:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:44:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:47:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:47:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:50:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:50:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:57:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:57:13 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:67:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:67:12 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:75:30 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:75:30 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:76:11 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:76:11 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:77:10 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
-   info - lib/pages/home.dart:77:10 - 'text' is deprecated and shouldn't be used. Use Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:33:31 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:33:31 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:35:33 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:35:33 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:36:29 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:36:29 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:37:32 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:37:32 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:43:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:43:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:44:12 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:44:12 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:47:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:47:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:50:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:50:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:57:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:57:13 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:67:12 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:67:12 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:75:30 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:75:30 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:76:11 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:76:11 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:77:10 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/pages/home.dart:77:10 - 'text' is deprecated and shouldn't be used. Use Component.Component.text() instead. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
 
 734 issues found.

@@ -40,8 +40,8 @@ class AppState extends State<App> {
   static List<StyleRule> get styles => [
     css('.app-wrapper').styles(
       display: Display.flex,
-      flexDirection: FlexDirection.column,
       minHeight: 100.vh,
+      flexDirection: FlexDirection.column,
       fontFamily: const FontFamily.list([FontFamily('Inter'), FontFamilies.sansSerif]),
     ),
   ];

@@ -28,8 +28,7 @@ void main() {
     head: [
       // Add multiple Google Fonts
       link(
-          href:
-              "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap",
           rel: "stylesheet"),
     ],
     styles: [
@@ -38,26 +37,26 @@ void main() {
         raw: {'scroll-behavior': 'smooth'},
       ),
       css('body').styles(
-        margin: Spacing.zero,
         padding: Spacing.zero,
+        margin: Spacing.zero,
+        color: Color('#1E293B'),
         fontFamily: const FontFamily.list([FontFamily('Inter'), FontFamilies.sansSerif]),
         backgroundColor: Colors.white,
-        color: Color('#1E293B'),
         raw: {'overflow-x': 'hidden'},
       ),
       css('h1, h2, h3, h4, h5, h6').styles(
-        fontFamily: const FontFamily.list([FontFamily('Outfit'), FontFamilies.sansSerif]),
         margin: Spacing.zero,
+        fontFamily: const FontFamily.list([FontFamily('Outfit'), FontFamilies.sansSerif]),
         fontWeight: FontWeight.bold,
       ),
       css('a').styles(
-        textDecoration: TextDecoration(line: TextDecorationLine.none),
         color: Color.inherit,
+        textDecoration: TextDecoration(line: TextDecorationLine.none),
       ),
       css('button').styles(
-        fontFamily: const FontFamily.list([FontFamily('Inter'), FontFamilies.sansSerif]),
-        cursor: Cursor.pointer,
         border: Border.unset,
+        cursor: Cursor.pointer,
+        fontFamily: const FontFamily.list([FontFamily('Inter'), FontFamilies.sansSerif]),
         backgroundColor: Colors.transparent,
       ),
     ],

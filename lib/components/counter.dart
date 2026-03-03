@@ -22,14 +22,14 @@ class CounterState extends State<Counter> {
           onClick: () {
             setState(() => count--);
           },
-          [.text('-')],
+          [.Component.text('-')],
         ),
-        span([.text('$count')]),
+        span([.Component.text('$count')]),
         button(
           onClick: () {
             setState(() => count++);
           },
-          [.text('+')],
+          [.Component.text('+')],
         ),
       ]),
     ]);

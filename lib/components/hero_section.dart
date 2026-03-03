@@ -12,26 +12,26 @@ class HeroSection extends StatelessComponent {
         // Left Content
         div(classes: 'hero-content', [
           div(classes: 'hero-badge', [
-            span(classes: 'badge-icon', [text('🏍️')]),
-            span(classes: 'badge-text', [text('Fastest Delivery in Town')]),
+            span(classes: 'badge-icon', [Component.text('🏍️')]),
+            span(classes: 'badge-text', [Component.text('Fastest Delivery in Town')]),
           ]),
           h1(classes: 'hero-title', [
-            text('Claim Best Offer\non Fast '),
-            span(classes: 'text-primary', [text('Food')]),
+            Component.text('Claim Best Offer\non Fast '),
+            span(classes: 'text-primary', [Component.text('Food')]),
             br(),
-            span(classes: 'text-primary', [text('Delivery')]),
+            span(classes: 'text-primary', [Component.text('Delivery')]),
           ]),
           p(classes: 'hero-subtitle', [
-            text('Experience the convenience of having your favorite meals delivered straight to your door. Fresh, hot, and lightning fast.'),
+            Component.text('Experience the convenience of having your favorite meals delivered straight to your door. Fresh, hot, and lightning fast.'),
           ]),
           div(classes: 'hero-actions', [
             button(classes: 'btn btn-primary btn-lg', [
-              text('Order Now'),
-              span(classes: 'icon', [text('→')]),
+              Component.text('Order Now'),
+              span(classes: 'icon', [Component.text('→')]),
             ]),
             button(classes: 'btn btn-outline btn-lg', [
-              span(classes: 'icon-play', [text('▶')]),
-              text('How to Order'),
+              span(classes: 'icon-play', [Component.text('▶')]),
+              Component.text('How to Order'),
             ]),
           ]),
           div(classes: 'hero-stats', [
@@ -51,10 +51,10 @@ class HeroSection extends StatelessComponent {
           ),
           // Floating Card
           div(classes: 'floating-card', [
-            div(classes: 'card-icon', [text('🛵')]),
+            div(classes: 'card-icon', [Component.text('🛵')]),
             div(classes: 'card-content', [
-              span(classes: 'card-title', [text('Fast Delivery')]),
-              span(classes: 'card-subtitle', [text('Under 30 mins')]),
+              span(classes: 'card-title', [Component.text('Fast Delivery')]),
+              span(classes: 'card-subtitle', [Component.text('Under 30 mins')]),
             ])
           ])
         ])
@@ -65,10 +65,10 @@ class HeroSection extends StatelessComponent {
 
   Component _buildStat(String value, String label, String icon) {
     return div(classes: 'stat-item', [
-      div(classes: 'stat-icon', [text(icon)]),
+      div(classes: 'stat-icon', [Component.text(icon)]),
       div(classes: 'stat-info', [
-        span(classes: 'stat-value', [text(value)]),
-        span(classes: 'stat-label', [text(label)]),
+        span(classes: 'stat-value', [Component.text(value)]),
+        span(classes: 'stat-label', [Component.text(label)]),
       ])
     ]);
   }

@@ -1,5 +1,6 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
+import 'package:jaspr/server.dart';
 
 class PopularDishes extends StatelessComponent {
   const PopularDishes({super.key});
@@ -11,12 +12,12 @@ class PopularDishes extends StatelessComponent {
       div(classes: 'container', [
         div(classes: 'section-header', [
           div(classes: 'header-content', [
-            span(classes: 'subtitle', [text('POPULAR MENU')]),
-            h2(classes: 'title', [text('Explore Our Top Trending Dishes')]),
+            span(classes: 'subtitle', [Component.text('POPULAR MENU')]),
+            h2(classes: 'title', [Component.text('Explore Our Top Trending Dishes')]),
           ]),
           button(classes: 'btn btn-outline', [
-            text('View All Menu'),
-            span(classes: 'icon', [text('→')]),
+            Component.text('View All Menu'),
+            span(classes: 'icon', [Component.text('→')]),
           ])
         ]),
 
@@ -31,8 +32,8 @@ class PopularDishes extends StatelessComponent {
             time: '15-20 Min',
           ),
           _buildDishCard(
-            image: 'https://images.unsplash.com/photo-1590947132387-155cc3be3a01?q=80&w=2080&auto=format&fit=crop',
-            title: 'Fresh Salmon Salad',
+            image: 'https://images.pexels.com/photos/374052/pexels-photo-374052.jpeg',
+            title: 'Fresh Salmon Salad 123',
             category: 'Healthy',
             price: 18.50,
             rating: 4.9,
@@ -75,25 +76,25 @@ class PopularDishes extends StatelessComponent {
     return div(classes: 'dish-card', [
       div(classes: 'dish-image-wrapper', [
         img(src: image, alt: title, classes: 'dish-image'),
-        div(classes: 'favorite-btn', [text('❤️')]),
+        div(classes: 'favorite-btn', [Component.text('❤️')]),
       ]),
       div(classes: 'dish-content', [
         div(classes: 'dish-meta', [
-          span(classes: 'dish-category', [text(category)]),
+          span(classes: 'dish-category', [Component.text(category)]),
           div(classes: 'dish-rating', [
-            span(classes: 'star', [text('⭐')]),
-            span(classes: 'rating-value', [text(rating.toStringAsFixed(1))]),
-            span(classes: 'review-count', [text('($reviews)')]),
+            span(classes: 'star', [Component.text('⭐')]),
+            span(classes: 'rating-value', [Component.text(rating.toStringAsFixed(1))]),
+            span(classes: 'review-count', [Component.text('($reviews)')]),
           ])
         ]),
-        h3(classes: 'dish-title', [text(title)]),
+        h3(classes: 'dish-title', [Component.text(title)]),
         div(classes: 'dish-footer', [
           div(classes: 'dish-price', [
-            span(classes: 'currency', [text('\$')]),
-            span(classes: 'price-amount', [text(price.toStringAsFixed(2))]),
+            span(classes: 'currency', [Component.text('\$')]),
+            span(classes: 'price-amount', [Component.text(price.toStringAsFixed(2))]),
           ]),
           button(classes: 'add-cart-btn', [
-            span(classes: 'plus-icon', [text('+')])
+            span(classes: 'plus-icon', [Component.text('+')])
           ])
         ])
       ])
@@ -101,9 +102,9 @@ class PopularDishes extends StatelessComponent {
   }
 
   @css
-  static final styles = [
+  static List<StyleRule> get styles => [
     css('.popular-dishes').styles(
-      padding: Spacing.symmetric(vertical: 100.px),
+      padding: Spacing.symmetric(vertical: 100.px, horizontal: 24.px),
       backgroundColor: Color('#F8FAFC'),
     ),
     css('.popular-dishes .section-header').styles(
@@ -128,16 +129,16 @@ class PopularDishes extends StatelessComponent {
       gap: Gap.all(32.px),
     ),
     css('.dish-card').styles(
-      backgroundColor: Colors.white,
       radius: BorderRadius.circular(24.px),
       overflow: Overflow.hidden,
       shadow: BoxShadow(offsetX: 0.px, offsetY: 12.px, blur: 24.px, color: Color.rgba(0,0,0,0.03)),
-      transition: Transition('all', duration: Duration(milliseconds: 300)),
       cursor: Cursor.pointer,
+      transition: Transition('all', duration: Duration(milliseconds: 300)),
+      backgroundColor: Colors.white,
     ),
     css('.dish-card:hover').styles(
-      transform: Transform.translate(y: (-12).px),
       shadow: BoxShadow(offsetX: 0.px, offsetY: 24.px, blur: 48.px, color: Color.rgba(0,0,0,0.08)),
+      transform: Transform.translate(y: (-12).px),
     ),
     css('.dish-image-wrapper').styles(
       position: Position.relative(),
@@ -244,8 +245,8 @@ class PopularDishes extends StatelessComponent {
       transition: Transition('all', duration: Duration(milliseconds: 300)),
     ),
     css('.add-cart-btn:hover').styles(
-      backgroundColor: Color('#FF5E1E'),
       transform: Transform.rotate(90.deg),
+      backgroundColor: Color('#FF5E1E'),
     ),
     css('.plus-icon').styles(
       fontSize: 1.5.rem,

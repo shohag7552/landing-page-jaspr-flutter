@@ -30,27 +30,27 @@ class NavbarState extends State<Navbar> {
         div(classes: 'container', [
           // Logo
           div(classes: 'logo-container', [
-            span(classes: 'logo-icon', [text('🍔')]),
+            span(classes: 'logo-icon', [Component.text('🍔')]),
             span(classes: 'logo-text', [
-              text('Food'),
-              span(classes: 'text-primary', [text('ie')]),
+              Component.text('Food'),
+              span(classes: 'text-primary', [Component.text('ie')]),
             ]),
           ]),
 
           // Desktop Links
           nav(classes: 'nav-links desktop-only', [
-            Link(to: '#home', classes: 'nav-link active', child: text('Home')),
-            Link(to: '#menu', classes: 'nav-link', child: text('Menu')),
-            Link(to: '#features', classes: 'nav-link', child: text('Services')),
-            Link(to: '#contact', classes: 'nav-link', child: text('Contact')),
+            Link(to: '#home', classes: 'nav-link active', child: Component.text('Home')),
+            Link(to: '#menu', classes: 'nav-link', child: Component.text('Menu')),
+            Link(to: '#features', classes: 'nav-link', child: Component.text('Services')),
+            Link(to: '#contact', classes: 'nav-link', child: Component.text('Contact')),
           ]),
 
           // Action Buttons
           div(classes: 'nav-actions desktop-only', [
-            button(classes: 'btn btn-ghost', [text('Log In')]),
+            button(classes: 'btn btn-ghost', [Component.text('Log In')]),
             button(classes: 'btn btn-primary', [
-              text('Sign Up'),
-              span(classes: 'icon', [text('→')]),
+              Component.text('Sign Up'),
+              span(classes: 'icon', [Component.text('→')]),
             ]),
           ]),
 
@@ -74,25 +74,25 @@ class NavbarState extends State<Navbar> {
     ),
     css('.navbar.scrolled').styles(
       padding: Spacing.symmetric(vertical: 16.px),
-      backgroundColor: const Color.rgba(255, 255, 255, 0.9),
-      // backdropFilter: 'blur(10px)', // requires raw css for blur right now
       shadow: BoxShadow(offsetX: 0.px, offsetY: 4.px, blur: 20.px, color: Color.rgba(0, 0, 0, 0.05)),
+      // backdropFilter: 'blur(10px)', // requires raw css for blur right now
+      backgroundColor: const Color.rgba(255, 255, 255, 0.9),
     ),
     css('.navbar .container').styles(
       display: Display.flex,
+      width: 100.percent,
+      maxWidth: 1200.px,
+      padding: Spacing.symmetric(horizontal: 24.px),
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+      boxSizing: BoxSizing.borderBox,
       justifyContent: JustifyContent.spaceBetween,
       alignItems: AlignItems.center,
-      maxWidth: 1200.px,
-      margin: Spacing.symmetric(horizontal: Unit.auto),
-      padding: Spacing.symmetric(horizontal: 24.px),
-      boxSizing: BoxSizing.borderBox,
-      width: 100.percent,
     ),
     css('.logo-container').styles(
       display: Display.flex,
+      cursor: Cursor.pointer,
       alignItems: AlignItems.center,
       gap: Gap.all(12.px),
-      cursor: Cursor.pointer,
     ),
     css('.logo-icon').styles(
       fontSize: 2.rem,
@@ -100,10 +100,10 @@ class NavbarState extends State<Navbar> {
       raw: {'filter': 'drop-shadow(0px 4px 8px rgba(255, 94, 30, 0.3))'},
     ),
     css('.logo-text').styles(
+      color: Color('#1E293B'),
       fontFamily: const FontFamily.list([FontFamily('Outfit'), FontFamilies.sansSerif]),
       fontSize: 1.75.rem,
       fontWeight: FontWeight.bold,
-      color: Color('#1E293B'),
       letterSpacing: (-0.5).px,
     ),
     css('.text-primary').styles(

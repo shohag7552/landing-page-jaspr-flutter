@@ -10,8 +10,8 @@ class FeaturesSection extends StatelessComponent {
     return section(id: 'features', classes: 'features-section', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
-          span(classes: 'subtitle', [text('WHAT WE SERVE')]),
-          h2(classes: 'title', [text('Your Favorite Food Delivery Partner')]),
+          span(classes: 'subtitle', [Component.text('WHAT WE SERVE')]),
+          h2(classes: 'title', [Component.text('Your Favorite Food Delivery Partner')]),
         ]),
         div(classes: 'features-grid', [
           _buildFeatureCard(
@@ -39,10 +39,10 @@ class FeaturesSection extends StatelessComponent {
     return div(classes: 'feature-card', [
       div(classes: 'feature-icon-wrapper', [
         div(classes: 'icon-bg', []),
-        span(classes: 'icon-emoji', [text(icon)]),
+        span(classes: 'icon-emoji', [Component.text(icon)]),
       ]),
-      h3(classes: 'feature-title', [text(title)]),
-      p(classes: 'feature-desc', [text(description)]),
+      h3(classes: 'feature-title', [Component.text(title)]),
+      p(classes: 'feature-desc', [Component.text(description)]),
     ]);
   }
 

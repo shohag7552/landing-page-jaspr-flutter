@@ -14,19 +14,19 @@ class FooterSection extends StatelessComponent {
           // Brand Column
           div(classes: 'footer-brand', [
             div(classes: 'logo-container mb-4', [
-              span(classes: 'logo-icon', [text('🍔')]),
+              span(classes: 'logo-icon', [Component.text('🍔')]),
               span(classes: 'logo-text', [
-                text('Food'),
-                span(classes: 'text-primary', [text('ie')]),
+                Component.text('Food'),
+                span(classes: 'text-primary', [Component.text('ie')]),
               ]),
             ]),
             p(classes: 'brand-desc', [
-              text('Our job is to filling your tummy with delicious food and with fast and free delivery.')
+              Component.text('Our job is to filling your tummy with delicious food and with fast and free delivery.')
             ]),
             div(classes: 'social-links', [
-              a(href: '#', classes: 'social-icon', [text('📘')]),
-              a(href: '#', classes: 'social-icon', [text('📸')]),
-              a(href: '#', classes: 'social-icon', [text('🐦')]),
+              a(href: '#', classes: 'social-icon', [Component.text('📘')]),
+              a(href: '#', classes: 'social-icon', [Component.text('📸')]),
+              a(href: '#', classes: 'social-icon', [Component.text('🐦')]),
             ])
           ]),
 
@@ -39,12 +39,12 @@ class FooterSection extends StatelessComponent {
           
           // Subscribe Column
           div(classes: 'footer-subscribe', [
-            h4(classes: 'footer-title', [text('Get in Touch')]),
-            p(classes: 'subscribe-desc', [text('Question or feedback? We\'d love to hear from you')]),
+            h4(classes: 'footer-title', [Component.text('Get in Touch')]),
+            p(classes: 'subscribe-desc', [Component.text('Question or feedback? We\'d love to hear from you')]),
             div(classes: 'subscribe-form', [
                input(type: InputType.email, attributes: {'placeholder': 'Email Address'}, classes: 'subscribe-input'),
                button(classes: 'btn btn-primary subscribe-btn', [
-                 span(classes: 'icon', [text('→')]),
+                 span(classes: 'icon', [Component.text('→')]),
                ])
             ])
           ])
@@ -52,12 +52,12 @@ class FooterSection extends StatelessComponent {
 
         div(classes: 'footer-bottom', [
           p(classes: 'copyright', [
-            text('© 2026 Foodie. All rights reserved.')
+            Component.text('© 2026 Foodie. All rights reserved.')
           ]),
           div(classes: 'legal-links', [
-            a(href: '#', classes: 'legal-link', [text('Terms & Conditions')]),
-            span(classes: 'separator', [text('•')]),
-            a(href: '#', classes: 'legal-link', [text('Privacy Policy')]),
+            a(href: '#', classes: 'legal-link', [Component.text('Terms & Conditions')]),
+            span(classes: 'separator', [Component.text('•')]),
+            a(href: '#', classes: 'legal-link', [Component.text('Privacy Policy')]),
           ])
         ])
       ])
@@ -67,11 +67,11 @@ class FooterSection extends StatelessComponent {
 
   Component _buildLinksColumn(String title, List<String> links) {
     return div(classes: 'footer-column', [
-      h4(classes: 'footer-title', [text(title)]),
+      h4(classes: 'footer-title', [Component.text(title)]),
       ul(classes: 'footer-links', [
         for (final link in links)
           li(classes: 'footer-item', [
-            a(href: '#', classes: 'footer-link', [text(link)])
+            a(href: '#', classes: 'footer-link', [Component.text(link)])
           ])
       ])
     ]);
