@@ -33,16 +33,13 @@ import 'package:food_delivery_landing/app.dart' as _app;
 /// ```
 ServerOptions get defaultServerOptions => ServerOptions(
   clientId: 'main.client.dart.js',
-  clients: {
-    _app.App: ClientTarget<_app.App>('app'),
-    _navbar.Navbar: ClientTarget<_navbar.Navbar>('navbar'),
-  },
+  clients: {_navbar.Navbar: ClientTarget<_navbar.Navbar>('navbar')},
   styles: () => [
+    ..._app.AppState.styles,
     ..._features_section.FeaturesSection.styles,
     ..._footer.FooterSection.styles,
     ..._hero_section.HeroSection.styles,
     ..._navbar.NavbarState.styles,
     ..._popular_dishes.PopularDishes.styles,
-    ..._app.AppState.styles,
   ],
 );

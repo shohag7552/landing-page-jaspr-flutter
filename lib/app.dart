@@ -7,7 +7,6 @@ import 'components/hero_section.dart';
 import 'components/navbar.dart';
 import 'components/popular_dishes.dart';
 
-@client
 class App extends StatefulComponent {
   const App({super.key});
 

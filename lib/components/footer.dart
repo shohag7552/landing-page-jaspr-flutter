@@ -1,6 +1,5 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
-import 'package:jaspr_router/jaspr_router.dart';
 
 class FooterSection extends StatelessComponent {
   const FooterSection({super.key});
@@ -17,11 +16,13 @@ class FooterSection extends StatelessComponent {
               span(classes: 'logo-icon', [Component.text('🍔')]),
               span(classes: 'logo-text', [
                 Component.text('Food'),
-                span(classes: 'text-primary', [Component.text('ie')]),
+                span(classes: 'text-primary', [Component.text('Flow')]),
               ]),
             ]),
             p(classes: 'brand-desc', [
-              Component.text('Our job is to filling your tummy with delicious food and with fast and free delivery.')
+              Component.text(
+                'Real-time food delivery infrastructure for restaurants, cloud kitchens, and operators that need speed customers can trust.',
+              )
             ]),
             div(classes: 'social-links', [
               a(href: '#', classes: 'social-icon', [Component.text('📘')]),
@@ -32,17 +33,19 @@ class FooterSection extends StatelessComponent {
 
           // Links Columns
           div(classes: 'footer-links-group', [
-            _buildLinksColumn('About', ['About Us', 'Features', 'News', 'Menu']),
-            _buildLinksColumn('Company', ['Why Foodie?', 'Partner With Us', 'FAQ', 'Blog']),
-            _buildLinksColumn('Support', ['Account', 'Support Center', 'Feedback', 'Contact Us']),
+            _buildLinksColumn('Platform', ['Live Tracking', 'Checkout', 'Dispatch', 'Analytics']),
+            _buildLinksColumn('Business', ['Restaurants', 'Cloud Kitchens', 'Enterprise', 'Integrations']),
+            _buildLinksColumn('Support', ['Partner Login', 'Help Center', 'Status', 'Contact']),
           ]),
           
           // Subscribe Column
           div(classes: 'footer-subscribe', [
-            h4(classes: 'footer-title', [Component.text('Get in Touch')]),
-            p(classes: 'subscribe-desc', [Component.text('Question or feedback? We\'d love to hear from you')]),
+            h4(classes: 'footer-title', [Component.text('Scale delivery with confidence')]),
+            p(classes: 'subscribe-desc', [
+              Component.text('Get product updates, launch guidance, and operator insights in your inbox.'),
+            ]),
             div(classes: 'subscribe-form', [
-               input(type: InputType.email, attributes: {'placeholder': 'Email Address'}, classes: 'subscribe-input'),
+               input(type: InputType.email, attributes: {'placeholder': 'Work email'}, classes: 'subscribe-input'),
                button(classes: 'btn btn-primary subscribe-btn', [
                  span(classes: 'icon', [Component.text('→')]),
                ])
@@ -52,7 +55,7 @@ class FooterSection extends StatelessComponent {
 
         div(classes: 'footer-bottom', [
           p(classes: 'copyright', [
-            Component.text('© 2026 Foodie. All rights reserved.')
+            Component.text('© 2026 FoodFlow. All rights reserved.')
           ]),
           div(classes: 'legal-links', [
             a(href: '#', classes: 'legal-link', [Component.text('Terms & Conditions')]),
@@ -81,9 +84,9 @@ class FooterSection extends StatelessComponent {
   static List<StyleRule> get styles => [
     css('.footer').styles(
       padding: Spacing.only(top: 80.px, bottom: 24.px),
-      margin: Spacing.only(top: 80.px),
+      margin: Spacing.zero,
       color: Colors.white,
-      backgroundColor: Color('#0F172A'),
+      backgroundColor: Color('#111827'),
     ),
     css('.footer-content').styles(
       display: Display.grid,
@@ -93,7 +96,7 @@ class FooterSection extends StatelessComponent {
         GridTrack(TrackSize.fr(1)),
         GridTrack(TrackSize.auto),
       ])),
-      gap: Gap.all(64.px),
+      gap: Gap.all(56.px),
     ),
     css('.mb-4').styles(
       margin: Spacing.only(bottom: 16.px),
@@ -102,8 +105,8 @@ class FooterSection extends StatelessComponent {
       color: Colors.white,
     ),
     css('.brand-desc').styles(
-      color: Color('#94A3B8'),
-      lineHeight: 1.6.em,
+      color: Color('#CBD5E1'),
+      lineHeight: 1.7.em,
       margin: Spacing.only(bottom: 32.px),
       maxWidth: 320.px,
     ),
@@ -114,7 +117,7 @@ class FooterSection extends StatelessComponent {
     css('.social-icon').styles(
       width: 40.px,
       height: 40.px,
-      backgroundColor: Color('#1E293B'),
+      backgroundColor: Color('#1F2937'),
       radius: BorderRadius.circular(50.percent),
       display: Display.flex,
       alignItems: AlignItems.center,
@@ -124,7 +127,7 @@ class FooterSection extends StatelessComponent {
       textDecoration: TextDecoration(line: TextDecorationLine.none),
     ),
     css('.social-icon:hover').styles(
-      backgroundColor: Color('#FF5E1E'),
+      backgroundColor: Color('#E94B1B'),
       transform: Transform.translate(y: (-4).px),
     ),
     css('.footer-links-group').styles(
@@ -151,16 +154,16 @@ class FooterSection extends StatelessComponent {
       gap: Gap.all(16.px),
     ),
     css('.footer-link').styles(
-      color: Color('#94A3B8'),
+      color: Color('#CBD5E1'),
       textDecoration: TextDecoration(line: TextDecorationLine.none),
       transition: Transition('color', duration: Duration(milliseconds: 200)),
       fontSize: 0.95.rem,
     ),
     css('.footer-link:hover').styles(
-      color: Color('#FF5E1E'),
+      color: Color('#FDBA74'),
     ),
     css('.subscribe-desc').styles(
-      color: Color('#94A3B8'),
+      color: Color('#CBD5E1'),
       lineHeight: 1.6.em,
       margin: Spacing.only(bottom: 24.px),
     ),
@@ -171,7 +174,7 @@ class FooterSection extends StatelessComponent {
     ),
     css('.subscribe-input').styles(
       width: 100.percent,
-      backgroundColor: Color('#1E293B'),
+      backgroundColor: Color('#1F2937'),
       border: Border.unset,
       radius: BorderRadius.circular(50.px),
       padding: Spacing.only(top: 16.px, bottom: 16.px, left: 24.px, right: 64.px),
@@ -180,7 +183,7 @@ class FooterSection extends StatelessComponent {
       fontFamily: const FontFamily.list([FontFamily('Inter'), FontFamilies.sansSerif]),
     ),
     css('.subscribe-input:focus').styles(
-      raw: {'outline': '1px solid #FF5E1E'},
+      raw: {'outline': '1px solid #E94B1B'},
     ),
     css('.subscribe-btn').styles(
       display: Display.flex,
@@ -197,11 +200,11 @@ class FooterSection extends StatelessComponent {
       padding: Spacing.only(top: 32.px),
       justifyContent: JustifyContent.spaceBetween,
       alignItems: AlignItems.center,
-      raw: {'border-top': '1px solid #1E293B'},
+      raw: {'border-top': '1px solid #1F2937'},
     ),
     css('.copyright').styles(
       margin: Spacing.only(left: 24.px, right: 24.px),
-      color: Color('#64748B'),
+      color: Color('#94A3B8'),
       fontSize: 0.875.rem,
     ),
     css('.legal-links').styles(
@@ -210,13 +213,13 @@ class FooterSection extends StatelessComponent {
       gap: Gap.all(16.px),
     ),
     css('.legal-link').styles(
-      color: Color('#64748B'),
+      color: Color('#94A3B8'),
       textDecoration: TextDecoration(line: TextDecorationLine.none),
       fontSize: 0.875.rem,
       transition: Transition('color', duration: Duration(milliseconds: 200)),
     ),
     css('.legal-link:hover').styles(
-      color: Color('#FF5E1E'),
+      color: Color('#FDBA74'),
     ),
     css('.separator').styles(
       color: Color('#334155'),

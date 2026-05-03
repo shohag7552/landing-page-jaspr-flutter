@@ -1,6 +1,5 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
-import 'package:jaspr/server.dart';
 
 class PopularDishes extends StatelessComponent {
   const PopularDishes({super.key});
@@ -12,11 +11,16 @@ class PopularDishes extends StatelessComponent {
       div(classes: 'container', [
         div(classes: 'section-header', [
           div(classes: 'header-content', [
-            span(classes: 'subtitle', [Component.text('POPULAR MENU')]),
-            h2(classes: 'title', [Component.text('Explore Our Top Trending Dishes')]),
+            span(classes: 'subtitle', [Component.text('CUSTOMER EXPERIENCE')]),
+            h2(classes: 'title', [Component.text('A marketplace that makes ordering feel effortless.')]),
+            p(classes: 'marketplace-copy', [
+              Component.text(
+                'Showcase bestsellers, surface accurate prep times, and convert hungry visitors with a storefront that feels fast before the rider even starts moving.',
+              ),
+            ]),
           ]),
           button(classes: 'btn btn-outline', [
-            Component.text('View All Menu'),
+            Component.text('Explore Storefront'),
             span(classes: 'icon', [Component.text('→')]),
           ])
         ]),
@@ -24,7 +28,7 @@ class PopularDishes extends StatelessComponent {
         div(classes: 'dishes-grid', [
           _buildDishCard(
             image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1999&auto=format&fit=crop',
-            title: 'Classic Beef Burger',
+            title: 'Signature Smash Burger',
             category: 'Burger',
             price: 12.99,
             rating: 4.8,
@@ -33,7 +37,7 @@ class PopularDishes extends StatelessComponent {
           ),
           _buildDishCard(
             image: 'https://images.pexels.com/photos/374052/pexels-photo-374052.jpeg',
-            title: 'Fresh Salmon Salad 123',
+            title: 'Fresh Salmon Power Salad',
             category: 'Healthy',
             price: 18.50,
             rating: 4.9,
@@ -42,7 +46,7 @@ class PopularDishes extends StatelessComponent {
           ),
           _buildDishCard(
             image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=2070&auto=format&fit=crop',
-            title: 'Margherita Pizza',
+            title: 'Stone-Fired Margherita',
             category: 'Pizza',
             price: 16.00,
             rating: 4.7,
@@ -51,7 +55,7 @@ class PopularDishes extends StatelessComponent {
           ),
           _buildDishCard(
             image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1974&auto=format&fit=crop',
-            title: 'Spicy Noodles',
+            title: 'Chili Garlic Noodles',
             category: 'Asian',
             price: 14.50,
             rating: 4.6,
@@ -76,7 +80,7 @@ class PopularDishes extends StatelessComponent {
     return div(classes: 'dish-card', [
       div(classes: 'dish-image-wrapper', [
         img(src: image, alt: title, classes: 'dish-image'),
-        div(classes: 'favorite-btn', [Component.text('❤️')]),
+        div(classes: 'favorite-btn', [Component.text('+')]),
       ]),
       div(classes: 'dish-content', [
         div(classes: 'dish-meta', [
@@ -116,7 +120,14 @@ class PopularDishes extends StatelessComponent {
     css('.header-content').styles(
       display: Display.flex,
       flexDirection: FlexDirection.column,
-      gap: Gap.all(16.px),
+      gap: Gap.all(14.px),
+      maxWidth: 690.px,
+    ),
+    css('.marketplace-copy').styles(
+      color: Color('#667085'),
+      lineHeight: 1.7.em,
+      fontSize: 1.02.rem,
+      margin: Spacing.zero,
     ),
     css('.dishes-grid').styles(
       display: Display.grid,
@@ -126,19 +137,20 @@ class PopularDishes extends StatelessComponent {
         GridTrack(TrackSize.fr(1)),
         GridTrack(TrackSize.fr(1)),
       ])),
-      gap: Gap.all(32.px),
+      gap: Gap.all(24.px),
     ),
     css('.dish-card').styles(
-      radius: BorderRadius.circular(24.px),
+      radius: BorderRadius.circular(22.px),
       overflow: Overflow.hidden,
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 12.px, blur: 24.px, color: Color.rgba(0,0,0,0.03)),
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 12.px, blur: 28.px, color: Color.rgba(17,24,39,0.05)),
       cursor: Cursor.pointer,
       transition: Transition('all', duration: Duration(milliseconds: 300)),
       backgroundColor: Colors.white,
+      raw: {'border': '1px solid rgba(17, 24, 39, 0.08)'},
     ),
     css('.dish-card:hover').styles(
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 24.px, blur: 48.px, color: Color.rgba(0,0,0,0.08)),
-      transform: Transform.translate(y: (-12).px),
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 26.px, blur: 56.px, color: Color.rgba(17,24,39,0.12)),
+      transform: Transform.translate(y: (-8).px),
     ),
     css('.dish-image-wrapper').styles(
       position: Position.relative(),
@@ -159,15 +171,16 @@ class PopularDishes extends StatelessComponent {
       position: Position.absolute(top: 16.px, right: 16.px),
       width: 40.px,
       height: 40.px,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.rgba(255,255,255,0.92),
       radius: BorderRadius.circular(50.percent),
       display: Display.flex,
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
       shadow: BoxShadow(offsetX: 0.px, offsetY: 4.px, blur: 12.px, color: Color.rgba(0,0,0,0.1)),
       transition: Transition('transform', duration: Duration(milliseconds: 200)),
-      color: Colors.red,
-      fontSize: 1.rem,
+      color: Color('#111827'),
+      fontSize: 1.25.rem,
+      fontWeight: FontWeight.bold,
     ),
     css('.favorite-btn:hover').styles(
       transform: Transform.scale(1.1),
@@ -182,8 +195,8 @@ class PopularDishes extends StatelessComponent {
       margin: Spacing.only(bottom: 16.px),
     ),
     css('.dish-category').styles(
-      color: Color('#FF5E1E'),
-      backgroundColor: Color('#FFF5F2'),
+      color: Color('#E94B1B'),
+      backgroundColor: Color('#FFF0E8'),
       padding: Spacing.symmetric(horizontal: 12.px, vertical: 4.px),
       radius: BorderRadius.circular(8.px),
       fontSize: 0.75.rem,
@@ -200,16 +213,16 @@ class PopularDishes extends StatelessComponent {
     ),
     css('.rating-value').styles(
       fontWeight: FontWeight.bold,
-      color: Color('#0F172A'),
+      color: Color('#111827'),
       fontSize: 0.875.rem,
     ),
     css('.review-count').styles(
-      color: Color('#64748B'),
+      color: Color('#667085'),
       fontSize: 0.875.rem,
     ),
     css('.dish-title').styles(
       fontSize: 1.25.rem,
-      color: Color('#0F172A'),
+      color: Color('#111827'),
       margin: Spacing.only(bottom: 24.px),
       fontWeight: FontWeight.bold,
     ),
@@ -221,12 +234,12 @@ class PopularDishes extends StatelessComponent {
     css('.dish-price').styles(
       display: Display.flex,
       alignItems: AlignItems.start,
-      color: Color('#0F172A'),
+      color: Color('#111827'),
     ),
     css('.currency').styles(
       fontSize: 1.rem,
       fontWeight: FontWeight.w600,
-      color: Color('#FF5E1E'),
+      color: Color('#E94B1B'),
       margin: Spacing.only(top: 2.px),
     ),
     css('.price-amount').styles(
@@ -236,7 +249,7 @@ class PopularDishes extends StatelessComponent {
     css('.add-cart-btn').styles(
       width: 48.px,
       height: 48.px,
-      backgroundColor: Color('#0F172A'),
+      backgroundColor: Color('#111827'),
       color: Colors.white,
       radius: BorderRadius.circular(16.px),
       display: Display.flex,
@@ -246,7 +259,7 @@ class PopularDishes extends StatelessComponent {
     ),
     css('.add-cart-btn:hover').styles(
       transform: Transform.rotate(90.deg),
-      backgroundColor: Color('#FF5E1E'),
+      backgroundColor: Color('#E94B1B'),
     ),
     css('.plus-icon').styles(
       fontSize: 1.5.rem,
