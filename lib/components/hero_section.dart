@@ -12,45 +12,47 @@ class HeroSection extends StatelessComponent {
           div(classes: 'hero-badge', [
             span(classes: 'badge-dot', []),
             span(classes: 'badge-text', [
-              Component.text('Real-time delivery operations for modern restaurants'),
+              Component.text('Food & Grocery — delivered to your door'),
             ]),
           ]),
           h1(classes: 'hero-title', [
-            Component.text('Move every order from craving to doorstep faster.'),
+            Component.text('Order food & groceries online, delivered at your doorstep.'),
           ]),
           p(classes: 'hero-subtitle', [
             Component.text(
-              'FoodFlow connects customers, kitchens, riders, and operators in one high-performance delivery platform built for live tracking, reliable checkout, and commercial scale.',
+              'Browse your favorite products, place orders in a few taps, and track your deliveryman in real-time. Get instant notifications at every step — from kitchen to your door.',
             ),
           ]),
           div(classes: 'hero-actions', [
             button(classes: 'btn btn-primary btn-lg', [
-              Component.text('Launch Ordering'),
+              Component.text('Download App'),
               span(classes: 'icon', [Component.text('→')]),
             ]),
             button(classes: 'btn btn-outline btn-lg', [
-              Component.text('See Platform Demo'),
+              Component.text('Explore Menu'),
             ]),
           ]),
           div(classes: 'hero-stats', [
-            _buildStat('Live', 'Courier visibility'),
-            _buildStat('99.9%', 'Uptime-ready architecture'),
-            _buildStat('Multi', 'Restaurant workflows'),
+            _buildStat('1000+', 'Products Available'),
+            _buildStat('30 min', 'Average Delivery'),
+            _buildStat('Live', 'Order Tracking'),
           ]),
         ]),
         div(classes: 'hero-visual', [
           img(
             src:
-                'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop',
-            alt: 'Restaurant team preparing food delivery orders',
+                'https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=2071&auto=format&fit=crop',
+            alt: 'Happy customer receiving food delivery at doorstep',
             classes: 'hero-image',
           ),
           div(classes: 'tracking-panel', [
             div(classes: 'panel-topline', [
               span(classes: 'panel-label', [Component.text('Order #4821')]),
-              span(classes: 'panel-status', [Component.text('On route')]),
+              span(classes: 'panel-status', [Component.text('On the way')]),
             ]),
             div(classes: 'route-line', [
+              span(classes: 'route-point active', []),
+              span(classes: 'route-bar complete', []),
               span(classes: 'route-point active', []),
               span(classes: 'route-bar complete', []),
               span(classes: 'route-point active', []),
@@ -58,16 +60,18 @@ class HeroSection extends StatelessComponent {
               span(classes: 'route-point', []),
             ]),
             div(classes: 'panel-metrics', [
-              _buildMetric('18 min', 'ETA'),
-              _buildMetric('2.4 km', 'Distance'),
-              _buildMetric('Paid', 'Checkout'),
+              _buildMetric('12 min', 'ETA'),
+              _buildMetric('1.8 km', 'Distance'),
+              _buildMetric('Paid', 'Status'),
             ]),
           ]),
-          div(classes: 'operator-card', [
-            span(classes: 'operator-kicker', [Component.text('Partner Console')]),
-            span(classes: 'operator-title', [Component.text('42 active orders')]),
-            span(classes: 'operator-copy', [
-              Component.text('Kitchen, dispatch, and customer updates stay in sync.'),
+          div(classes: 'notification-card', [
+            div(classes: 'notif-icon', [Component.text('🔔')]),
+            div(classes: 'notif-body', [
+              span(classes: 'notif-title', [Component.text('Order Update')]),
+              span(classes: 'notif-text', [
+                Component.text('Your rider is almost there! Arriving in 3 min.'),
+              ]),
             ]),
           ]),
         ]),
@@ -156,8 +160,8 @@ class HeroSection extends StatelessComponent {
           fontSize: 0.9.rem,
         ),
         css('.hero-title').styles(
-          fontSize: 4.4.rem,
-          lineHeight: 1.02.em,
+          fontSize: 4.2.rem,
+          lineHeight: 1.06.em,
           color: Color('#111827'),
           margin: Spacing.only(bottom: 26.px),
           letterSpacing: 0.px,
@@ -324,40 +328,50 @@ class HeroSection extends StatelessComponent {
           color: Color('#667085'),
           fontSize: 0.78.rem,
         ),
-        css('.operator-card').styles(
+        // Notification card replaces operator card
+        css('.notification-card').styles(
           position: Position.absolute(top: 44.px, right: (-26).px),
-          width: 248.px,
-          backgroundColor: Color('#111827'),
-          color: Colors.white,
-          padding: Spacing.all(22.px),
+          width: 300.px,
+          backgroundColor: Colors.white,
+          padding: Spacing.all(20.px),
           radius: BorderRadius.circular(22.px),
           zIndex: ZIndex(30),
+          display: Display.flex,
+          alignItems: AlignItems.center,
+          gap: Gap.all(16.px),
           shadow: BoxShadow(
             offsetX: 0.px,
             offsetY: 26.px,
             blur: 50.px,
-            color: Color.rgba(17, 24, 39, 0.24),
+            color: Color.rgba(17, 24, 39, 0.18),
           ),
+          raw: {'border': '1px solid rgba(17, 24, 39, 0.06)'},
         ),
-        css('.operator-kicker').styles(
-          display: Display.block,
-          color: Color('#FDBA74'),
-          fontSize: 0.78.rem,
-          fontWeight: FontWeight.w600,
-          margin: Spacing.only(bottom: 10.px),
-          textTransform: TextTransform.upperCase,
+        css('.notif-icon').styles(
+          width: 48.px,
+          height: 48.px,
+          display: Display.flex,
+          alignItems: AlignItems.center,
+          justifyContent: JustifyContent.center,
+          backgroundColor: Color('#FFF0E8'),
+          radius: BorderRadius.circular(14.px),
+          fontSize: 1.4.rem,
+          raw: {'flex-shrink': '0'},
         ),
-        css('.operator-title').styles(
-          display: Display.block,
-          fontSize: 1.45.rem,
+        css('.notif-body').styles(
+          display: Display.flex,
+          flexDirection: FlexDirection.column,
+          gap: Gap.all(4.px),
+        ),
+        css('.notif-title').styles(
           fontWeight: FontWeight.bold,
-          margin: Spacing.only(bottom: 8.px),
+          color: Color('#111827'),
+          fontSize: 0.92.rem,
         ),
-        css('.operator-copy').styles(
-          display: Display.block,
-          color: Color('#CBD5E1'),
-          lineHeight: 1.5.em,
-          fontSize: 0.9.rem,
+        css('.notif-text').styles(
+          color: Color('#667085'),
+          fontSize: 0.84.rem,
+          lineHeight: 1.45.em,
         ),
         css('@media (max-width: 992px)').styles(raw: {
           ' .hero':
@@ -372,7 +386,7 @@ class HeroSection extends StatelessComponent {
           ' .hero-stats': 'margin: 0 auto;',
           ' .hero-visual': 'min-height: 540px;',
           ' .hero-image': 'height: 540px;',
-          ' .operator-card': 'right: 18px;',
+          ' .notification-card': 'right: 18px;',
           ' .tracking-panel': 'left: 18px;',
         }),
         css('@media (max-width: 768px)').styles(raw: {
@@ -386,7 +400,7 @@ class HeroSection extends StatelessComponent {
           ' .hero-image': 'height: 430px; border-radius: 24px;',
           ' .tracking-panel':
               'position: relative; left: auto; bottom: auto; width: auto; margin: -88px 14px 0;',
-          ' .operator-card': 'display: none;',
+          ' .notification-card': 'display: none;',
         }),
       ];
 }

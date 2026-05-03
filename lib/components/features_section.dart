@@ -10,34 +10,52 @@ class FeaturesSection extends StatelessComponent {
     return section(id: 'features', classes: 'features-section', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
-          span(classes: 'subtitle', [Component.text('PLATFORM CAPABILITIES')]),
+          span(classes: 'subtitle', [Component.text('FEATURES')]),
           h2(classes: 'title', [
-            Component.text('Built for fast orders, confident customers, and scalable restaurant growth.'),
+            Component.text('Everything you need for a seamless delivery experience.'),
           ]),
           p(classes: 'section-copy', [
             Component.text(
-              'From checkout to dispatch, every workflow is designed to reduce friction for diners while giving operators the visibility they need to run at volume.',
+              'From easy ordering to real-time tracking — our platform is packed with features designed to make your food and grocery delivery smooth and reliable.',
             ),
           ]),
         ]),
         div(classes: 'features-grid', [
           _buildFeatureCard(
-            icon: 'LIVE',
-            title: 'Real-time order tracking',
+            icon: '📱',
+            title: 'Easy Ordering',
             description:
-                'Customers see every handoff as it happens, while support teams get live status context before tickets ever escalate.',
+                'Browse products by category, add to cart, and checkout in just a few taps. A smooth shopping experience on your phone.',
           ),
           _buildFeatureCard(
-            icon: 'PAY',
-            title: 'Seamless payment flow',
+            icon: '🚚',
+            title: 'Fast Delivery',
             description:
-                'A polished checkout experience keeps orders moving with clear totals, secure payment readiness, and fewer abandoned carts.',
+                'Our dedicated delivery team picks up your order and delivers it fresh to your doorstep as quickly as possible.',
           ),
           _buildFeatureCard(
-            icon: 'API',
-            title: 'Robust backend architecture',
+            icon: '📍',
+            title: 'Real-Time Tracking',
             description:
-                'Scalable services, reliable data flows, and integration-friendly patterns support restaurant networks, riders, and admin teams.',
+                'Track your deliveryman live on the map. Know exactly where your order is and when it will arrive.',
+          ),
+          _buildFeatureCard(
+            icon: '🔔',
+            title: 'Order Notifications',
+            description:
+                'Get real-time status updates at every step — from order confirmed, to picked up, to arriving at your door.',
+          ),
+          _buildFeatureCard(
+            icon: '💳',
+            title: 'Secure Payments',
+            description:
+                'Multiple payment options including cash on delivery and secure online payments. Choose what works best for you.',
+          ),
+          _buildFeatureCard(
+            icon: '⭐',
+            title: 'Rate & Review',
+            description:
+                'Share your experience after every order. Your feedback helps us improve our service and maintain quality.',
           ),
         ])
       ])
@@ -131,12 +149,10 @@ class FeaturesSection extends StatelessComponent {
       backgroundColor: Color('#FFF0E8'),
     ),
     css('.icon-emoji').styles(
-      fontSize: 0.86.rem,
+      fontSize: 1.6.rem,
       position: Position.relative(),
       zIndex: ZIndex(10),
-      color: Color('#E94B1B'),
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.8.px,
+      lineHeight: 1.em,
     ),
     css('.feature-title').styles(
       fontSize: 1.35.rem,

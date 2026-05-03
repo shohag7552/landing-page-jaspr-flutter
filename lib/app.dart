@@ -1,11 +1,14 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import 'components/cta_banner.dart';
 import 'components/features_section.dart';
 import 'components/footer.dart';
 import 'components/hero_section.dart';
+import 'components/how_it_works.dart';
 import 'components/navbar.dart';
-import 'components/popular_dishes.dart';
+import 'components/our_platform.dart';
+import 'components/why_choose_us.dart';
 
 class App extends StatefulComponent {
   const App({super.key});
@@ -30,7 +33,10 @@ class AppState extends State<App> {
       const Navbar(),
       const HeroSection(),
       const FeaturesSection(),
-      const PopularDishes(),
+      const HowItWorks(),
+      const OurPlatform(),
+      const WhyChooseUs(),
+      const CtaBanner(),
       const FooterSection(),
     ]);
   }
