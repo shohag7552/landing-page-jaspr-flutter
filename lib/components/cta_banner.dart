@@ -102,6 +102,7 @@ class CtaBanner extends StatelessComponent {
       transition: Transition('all', duration: Duration(milliseconds: 300)),
       border: Border.unset,
       textAlign: TextAlign.left,
+      minWidth: 202.px,
     ),
     css('.apple-btn').styles(
       backgroundColor: Colors.white,
@@ -136,11 +137,25 @@ class CtaBanner extends StatelessComponent {
     ),
     css('@media (max-width: 768px)').styles(
       raw: {
+        ' .cta-banner': 'padding: 40px 20px;',
         ' .cta-container': 'padding: 56px 28px; border-radius: 24px;',
         ' .cta-title': 'font-size: 2rem;',
-        ' .cta-buttons': 'flex-direction: column; width: 100%; max-width: 280px;',
+        ' .cta-buttons': 'flex-direction: column; width: 100%; max-width: 320px;',
         ' .store-btn': 'width: 100%; justify-content: center;',
-      }
+      },
+    ),
+    css('@media (max-width: 520px)').styles(
+      raw: {
+        ' .cta-banner': 'padding: 28px 16px;',
+        ' .cta-container': 'padding: 38px 18px; border-radius: 20px;',
+        ' .cta-content': 'gap: 16px;',
+        ' .cta-emoji': 'font-size: 2.5rem;',
+        ' .cta-title': 'font-size: 1.62rem; line-height: 1.16;',
+        ' .cta-desc': 'font-size: 0.94rem; line-height: 1.62;',
+        ' .cta-buttons': 'max-width: none;',
+        ' .store-btn': 'padding: 14px 18px; min-width: 0; min-height: 54px;',
+        ' .store-btn-name': 'font-size: 1.08rem;',
+      },
     ),
   ];
 }

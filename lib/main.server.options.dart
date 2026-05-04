@@ -17,6 +17,8 @@ import 'package:food_delivery_landing/components/how_it_works.dart'
 import 'package:food_delivery_landing/components/navbar.dart' as _navbar;
 import 'package:food_delivery_landing/components/our_platform.dart'
     as _our_platform;
+import 'package:food_delivery_landing/components/popular_dishes.dart'
+    as _popular_dishes;
 import 'package:food_delivery_landing/components/why_choose_us.dart'
     as _why_choose_us;
 import 'package:food_delivery_landing/app.dart' as _app;
@@ -49,6 +51,7 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._how_it_works.HowItWorks.styles,
     ..._navbar.NavbarState.styles,
     ..._our_platform.OurPlatform.styles,
+    ..._popular_dishes.PopularDishes.styles,
     ..._why_choose_us.WhyChooseUs.styles,
   ],
 );

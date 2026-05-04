@@ -6,7 +6,6 @@ class FeaturesSection extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-
     return section(id: 'features', classes: 'features-section', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
@@ -57,10 +56,9 @@ class FeaturesSection extends StatelessComponent {
             description:
                 'Share your experience after every order. Your feedback helps us improve our service and maintain quality.',
           ),
-        ])
-      ])
+        ]),
+      ]),
     ]);
-  
   }
 
   Component _buildFeatureCard({required String icon, required String title, required String description}) {
@@ -78,6 +76,11 @@ class FeaturesSection extends StatelessComponent {
     css('.features-section').styles(
       padding: Spacing.symmetric(vertical: 112.px, horizontal: 24.px),
       backgroundColor: Colors.white,
+    ),
+    css('.features-section .container').styles(
+      width: 100.percent,
+      maxWidth: 1180.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
     ),
     css('.section-header').styles(
       margin: Spacing.only(bottom: 58.px),
@@ -113,11 +116,13 @@ class FeaturesSection extends StatelessComponent {
       display: Display.grid,
       maxWidth: 1080.px,
       margin: Spacing.symmetric(horizontal: Unit.auto),
-      gridTemplate: const GridTemplate(columns: GridTracks([
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-      ])),
+      gridTemplate: const GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
       gap: Gap.all(24.px),
     ),
     css('.feature-card').styles(
@@ -133,7 +138,7 @@ class FeaturesSection extends StatelessComponent {
       raw: {'border': '1px solid rgba(17, 24, 39, 0.08)'},
     ),
     css('.feature-card:hover').styles(
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 26.px, blur: 56.px, color: Color.rgba(17,24,39,0.10)),
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 26.px, blur: 56.px, color: Color.rgba(17, 24, 39, 0.10)),
       transform: Transform.translate(y: (-6).px),
       raw: {'border-color': 'rgba(233, 75, 27, 0.28)'},
     ),
@@ -166,14 +171,32 @@ class FeaturesSection extends StatelessComponent {
     ),
     css('@media (max-width: 992px)').styles(
       raw: {
+        ' .features-section': 'padding: 88px 24px;',
         ' .features-grid': 'grid-template-columns: repeat(2, 1fr); gap: 32px;',
-      }
+        ' .title': 'font-size: 2.35rem;',
+      },
     ),
     css('@media (max-width: 768px)').styles(
       raw: {
+        ' .features-section': 'padding: 64px 20px;',
+        ' .section-header': 'align-items: flex-start; text-align: left; margin-bottom: 36px;',
         ' .features-grid': 'grid-template-columns: 1fr; gap: 20px;',
         ' .title': 'font-size: 2rem;',
-      }
-    )
+        ' .section-copy': 'font-size: 0.98rem;',
+        ' .feature-card': 'padding: 26px;',
+      },
+    ),
+    css('@media (max-width: 520px)').styles(
+      raw: {
+        ' .features-section': 'padding: 54px 16px;',
+        ' .subtitle': 'font-size: 0.74rem; letter-spacing: 1.2px;',
+        ' .title': 'font-size: 1.72rem; line-height: 1.16;',
+        ' .section-copy': 'font-size: 0.94rem; line-height: 1.62;',
+        ' .feature-card': 'padding: 20px; border-radius: 18px;',
+        ' .feature-icon-wrapper': 'width: 52px; height: 52px; margin-bottom: 18px; border-radius: 15px;',
+        ' .feature-title': 'font-size: 1.18rem;',
+        ' .feature-desc': 'font-size: 0.94rem; line-height: 1.62;',
+      },
+    ),
   ];
 }

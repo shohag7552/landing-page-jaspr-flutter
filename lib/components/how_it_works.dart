@@ -24,14 +24,16 @@ class HowItWorks extends StatelessComponent {
             number: '01',
             icon: '🔍',
             title: 'Browse Menu',
-            description: 'Explore our wide range of food & grocery items. Filter by category, search for your favorites.',
+            description:
+                'Explore our wide range of food & grocery items. Filter by category, search for your favorites.',
             isLast: false,
           ),
           _buildStep(
             number: '02',
             icon: '🛒',
             title: 'Place Your Order',
-            description: 'Add items to your cart, choose your payment method, and confirm your order with a single tap.',
+            description:
+                'Add items to your cart, choose your payment method, and confirm your order with a single tap.',
             isLast: false,
           ),
           _buildStep(
@@ -79,6 +81,11 @@ class HowItWorks extends StatelessComponent {
       padding: Spacing.symmetric(vertical: 112.px, horizontal: 24.px),
       backgroundColor: Colors.white,
     ),
+    css('.how-it-works .container').styles(
+      width: 100.percent,
+      maxWidth: 1180.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+    ),
     css('.how-it-works .section-header').styles(
       margin: Spacing.only(bottom: 72.px),
       display: Display.flex,
@@ -90,12 +97,14 @@ class HowItWorks extends StatelessComponent {
       display: Display.grid,
       maxWidth: 1180.px,
       margin: Spacing.symmetric(horizontal: Unit.auto),
-      gridTemplate: const GridTemplate(columns: GridTracks([
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-      ])),
+      gridTemplate: const GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
       gap: Gap.all(12.px),
     ),
     css('.step-item').styles(
@@ -157,14 +166,25 @@ class HowItWorks extends StatelessComponent {
     ),
     css('@media (max-width: 992px)').styles(
       raw: {
+        ' .how-it-works': 'padding: 88px 24px;',
+        ' .how-it-works .section-header': 'margin-bottom: 52px;',
         ' .steps-grid': 'grid-template-columns: repeat(2, 1fr); gap: 40px;',
         ' .step-connector': 'display: none;',
-      }
+      },
     ),
     css('@media (max-width: 640px)').styles(
       raw: {
-        ' .steps-grid': 'grid-template-columns: 1fr; gap: 32px;',
-      }
+        ' .how-it-works': 'padding: 58px 16px;',
+        ' .how-it-works .section-header': 'align-items: flex-start; text-align: left; margin-bottom: 34px;',
+        ' .steps-grid': 'grid-template-columns: 1fr; gap: 16px;',
+        ' .step-item':
+            'align-items: flex-start; text-align: left; padding: 20px; border: 1px solid rgba(17, 24, 39, 0.08); border-radius: 18px; background: #FFFFFF;',
+        ' .step-number-wrapper': 'justify-content: flex-start; margin-bottom: 16px;',
+        ' .step-number': 'width: 48px; height: 48px; font-size: 0.98rem;',
+        ' .step-icon': 'font-size: 2rem; margin-bottom: 14px;',
+        ' .step-title': 'font-size: 1.15rem;',
+        ' .step-desc': 'max-width: none; font-size: 0.94rem;',
+      },
     ),
   ];
 }

@@ -6,8 +6,7 @@ class FooterSection extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-
-    return footer(classes: 'footer', [
+    return footer(id: 'contact', classes: 'footer', [
       div(classes: 'container', [
         div(classes: 'footer-content', [
           // Brand Column
@@ -22,13 +21,13 @@ class FooterSection extends StatelessComponent {
             p(classes: 'brand-desc', [
               Component.text(
                 'Real-time food delivery infrastructure for restaurants, cloud kitchens, and operators that need speed customers can trust.',
-              )
+              ),
             ]),
             div(classes: 'social-links', [
               a(href: '#', classes: 'social-icon', [Component.text('📘')]),
               a(href: '#', classes: 'social-icon', [Component.text('📸')]),
               a(href: '#', classes: 'social-icon', [Component.text('🐦')]),
-            ])
+            ]),
           ]),
 
           // Links Columns
@@ -37,7 +36,7 @@ class FooterSection extends StatelessComponent {
             _buildLinksColumn('Business', ['Restaurants', 'Cloud Kitchens', 'Enterprise', 'Integrations']),
             _buildLinksColumn('Support', ['Partner Login', 'Help Center', 'Status', 'Contact']),
           ]),
-          
+
           // Subscribe Column
           div(classes: 'footer-subscribe', [
             h4(classes: 'footer-title', [Component.text('Scale delivery with confidence')]),
@@ -45,27 +44,24 @@ class FooterSection extends StatelessComponent {
               Component.text('Get product updates, launch guidance, and operator insights in your inbox.'),
             ]),
             div(classes: 'subscribe-form', [
-               input(type: InputType.email, attributes: {'placeholder': 'Work email'}, classes: 'subscribe-input'),
-               button(classes: 'btn btn-primary subscribe-btn', [
-                 span(classes: 'icon', [Component.text('→')]),
-               ])
-            ])
-          ])
+              input(type: InputType.email, attributes: {'placeholder': 'Work email'}, classes: 'subscribe-input'),
+              button(classes: 'btn btn-primary subscribe-btn', [
+                span(classes: 'icon', [Component.text('→')]),
+              ]),
+            ]),
+          ]),
         ]),
 
         div(classes: 'footer-bottom', [
-          p(classes: 'copyright', [
-            Component.text('© 2026 FoodFlow. All rights reserved.')
-          ]),
+          p(classes: 'copyright', [Component.text('© 2026 FoodFlow. All rights reserved.')]),
           div(classes: 'legal-links', [
             a(href: '#', classes: 'legal-link', [Component.text('Terms & Conditions')]),
             span(classes: 'separator', [Component.text('•')]),
             a(href: '#', classes: 'legal-link', [Component.text('Privacy Policy')]),
-          ])
-        ])
-      ])
+          ]),
+        ]),
+      ]),
     ]);
-  
   }
 
   Component _buildLinksColumn(String title, List<String> links) {
@@ -74,28 +70,35 @@ class FooterSection extends StatelessComponent {
       ul(classes: 'footer-links', [
         for (final link in links)
           li(classes: 'footer-item', [
-            a(href: '#', classes: 'footer-link', [Component.text(link)])
-          ])
-      ])
+            a(href: '#', classes: 'footer-link', [Component.text(link)]),
+          ]),
+      ]),
     ]);
   }
 
   @css
   static List<StyleRule> get styles => [
     css('.footer').styles(
-      padding: Spacing.only(top: 80.px, bottom: 24.px),
+      padding: Spacing.only(top: 80.px, bottom: 24.px, left: 24.px, right: 24.px),
       margin: Spacing.zero,
       color: Colors.white,
       backgroundColor: Color('#111827'),
     ),
+    css('.footer .container').styles(
+      width: 100.percent,
+      maxWidth: 1180.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+    ),
     css('.footer-content').styles(
       display: Display.grid,
-      margin: Spacing.only(bottom: 64.px, left: 24.px, right: 24.px),
-      gridTemplate: GridTemplate(columns: GridTracks([
-        GridTrack(TrackSize.auto),
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.auto),
-      ])),
+      margin: Spacing.only(bottom: 64.px),
+      gridTemplate: GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.auto),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.auto),
+        ]),
+      ),
       gap: Gap.all(56.px),
     ),
     css('.mb-4').styles(
@@ -132,11 +135,13 @@ class FooterSection extends StatelessComponent {
     ),
     css('.footer-links-group').styles(
       display: Display.grid,
-      gridTemplate: GridTemplate(columns: GridTracks([
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-      ])),
+      gridTemplate: GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
       gap: Gap.all(32.px),
     ),
     css('.footer-title').styles(
@@ -166,6 +171,10 @@ class FooterSection extends StatelessComponent {
       color: Color('#CBD5E1'),
       lineHeight: 1.6.em,
       margin: Spacing.only(bottom: 24.px),
+    ),
+    css('.footer-subscribe').styles(
+      width: 100.percent,
+      maxWidth: 320.px,
     ),
     css('.subscribe-form').styles(
       position: Position.relative(),
@@ -203,7 +212,7 @@ class FooterSection extends StatelessComponent {
       raw: {'border-top': '1px solid #1F2937'},
     ),
     css('.copyright').styles(
-      margin: Spacing.only(left: 24.px, right: 24.px),
+      margin: Spacing.zero,
       color: Color('#94A3B8'),
       fontSize: 0.875.rem,
     ),
@@ -228,13 +237,28 @@ class FooterSection extends StatelessComponent {
       raw: {
         ' .footer-content': 'grid-template-columns: 1fr; gap: 48px;',
         ' .footer-brand': 'max-width: 400px;',
-      }
+        ' .footer-subscribe': 'max-width: 460px;',
+      },
     ),
     css('@media (max-width: 640px)').styles(
       raw: {
-        ' .footer-links-group': 'grid-template-columns: 1fr; gap: 32px;',
+        ' .footer': 'padding: 56px 16px 24px;',
+        ' .footer-content': 'gap: 34px; margin-bottom: 40px;',
+        ' .brand-desc': 'max-width: none; font-size: 0.94rem;',
+        ' .footer-links-group': 'grid-template-columns: 1fr 1fr; gap: 28px 22px;',
+        ' .footer-title': 'font-size: 1.06rem; margin-bottom: 16px;',
+        ' .footer-links': 'gap: 12px;',
+        ' .footer-link': 'font-size: 0.9rem;',
+        ' .footer-subscribe': 'max-width: none;',
+        ' .subscribe-input': 'min-height: 50px;',
         ' .footer-bottom': 'flex-direction: column; gap: 16px; text-align: center;',
-      }
-    )
+        ' .legal-links': 'flex-wrap: wrap; justify-content: center; gap: 10px;',
+      },
+    ),
+    css('@media (max-width: 420px)').styles(
+      raw: {
+        ' .footer-links-group': 'grid-template-columns: 1fr;',
+      },
+    ),
   ];
 }

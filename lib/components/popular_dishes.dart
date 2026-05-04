@@ -6,7 +6,6 @@ class PopularDishes extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-
     return section(id: 'menu', classes: 'popular-dishes', [
       div(classes: 'container', [
         div(classes: 'section-header', [
@@ -22,7 +21,7 @@ class PopularDishes extends StatelessComponent {
           button(classes: 'btn btn-outline', [
             Component.text('Explore Storefront'),
             span(classes: 'icon', [Component.text('→')]),
-          ])
+          ]),
         ]),
 
         div(classes: 'dishes-grid', [
@@ -62,10 +61,9 @@ class PopularDishes extends StatelessComponent {
             reviews: 142,
             time: '15-20 Min',
           ),
-        ])
-      ])
+        ]),
+      ]),
     ]);
-  
   }
 
   Component _buildDishCard({
@@ -80,6 +78,10 @@ class PopularDishes extends StatelessComponent {
     return div(classes: 'dish-card', [
       div(classes: 'dish-image-wrapper', [
         img(src: image, alt: title, classes: 'dish-image'),
+        div(classes: 'dish-time-badge', [
+          span(classes: 'dish-time-dot', []),
+          Component.text(time),
+        ]),
         div(classes: 'favorite-btn', [Component.text('+')]),
       ]),
       div(classes: 'dish-content', [
@@ -89,7 +91,7 @@ class PopularDishes extends StatelessComponent {
             span(classes: 'star', [Component.text('⭐')]),
             span(classes: 'rating-value', [Component.text(rating.toStringAsFixed(1))]),
             span(classes: 'review-count', [Component.text('($reviews)')]),
-          ])
+          ]),
         ]),
         h3(classes: 'dish-title', [Component.text(title)]),
         div(classes: 'dish-footer', [
@@ -98,10 +100,10 @@ class PopularDishes extends StatelessComponent {
             span(classes: 'price-amount', [Component.text(price.toStringAsFixed(2))]),
           ]),
           button(classes: 'add-cart-btn', [
-            span(classes: 'plus-icon', [Component.text('+')])
-          ])
-        ])
-      ])
+            span(classes: 'plus-icon', [Component.text('+')]),
+          ]),
+        ]),
+      ]),
     ]);
   }
 
@@ -110,6 +112,11 @@ class PopularDishes extends StatelessComponent {
     css('.popular-dishes').styles(
       padding: Spacing.symmetric(vertical: 100.px, horizontal: 24.px),
       backgroundColor: Color('#F8FAFC'),
+    ),
+    css('.popular-dishes .container').styles(
+      width: 100.percent,
+      maxWidth: 1180.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
     ),
     css('.popular-dishes .section-header').styles(
       display: Display.flex,
@@ -131,25 +138,27 @@ class PopularDishes extends StatelessComponent {
     ),
     css('.dishes-grid').styles(
       display: Display.grid,
-      gridTemplate: const GridTemplate(columns: GridTracks([
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-      ])),
+      gridTemplate: const GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
       gap: Gap.all(24.px),
     ),
     css('.dish-card').styles(
       radius: BorderRadius.circular(22.px),
       overflow: Overflow.hidden,
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 12.px, blur: 28.px, color: Color.rgba(17,24,39,0.05)),
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 12.px, blur: 28.px, color: Color.rgba(17, 24, 39, 0.05)),
       cursor: Cursor.pointer,
       transition: Transition('all', duration: Duration(milliseconds: 300)),
       backgroundColor: Colors.white,
       raw: {'border': '1px solid rgba(17, 24, 39, 0.08)'},
     ),
     css('.dish-card:hover').styles(
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 26.px, blur: 56.px, color: Color.rgba(17,24,39,0.12)),
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 26.px, blur: 56.px, color: Color.rgba(17, 24, 39, 0.12)),
       transform: Transform.translate(y: (-8).px),
     ),
     css('.dish-image-wrapper').styles(
@@ -171,16 +180,36 @@ class PopularDishes extends StatelessComponent {
       position: Position.absolute(top: 16.px, right: 16.px),
       width: 40.px,
       height: 40.px,
-      backgroundColor: const Color.rgba(255,255,255,0.92),
+      backgroundColor: const Color.rgba(255, 255, 255, 0.92),
       radius: BorderRadius.circular(50.percent),
       display: Display.flex,
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 4.px, blur: 12.px, color: Color.rgba(0,0,0,0.1)),
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 4.px, blur: 12.px, color: Color.rgba(0, 0, 0, 0.1)),
       transition: Transition('transform', duration: Duration(milliseconds: 200)),
       color: Color('#111827'),
       fontSize: 1.25.rem,
       fontWeight: FontWeight.bold,
+    ),
+    css('.dish-time-badge').styles(
+      position: Position.absolute(left: 16.px, bottom: 16.px),
+      display: Display.flex,
+      alignItems: AlignItems.center,
+      gap: Gap.all(8.px),
+      padding: Spacing.symmetric(horizontal: 12.px, vertical: 8.px),
+      radius: BorderRadius.circular(999.px),
+      backgroundColor: const Color.rgba(255, 255, 255, 0.92),
+      color: Color('#111827'),
+      fontSize: 0.8.rem,
+      fontWeight: FontWeight.w700,
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 8.px, blur: 20.px, color: Color.rgba(0, 0, 0, 0.12)),
+      raw: {'backdrop-filter': 'blur(10px)'},
+    ),
+    css('.dish-time-dot').styles(
+      width: 7.px,
+      height: 7.px,
+      radius: BorderRadius.circular(50.percent),
+      backgroundColor: Color('#16A34A'),
     ),
     css('.favorite-btn:hover').styles(
       transform: Transform.scale(1.1),
@@ -268,18 +297,36 @@ class PopularDishes extends StatelessComponent {
     css('@media (max-width: 1200px)').styles(
       raw: {
         ' .dishes-grid': 'grid-template-columns: repeat(3, 1fr);',
-      }
+      },
     ),
     css('@media (max-width: 992px)').styles(
       raw: {
+        ' .popular-dishes': 'padding: 88px 24px;',
         ' .dishes-grid': 'grid-template-columns: repeat(2, 1fr);',
         ' .popular-dishes .section-header': 'flex-direction: column; align-items: flex-start; gap: 24px;',
-      }
+      },
     ),
     css('@media (max-width: 640px)').styles(
       raw: {
+        ' .popular-dishes': 'padding: 58px 16px;',
+        ' .popular-dishes .section-header': 'align-items: stretch; gap: 18px; margin-bottom: 34px;',
+        ' .popular-dishes .btn': 'width: 100%; justify-content: center;',
         ' .dishes-grid': 'grid-template-columns: 1fr;',
-      }
-    )
+        ' .dish-card': 'border-radius: 18px;',
+        ' .dish-image-wrapper': 'height: 205px;',
+        ' .dish-time-badge': 'left: 12px; bottom: 12px; padding: 7px 10px; font-size: 0.76rem;',
+        ' .favorite-btn': 'top: 12px; right: 12px; width: 38px; height: 38px;',
+        ' .dish-content': 'padding: 18px;',
+        ' .dish-meta': 'align-items: flex-start; gap: 10px; margin-bottom: 14px;',
+        ' .dish-title': 'font-size: 1.12rem; margin-bottom: 20px;',
+        ' .add-cart-btn': 'width: 44px; height: 44px; border-radius: 14px;',
+      },
+    ),
+    css('@media (max-width: 380px)').styles(
+      raw: {
+        ' .dish-meta': 'flex-direction: column;',
+        ' .dish-image-wrapper': 'height: 180px;',
+      },
+    ),
   ];
 }

@@ -8,6 +8,7 @@ import 'components/hero_section.dart';
 import 'components/how_it_works.dart';
 import 'components/navbar.dart';
 import 'components/our_platform.dart';
+import 'components/popular_dishes.dart';
 import 'components/why_choose_us.dart';
 
 class App extends StatefulComponent {
@@ -18,7 +19,6 @@ class App extends StatefulComponent {
 }
 
 class AppState extends State<App> {
-
   @override
   void initState() {
     super.initState();
@@ -32,6 +32,7 @@ class AppState extends State<App> {
     return div(classes: 'app-wrapper', [
       const Navbar(),
       const HeroSection(),
+      // const PopularDishes(),
       const FeaturesSection(),
       const HowItWorks(),
       const OurPlatform(),

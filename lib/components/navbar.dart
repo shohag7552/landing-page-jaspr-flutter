@@ -15,6 +15,7 @@ class Navbar extends StatefulComponent {
 class NavbarState extends State<Navbar> {
   bool isScrolled = false;
   bool isDarkMode = false;
+  bool isMenuOpen = false;
   web.EventListener? _scrollListener;
 
   @override
@@ -52,6 +53,22 @@ class NavbarState extends State<Navbar> {
     });
   }
 
+  void _toggleMenu() {
+    setState(() {
+      isMenuOpen = !isMenuOpen;
+    });
+  }
+
+  void _closeMenu() {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    setState(() {
+      isMenuOpen = false;
+    });
+  }
+
   void _applyTheme(bool useDarkMode) {
     final root = web.document.documentElement;
     if (root == null) {
@@ -76,7 +93,7 @@ class NavbarState extends State<Navbar> {
   @override
   Component build(BuildContext context) {
     return header(
-      classes: 'navbar ${isScrolled ? 'scrolled' : ''}',
+      classes: 'navbar ${isScrolled || isMenuOpen ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}',
       [
         div(classes: 'container', [
           // Logo
@@ -109,11 +126,36 @@ class NavbarState extends State<Navbar> {
           // Mobile Menu Toggle
           div(classes: 'mobile-controls mobile-only', [
             _buildThemeToggle(),
-            button(classes: 'mobile-menu-toggle', [
-              span(classes: 'hamburger', []),
+            button(
+              classes: 'mobile-menu-toggle ${isMenuOpen ? 'active' : ''}',
+              type: ButtonType.button,
+              onClick: _toggleMenu,
+              attributes: {'aria-label': isMenuOpen ? 'Close menu' : 'Open menu'},
+              [
+                span(classes: 'hamburger', []),
+              ],
+            ),
+          ]),
+        ]),
+        div(classes: 'mobile-menu mobile-only ${isMenuOpen ? 'open' : ''}', [
+          div(classes: 'mobile-menu-panel', [
+            nav(classes: 'mobile-nav-links', [
+              Link(to: '#home', classes: 'mobile-nav-link active', child: Component.text('Home')),
+              Link(to: '#menu', classes: 'mobile-nav-link', child: Component.text('Marketplace')),
+              Link(to: '#features', classes: 'mobile-nav-link', child: Component.text('Platform')),
+              Link(to: '#contact', classes: 'mobile-nav-link', child: Component.text('Contact')),
             ]),
-          ])
-        ])
+            div(classes: 'mobile-nav-actions', [
+              button(classes: 'btn btn-ghost mobile-action', onClick: _closeMenu, [
+                Component.text('Partner Login'),
+              ]),
+              button(classes: 'btn btn-primary mobile-action', onClick: _closeMenu, [
+                Component.text('Book Demo'),
+                span(classes: 'icon', [Component.text('→')]),
+              ]),
+            ]),
+          ]),
+        ]),
       ],
     );
   }
@@ -143,6 +185,10 @@ class NavbarState extends State<Navbar> {
       transition: Transition('all', duration: Duration(milliseconds: 300)),
       backgroundColor: Colors.transparent,
       raw: {'backdrop-filter': 'blur(0px)'},
+    ),
+    css('.navbar.menu-open').styles(
+      backgroundColor: Colors.white,
+      raw: {'backdrop-filter': 'blur(18px)'},
     ),
     css('.navbar.scrolled').styles(
       padding: Spacing.symmetric(vertical: 16.px),
@@ -282,12 +328,19 @@ class NavbarState extends State<Navbar> {
     css('.mobile-only').styles(
       display: Display.none,
     ),
-    css('@media (max-width: 768px)').styles(
-      raw: {' .desktop-only': 'display: none;', ' .mobile-only': 'display: flex;'},
-    ),
     css('.mobile-controls').styles(
       alignItems: AlignItems.center,
       gap: Gap.all(12.px),
+    ),
+    css('.mobile-menu-toggle').styles(
+      width: 44.px,
+      height: 44.px,
+      display: Display.flex,
+      alignItems: AlignItems.center,
+      justifyContent: JustifyContent.center,
+      radius: BorderRadius.circular(14.px),
+      backgroundColor: Color('#F2F4F7'),
+      raw: {'border': '1px solid rgba(17, 24, 39, 0.10)'},
     ),
     css('.hamburger').styles(
       display: Display.block,
@@ -295,7 +348,99 @@ class NavbarState extends State<Navbar> {
       height: 2.px,
       backgroundColor: Color('#1E293B'),
       position: Position.relative(),
+      transition: Transition('all', duration: Duration(milliseconds: 200)),
     ),
-    // Note: before/after pseudo elements might be better in global styles for full raw support
+    css('.hamburger::before, .hamburger::after').styles(
+      position: Position.absolute(left: 0.px),
+      width: 24.px,
+      height: 2.px,
+      backgroundColor: Color('#1E293B'),
+      transition: Transition('all', duration: Duration(milliseconds: 200)),
+      raw: {
+        'content': '""',
+      },
+    ),
+    css('.hamburger::before').styles(position: Position.absolute(top: (-7).px)),
+    css('.hamburger::after').styles(position: Position.absolute(top: 7.px)),
+    css('.mobile-menu').styles(
+      display: Display.none,
+      maxWidth: 1180.px,
+      width: 100.percent,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+      padding: Spacing.only(left: 20.px, right: 20.px, top: 12.px),
+      boxSizing: BoxSizing.borderBox,
+      raw: {'max-height': 'calc(100vh - 72px)', 'overflow-y': 'auto'},
+    ),
+    css('.mobile-nav-links').styles(
+      display: Display.flex,
+      flexDirection: FlexDirection.column,
+      gap: Gap.all(6.px),
+      padding: Spacing.all(8.px),
+    ),
+    css('.mobile-menu-panel').styles(
+      backgroundColor: Colors.white,
+      padding: Spacing.all(10.px),
+      radius: BorderRadius.circular(24.px),
+      shadow: BoxShadow(offsetX: 0.px, offsetY: 18.px, blur: 45.px, color: Color.rgba(17, 24, 39, 0.12)),
+      raw: {'border': '1px solid rgba(17, 24, 39, 0.08)'},
+    ),
+    css('.mobile-nav-link').styles(
+      padding: Spacing.symmetric(horizontal: 16.px, vertical: 13.px),
+      radius: BorderRadius.circular(14.px),
+      color: Color('#344054'),
+      fontWeight: FontWeight.w600,
+    ),
+    css('.mobile-nav-link.active, .mobile-nav-link:hover').styles(
+      color: Color('#E94B1B'),
+      backgroundColor: Color('#FFF0E8'),
+    ),
+    css('.mobile-nav-actions').styles(
+      display: Display.grid,
+      gridTemplate: const GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
+      gap: Gap.all(12.px),
+      padding: Spacing.only(top: 12.px, bottom: 10.px),
+    ),
+    css('.mobile-action').styles(
+      justifyContent: JustifyContent.center,
+      width: 100.percent,
+    ),
+    css('@media (max-width: 900px)').styles(
+      raw: {
+        ' .navbar': 'padding: 12px 0;',
+        ' .navbar.scrolled': 'padding: 10px 0;',
+        ' .navbar .container': 'padding: 0 20px;',
+        ' .desktop-only': 'display: none;',
+        ' .mobile-only': 'display: flex;',
+        ' .mobile-menu': 'display: none;',
+        ' .mobile-menu.open': 'display: block;',
+        ' .mobile-menu-toggle.active .hamburger': 'background-color: transparent;',
+        ' .mobile-menu-toggle.active .hamburger::before': 'top: 0; transform: rotate(45deg);',
+        ' .mobile-menu-toggle.active .hamburger::after': 'top: 0; transform: rotate(-45deg);',
+      },
+    ),
+    css('@media (max-width: 520px)').styles(
+      raw: {
+        ' .navbar': 'padding: 10px 0;',
+        ' .navbar.scrolled': 'padding: 8px 0;',
+        ' .navbar .container': 'padding: 0 16px;',
+        ' .logo-icon': 'font-size: 1.7rem;',
+        ' .logo-text': 'font-size: 1.32rem;',
+        ' .theme-toggle, .theme-toggle-track': 'width: 52px; height: 32px;',
+        ' .theme-toggle-thumb': 'width: 24px; height: 24px;',
+        ' .theme-toggle.dark .theme-toggle-thumb': 'transform: translateX(20px);',
+        ' .mobile-controls': 'gap: 8px;',
+        ' .mobile-menu': 'padding: 10px 16px 0;',
+        ' .mobile-menu-toggle': 'width: 40px; height: 40px; border-radius: 12px;',
+        ' .mobile-menu-panel': 'padding: 8px; border-radius: 20px;',
+        ' .mobile-nav-links': 'padding: 4px;',
+        ' .mobile-nav-link': 'padding: 12px 14px;',
+        ' .mobile-nav-actions': 'grid-template-columns: 1fr;',
+      },
+    ),
   ];
 }

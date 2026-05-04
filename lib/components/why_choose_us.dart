@@ -83,6 +83,11 @@ class WhyChooseUs extends StatelessComponent {
       padding: Spacing.symmetric(vertical: 112.px, horizontal: 24.px),
       backgroundColor: Colors.white,
     ),
+    css('.why-choose-us .container').styles(
+      width: 100.percent,
+      maxWidth: 1180.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+    ),
     css('.why-choose-us .section-header').styles(
       margin: Spacing.only(bottom: 64.px),
       display: Display.flex,
@@ -94,10 +99,12 @@ class WhyChooseUs extends StatelessComponent {
       display: Display.grid,
       maxWidth: 1080.px,
       margin: Spacing.symmetric(horizontal: Unit.auto),
-      gridTemplate: const GridTemplate(columns: GridTracks([
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-      ])),
+      gridTemplate: const GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
       gap: Gap.all(28.px),
     ),
     css('.reason-card').styles(
@@ -136,11 +143,29 @@ class WhyChooseUs extends StatelessComponent {
       lineHeight: 1.7.em,
       margin: Spacing.zero,
     ),
+    css('@media (max-width: 992px)').styles(
+      raw: {
+        ' .why-choose-us': 'padding: 88px 24px;',
+        ' .why-choose-us .section-header': 'margin-bottom: 48px;',
+      },
+    ),
     css('@media (max-width: 768px)').styles(
       raw: {
+        ' .why-choose-us': 'padding: 64px 20px;',
+        ' .why-choose-us .section-header': 'align-items: flex-start; text-align: left; margin-bottom: 36px;',
         ' .reasons-grid': 'grid-template-columns: 1fr; gap: 20px;',
         ' .reason-card': 'padding: 28px;',
-      }
+      },
+    ),
+    css('@media (max-width: 520px)').styles(
+      raw: {
+        ' .why-choose-us': 'padding: 54px 16px;',
+        ' .reasons-grid': 'gap: 18px;',
+        ' .reason-card': 'padding: 20px; border-radius: 20px;',
+        ' .reason-icon-wrapper': 'width: 56px; height: 56px; margin-bottom: 18px; border-radius: 16px;',
+        ' .reason-title': 'font-size: 1.18rem;',
+        ' .reason-desc': 'font-size: 0.94rem; line-height: 1.62;',
+      },
     ),
   ];
 }

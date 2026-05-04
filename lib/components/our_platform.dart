@@ -101,6 +101,11 @@ class OurPlatform extends StatelessComponent {
       padding: Spacing.symmetric(vertical: 112.px, horizontal: 24.px),
       backgroundColor: Color('#F8FAFC'),
     ),
+    css('.our-platform .container').styles(
+      width: 100.percent,
+      maxWidth: 1180.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+    ),
     css('.our-platform .section-header').styles(
       margin: Spacing.only(bottom: 64.px),
       display: Display.flex,
@@ -112,10 +117,12 @@ class OurPlatform extends StatelessComponent {
       display: Display.grid,
       maxWidth: 1080.px,
       margin: Spacing.symmetric(horizontal: Unit.auto),
-      gridTemplate: const GridTemplate(columns: GridTracks([
-        GridTrack(TrackSize.fr(1)),
-        GridTrack(TrackSize.fr(1)),
-      ])),
+      gridTemplate: const GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
       gap: Gap.all(32.px),
     ),
     css('.platform-card').styles(
@@ -214,11 +221,40 @@ class OurPlatform extends StatelessComponent {
       width: 100.percent,
       justifyContent: JustifyContent.center,
     ),
+    css('@media (max-width: 992px)').styles(
+      raw: {
+        ' .our-platform': 'padding: 88px 24px;',
+        ' .our-platform .section-header': 'margin-bottom: 48px;',
+        ' .platform-card': 'padding: 32px;',
+      },
+    ),
     css('@media (max-width: 768px)').styles(
       raw: {
+        ' .our-platform': 'padding: 64px 20px;',
+        ' .our-platform .section-header': 'align-items: flex-start; text-align: left; margin-bottom: 36px;',
         ' .platform-grid': 'grid-template-columns: 1fr; gap: 24px;',
         ' .platform-card': 'padding: 28px;',
-      }
+      },
+    ),
+    css('@media (max-width: 520px)').styles(
+      raw: {
+        ' .our-platform': 'padding: 54px 16px;',
+        ' .platform-grid': 'gap: 18px;',
+        ' .platform-card': 'padding: 20px; border-radius: 20px;',
+        ' .platform-card-header': 'align-items: center; gap: 12px; margin-bottom: 20px;',
+        ' .platform-icon-wrapper': 'width: 52px; height: 52px; border-radius: 15px;',
+        ' .platform-badge': 'font-size: 0.72rem; letter-spacing: 0.4px;',
+        ' .platform-title': 'font-size: 1.34rem;',
+        ' .platform-desc': 'font-size: 0.94rem; line-height: 1.62; margin-bottom: 22px;',
+        ' .platform-features': 'gap: 12px; margin-bottom: 24px;',
+        ' .platform-feature-item': 'align-items: flex-start;',
+        ' .platform-cta': 'min-height: 48px;',
+      },
+    ),
+    css('@media (max-width: 380px)').styles(
+      raw: {
+        ' .platform-card-header': 'flex-direction: column; align-items: flex-start;',
+      },
     ),
   ];
 }
