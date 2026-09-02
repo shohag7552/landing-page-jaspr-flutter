@@ -27,7 +27,25 @@ List<StyleRule> get uiKit => [
     margin: Spacing.symmetric(horizontal: Unit.auto),
     padding: Spacing.symmetric(horizontal: 28.px),
     boxSizing: BoxSizing.borderBox,
+    raw: {'min-width': '0'},
   ),
+
+  // Defensive, not a fix for a current bug: grid and flex items default to
+  // `min-width: auto` and refuse to shrink below their min-content width, so
+  // one long unbreakable run — a nowrap chip, a wide image, a two-up row —
+  // can push a track wider than the phone and overflow the page sideways.
+  //
+  // It matters here because this ships as source that store owners edit. A
+  // longer area name or an extra chip is exactly the kind of harmless-looking
+  // change that triggers it, and the damage lands on phones, where most of
+  // this page's traffic arrives.
+  css(
+    '.app-wrapper > *, .container > *, .hero-container > *, .hero-content > *, .reassurance-row > *, '
+    '.zone-grid > *, .zone-panels > *, .zone-pair > *, .zone-card > *, .zone-row > *, '
+    '.split-grid > *, .showcase-panel > *, .steps-grid > *, .features-grid > *, '
+    '.tracking-grid > *, .tracking-points > *, .tracking-point > *, '
+    '.getapp-grid > *, .getapp-card > *, .footer-top > *, .footer-col > *',
+  ).styles(raw: {'min-width': '0'}),
   css('.section').styles(
     padding: Spacing.symmetric(vertical: 104.px, horizontal: 0.px),
     backgroundColor: Color.variable('--surface-0'),
