@@ -10,9 +10,67 @@ import 'package:jaspr/server.dart';
 
 // Imports the [App] component.
 import 'app.dart';
+import 'components/navbar.dart' show kThemeStorageKey;
+import 'content/site_content.dart';
+import 'content/site_links.dart';
+import 'theme.dart';
 
 // This file is generated automatically by Jaspr, do not remove or edit.
 import 'main.server.options.dart';
+
+const _title = '$kBrandName — Order Food & Groceries Online | Fast Local Delivery';
+const _description =
+    'Order food and groceries online from $kBrandName in $kCity. Fresh meals and '
+    'everyday essentials delivered to your door, with live rider tracking and '
+    'secure payment. Order on the web or get the app.';
+
+/// TODO(owner): replace with your own 1200×630 share image. This is what
+/// people see when your link is pasted into WhatsApp or Facebook, so it is
+/// worth making properly — a photo of your food and a bag of groceries, with
+/// your logo, works well.
+const _ogImage = '$kSiteUrl/images/og-cover.jpg';
+
+/// Applies the saved theme before the first paint.
+///
+/// Without this the class is only added after hydration, so anyone using dark
+/// mode gets a white flash on every page load.
+const _noFlashThemeScript =
+    '(function(){try{var t=localStorage.getItem("$kThemeStorageKey");'
+    'if(t==="dark")document.documentElement.classList.add("dark-mode");}catch(e){}})();';
+
+/// `prefers-reduced-motion` has no constructor in Jaspr's typed MediaQuery,
+/// so this one media query is written by hand.
+const _reducedMotionCss =
+    '@media (prefers-reduced-motion: reduce){*,*::before,*::after{'
+    'animation-duration:0.01ms !important;animation-iteration-count:1 !important;'
+    'transition-duration:0.01ms !important;scroll-behavior:auto !important}}';
+
+/// Tells Google this is a real local business with a real service area.
+const _localBusinessJsonLd =
+    '{"@context":"https://schema.org","@type":"GroceryStore",'
+    '"name":"$kBrandName",'
+    '"description":"Food and grocery delivery in $kCity.",'
+    '"url":"$kSiteUrl",'
+    '"telephone":"$kSupportPhone",'
+    '"email":"$kSupportEmail",'
+    '"image":"$_ogImage",'
+    '"priceRange":"\$\$",'
+    '"address":{"@type":"PostalAddress","streetAddress":"$kStoreAddress","addressLocality":"$kCity"},'
+    '"areaServed":{"@type":"GeoCircle",'
+    '"geoMidpoint":{"@type":"GeoCoordinates","address":"$kStoreAddress"},'
+    '"geoRadius":"5000"},'
+    '"aggregateRating":{"@type":"AggregateRating","ratingValue":"$kRating","reviewCount":"1200"}}';
+
+/// Open Graph needs `property=`, which `Document(meta:)` cannot emit.
+Iterable<Component> _ogMeta(Map<String, String> tags) {
+  return tags.entries.map(
+    (e) => Component.element(
+      tag: 'meta',
+      attributes: {'property': e.key, 'content': e.value},
+      children: const [],
+    ),
+  );
+}
 
 void main() {
   Jaspr.initializeApp(
@@ -21,236 +79,106 @@ void main() {
 
   runApp(
     Document(
-      title: 'FoodFlow — Order Food & Groceries Online | Fast Delivery',
+      title: _title,
+      lang: 'en',
       meta: {
-        "description":
-            "Order food and groceries online with FoodFlow. Fast delivery, real-time tracking, instant notifications, and secure payments — all in one app.",
-        "viewport": "width=device-width, initial-scale=1.0",
+        'description': _description,
+        'viewport': 'width=device-width, initial-scale=1.0',
+        'theme-color': kBrandHex,
+        // NOTE: Open Graph tags are NOT here. Document(meta:) renders
+        // `name="..."`, but the Open Graph protocol requires `property="..."`,
+        // and Facebook/WhatsApp read only `property`. They are emitted as raw
+        // <meta property> elements in `head:` below instead.
+        'twitter:card': 'summary_large_image',
+        'twitter:title': _title,
+        'twitter:description': _description,
+        'twitter:image': _ogImage,
       },
       head: [
-        // Add multiple Google Fonts
+        // Link previews. This page's whole distribution model is someone
+        // pasting the URL into a chat, so these are not optional polish — a
+        // share with no card is a dead post.
+        ..._ogMeta({
+          'og:type': 'website',
+          'og:site_name': kBrandName,
+          'og:title': _title,
+          'og:description': _description,
+          'og:url': kSiteUrl,
+          'og:image': _ogImage,
+          'og:image:width': '1200',
+          'og:image:height': '630',
+          'og:image:alt': '$kBrandName — food and grocery delivery in $kCity',
+          'og:locale': 'en_US',
+        }),
+        link(href: kSiteUrl, rel: 'canonical'),
+        link(href: 'https://fonts.googleapis.com', rel: 'preconnect'),
+        link(href: 'https://fonts.gstatic.com', rel: 'preconnect', attributes: const {'crossorigin': ''}),
         link(
           href:
-              "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap",
-          rel: "stylesheet",
+              'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700'
+              '&family=Outfit:wght@500;600;700;800&display=swap',
+          rel: 'stylesheet',
+        ),
+        // Must run before first paint — do not add `defer` or `async`.
+        script(content: _noFlashThemeScript),
+        Component.element(tag: 'style', children: const [RawText(_reducedMotionCss)]),
+        script(
+          attributes: const {'type': 'application/ld+json'},
+          content: _localBusinessJsonLd,
         ),
       ],
       styles: [
-        // Base resets & typography
-        css('html').styles(
-          raw: {'scroll-behavior': 'smooth'},
-        ),
-        css('*, *::before, *::after').styles(
-          raw: {'box-sizing': 'border-box'},
-        ),
+        // ── Base resets & typography ────────────────────────────────────
+        css('html').styles(raw: {'scroll-behavior': 'smooth'}),
+        css('*, *::before, *::after').styles(raw: {'box-sizing': 'border-box'}),
         css('body').styles(
-          padding: Spacing.zero,
           margin: Spacing.zero,
-          color: Color('#182230'),
+          padding: Spacing.zero,
+          backgroundColor: Color.variable('--surface-0'),
+          color: Color.variable('--ink-800'),
           fontFamily: const FontFamily.list([FontFamily('Inter'), FontFamilies.sansSerif]),
-          backgroundColor: Color('#FFFDF8'),
-          raw: {'overflow-x': 'hidden'},
+          raw: {'overflow-x': 'hidden', '-webkit-font-smoothing': 'antialiased'},
         ),
         css('h1, h2, h3, h4, h5, h6').styles(
           margin: Spacing.zero,
           fontFamily: const FontFamily.list([FontFamily('Outfit'), FontFamilies.sansSerif]),
           fontWeight: FontWeight.bold,
         ),
+        css('p').styles(margin: Spacing.zero),
         css('a').styles(
           color: Color.inherit,
-          textDecoration: TextDecoration(line: TextDecorationLine.none),
+          textDecoration: const TextDecoration(line: TextDecorationLine.none),
         ),
         css('button').styles(
           border: Border.unset,
+          backgroundColor: Colors.transparent,
           cursor: Cursor.pointer,
           fontFamily: const FontFamily.list([FontFamily('Inter'), FontFamilies.sansSerif]),
-          backgroundColor: Colors.transparent,
         ),
-        css('img').styles(
-          raw: {'max-width': '100%', 'display': 'block'},
-        ),
-        css('@media (max-width: 640px)').styles(
-          raw: {
-            'html': 'font-size: 15px;',
-            'body': '-webkit-text-size-adjust: 100%;',
-            '.app-wrapper': 'overflow-x: hidden;',
-          },
-        ),
+        css('img').styles(raw: {'max-width': '100%', 'display': 'block'}),
+        css('svg').styles(raw: {'display': 'block', 'flex-shrink': '0'}),
 
-        // ─── Dark Mode ────────────────────────────────────────────
-        // Base
-        css('html.dark-mode body').styles(
-          color: Color('#E5E7EB'),
-          backgroundColor: Color('#080C14'),
-        ),
-        css('html.dark-mode .app-wrapper').styles(
-          backgroundColor: Color('#080C14'),
-        ),
-
-        // Hero
+        // ── Dark mode ───────────────────────────────────────────────────
+        // This used to be ~40 rules re-stating the entire palette. Almost all
+        // of them are gone: components read `var(--ink-900)` and friends, and
+        // `lib/theme.dart` redefines those under `html.dark-mode`. What is
+        // left is genuinely structural — things whose *shape*, not colour,
+        // changes with the theme.
         css('html.dark-mode .hero').styles(
-          backgroundColor: Color('#080C14'),
           raw: {
             'background-image':
-                'radial-gradient(circle at 15% 15%, rgba(233, 75, 27, 0.18), transparent 30%), linear-gradient(180deg, #080C14 0%, #111827 100%)',
+                'radial-gradient(circle at 15% 12%, var(--brand-a18), transparent 30%), '
+                    'linear-gradient(180deg, var(--surface-0) 0%, var(--surface-card) 100%)',
           },
         ),
-
-        // Navbar scrolled
-        css('html.dark-mode .navbar.scrolled').styles(
-          backgroundColor: const Color.rgba(11, 17, 29, 0.94),
-          shadow: BoxShadow(offsetX: 0.px, offsetY: 16.px, blur: 40.px, color: Color.rgba(0, 0, 0, 0.28)),
-          raw: {'backdrop-filter': 'blur(18px)', 'border-bottom': '1px solid rgba(255, 255, 255, 0.08)'},
+        css('html.dark-mode .navbar.scrolled, html.dark-mode .navbar.menu-open').styles(
+          raw: {'border-bottom': '1px solid var(--border-subtle)'},
         ),
-
-        // Sections backgrounds
-        css('html.dark-mode .features-section, html.dark-mode .why-choose-us, html.dark-mode .how-it-works').styles(
-          backgroundColor: Color('#0B111D'),
+        css('html.dark-mode .store-badge').styles(
+          backgroundColor: Color.variable('--surface-2'),
+          color: Color.variable('--ink-900'),
         ),
-        css('html.dark-mode .popular-dishes, html.dark-mode .our-platform, html.dark-mode .cta-banner').styles(
-          backgroundColor: Color('#111827'),
-        ),
-
-        // Text colors - headings
-        css(
-          'html.dark-mode .logo-text, html.dark-mode .hero-title, html.dark-mode .title, html.dark-mode .feature-title, html.dark-mode .stat-value, html.dark-mode .panel-label, html.dark-mode .metric-value, html.dark-mode .step-title, html.dark-mode .platform-title, html.dark-mode .reason-title, html.dark-mode .notif-title, html.dark-mode .dish-title, html.dark-mode .rating-value, html.dark-mode .dish-price',
-        ).styles(
-          color: Color('#F8FAFC'),
-        ),
-
-        // Text colors - body
-        css(
-          'html.dark-mode .hero-subtitle, html.dark-mode .section-copy, html.dark-mode .feature-desc, html.dark-mode .stat-label, html.dark-mode .metric-label, html.dark-mode .step-desc, html.dark-mode .platform-desc, html.dark-mode .reason-desc, html.dark-mode .notif-text, html.dark-mode .platform-feature-item, html.dark-mode .marketplace-copy, html.dark-mode .review-count, html.dark-mode .quick-info-label',
-        ).styles(
-          color: Color('#AAB4C5'),
-        ),
-
-        // Nav links
-        css('html.dark-mode .nav-link, html.dark-mode .btn-ghost').styles(
-          color: Color('#CBD5E1'),
-        ),
-        css('html.dark-mode .nav-link:hover, html.dark-mode .nav-link.active, html.dark-mode .btn-ghost:hover').styles(
-          color: Color('#FDBA74'),
-        ),
-
-        // Cards & surfaces
-        css(
-          'html.dark-mode .hero-badge, html.dark-mode .feature-card, html.dark-mode .stat-item, html.dark-mode .tracking-panel, html.dark-mode .platform-card, html.dark-mode .reason-card, html.dark-mode .notification-card, html.dark-mode .dish-card, html.dark-mode .quick-info-item',
-        ).styles(
-          backgroundColor: const Color.rgba(17, 24, 39, 0.86),
-          raw: {'border': '1px solid rgba(255, 255, 255, 0.10)'},
-        ),
-        css('html.dark-mode .badge-text').styles(
-          color: Color('#E5E7EB'),
-        ),
-
-        // Buttons
-        css('html.dark-mode .btn-outline').styles(
-          backgroundColor: const Color.rgba(17, 24, 39, 0.78),
-          color: Color('#F8FAFC'),
-          raw: {'border': '1px solid rgba(255, 255, 255, 0.14)'},
-        ),
-        css('html.dark-mode .btn-outline:hover').styles(
-          color: Color('#FDBA74'),
-          raw: {'border-color': '#FDBA74'},
-        ),
-        css('html.dark-mode .btn-primary').styles(
-          backgroundColor: Color('#E94B1B'),
-          shadow: BoxShadow(offsetX: 0.px, offsetY: 14.px, blur: 26.px, color: Color.rgba(233, 75, 27, 0.28)),
-        ),
-
-        // Feature icons
-        css('html.dark-mode .feature-icon-wrapper, html.dark-mode .notif-icon').styles(
-          backgroundColor: const Color.rgba(233, 75, 27, 0.14),
-        ),
-
-        // Tracking panel
-        css('html.dark-mode .panel-status').styles(
-          backgroundColor: const Color.rgba(22, 163, 74, 0.14),
-          color: Color('#86EFAC'),
-        ),
-        css('html.dark-mode .route-point, html.dark-mode .route-bar').styles(
-          backgroundColor: Color('#374151'),
-        ),
-        css('html.dark-mode .route-point.active, html.dark-mode .route-bar.complete').styles(
-          backgroundColor: Color('#FDBA74'),
-        ),
-
-        // Theme toggle
-        css('html.dark-mode .theme-toggle-track').styles(
-          backgroundColor: Color('#111827'),
-          raw: {'border-color': 'rgba(255, 255, 255, 0.16)'},
-        ),
-        css('html.dark-mode .hamburger').styles(
-          backgroundColor: Color('#F8FAFC'),
-        ),
-        css('html.dark-mode .hamburger::before, html.dark-mode .hamburger::after').styles(
-          backgroundColor: Color('#F8FAFC'),
-        ),
-        css('html.dark-mode .mobile-menu-toggle').styles(
-          backgroundColor: Color('#111827'),
-          raw: {'border-color': 'rgba(255, 255, 255, 0.12)'},
-        ),
-        css('html.dark-mode .mobile-menu-panel').styles(
-          backgroundColor: const Color.rgba(17, 24, 39, 0.96),
-          raw: {'border': '1px solid rgba(255, 255, 255, 0.10)'},
-        ),
-        css('html.dark-mode .mobile-nav-link').styles(
-          color: Color('#CBD5E1'),
-        ),
-        css('html.dark-mode .mobile-nav-link.active, html.dark-mode .mobile-nav-link:hover').styles(
-          color: Color('#FDBA74'),
-          backgroundColor: const Color.rgba(233, 75, 27, 0.14),
-        ),
-        css('html.dark-mode .navbar.menu-open').styles(
-          backgroundColor: const Color.rgba(11, 17, 29, 0.94),
-        ),
-
-        // How it works
-        css('html.dark-mode .step-connector').styles(
-          backgroundColor: Color('#374151'),
-        ),
-        css('html.dark-mode .step-item').styles(
-          raw: {
-            'border-color': 'rgba(255, 255, 255, 0.10)',
-            'background': '#111827',
-          },
-        ),
-
-        // Platform badges
-        css('html.dark-mode .user-icon, html.dark-mode .user-badge').styles(
-          backgroundColor: const Color.rgba(233, 75, 27, 0.14),
-        ),
-        css('html.dark-mode .delivery-icon, html.dark-mode .delivery-badge').styles(
-          backgroundColor: const Color.rgba(79, 70, 229, 0.14),
-        ),
-        css('html.dark-mode .delivery-badge').styles(
-          color: Color('#A5B4FC'),
-        ),
-        css('html.dark-mode .check-icon').styles(
-          backgroundColor: const Color.rgba(22, 163, 74, 0.14),
-          color: Color('#86EFAC'),
-        ),
-        css('html.dark-mode .dish-time-badge').styles(
-          backgroundColor: const Color.rgba(17, 24, 39, 0.86),
-          color: Color('#F8FAFC'),
-          raw: {'border': '1px solid rgba(255, 255, 255, 0.10)'},
-        ),
-
-        // CTA banner
-        css('html.dark-mode .cta-container').styles(
-          backgroundColor: Color('#0B111D'),
-          raw: {'border': '1px solid rgba(255, 255, 255, 0.08)'},
-        ),
-        css('html.dark-mode .apple-btn').styles(
-          backgroundColor: Colors.white,
-          color: Color('#111827'),
-        ),
-
-        // Store buttons
-        css('html.dark-mode .store-btn-small').styles(
-          raw: {'opacity': '0.7'},
-        ),
+        css('html.dark-mode .hero-store-glyphs').styles(color: Color.variable('--ink-700')),
       ],
       body: const App(),
     ),

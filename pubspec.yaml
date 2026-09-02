@@ -1,13 +1,17 @@
 name: food_delivery_landing
-description: A new Jaspr project
-version: 0.0.1
+description: >-
+  Kiko Mart storefront landing page — the public marketing site a store owner
+  shares with their customers. Built with Jaspr, rendered as a static site.
+version: 1.0.0
+publish_to: none
 
 environment:
   sdk: ^3.10.0
 
 dependencies:
   jaspr: ^0.23.0
-  jaspr_router: ^0.8.2
+  # jaspr_router was dropped: this is a single page with hash anchors, so
+  # plain <a href="#..."> does the job with one fewer dependency to ship.
   universal_web: ^1.1.1+1
 
 dev_dependencies:

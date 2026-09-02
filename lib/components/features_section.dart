@@ -1,121 +1,81 @@
-import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
+import 'package:jaspr/jaspr.dart';
 
+import '../content/site_content.dart';
+import '../theme.dart';
+import 'ui/icons.dart';
+
+/// Six consumer benefits.
+///
+/// Note what these are *not*: platform capabilities. A shopper does not care
+/// that the system supports real-time dispatch — they care that they get told
+/// when the food leaves. Every line here is written from the customer's side
+/// of the door.
 class FeaturesSection extends StatelessComponent {
   const FeaturesSection({super.key});
 
+  static final _features = <(Component, String, String)>[
+    (
+      iconSearch(size: 24),
+      'Easy ordering',
+      'Search once and find it — meals and groceries sit in the same app, in the same cart.',
+    ),
+    (
+      iconRoute(size: 24),
+      'Live tracking',
+      "Watch your order move from our counter to your street. No wondering where it's got to.",
+    ),
+    (
+      iconClock(size: 24),
+      'Honest ETAs',
+      'We show the time it will really take, and update it if the road disagrees.',
+    ),
+    (
+      iconCreditCard(size: 24),
+      'Pay your way',
+      'Card, digital wallet, or cash at the door. Your details stay encrypted.',
+    ),
+    (
+      iconBell(size: 24),
+      'Order updates',
+      'A nudge when it is accepted, packed, picked up and arriving. Nothing more.',
+    ),
+    (
+      iconStar(size: 24),
+      'Rate & review',
+      'Tell us how it went. We read every one, and it shapes what we stock and cook.',
+    ),
+  ];
+
   @override
   Component build(BuildContext context) {
-    return section(id: 'features', classes: 'features-section', [
+    return section(id: 'features', classes: 'section features', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
-          span(classes: 'subtitle', [Component.text('FEATURES')]),
-          h2(classes: 'title', [
-            Component.text('Everything you need for a seamless delivery experience.'),
-          ]),
+          span(classes: 'section-eyebrow', [Component.text('Why $kBrandName')]),
+          h2(classes: 'section-title', [Component.text('Built to make ordering effortless')]),
           p(classes: 'section-copy', [
-            Component.text(
-              'From easy ordering to real-time tracking — our platform is packed with features designed to make your food and grocery delivery smooth and reliable.',
-            ),
+            Component.text('The small things that decide whether you order from us again.'),
           ]),
         ]),
+
         div(classes: 'features-grid', [
-          _buildFeatureCard(
-            icon: '📱',
-            title: 'Easy Ordering',
-            description:
-                'Browse products by category, add to cart, and checkout in just a few taps. A smooth shopping experience on your phone.',
-          ),
-          _buildFeatureCard(
-            icon: '🚚',
-            title: 'Fast Delivery',
-            description:
-                'Our dedicated delivery team picks up your order and delivers it fresh to your doorstep as quickly as possible.',
-          ),
-          _buildFeatureCard(
-            icon: '📍',
-            title: 'Real-Time Tracking',
-            description:
-                'Track your deliveryman live on the map. Know exactly where your order is and when it will arrive.',
-          ),
-          _buildFeatureCard(
-            icon: '🔔',
-            title: 'Order Notifications',
-            description:
-                'Get real-time status updates at every step — from order confirmed, to picked up, to arriving at your door.',
-          ),
-          _buildFeatureCard(
-            icon: '💳',
-            title: 'Secure Payments',
-            description:
-                'Multiple payment options including cash on delivery and secure online payments. Choose what works best for you.',
-          ),
-          _buildFeatureCard(
-            icon: '⭐',
-            title: 'Rate & Review',
-            description:
-                'Share your experience after every order. Your feedback helps us improve our service and maintain quality.',
-          ),
+          for (final (icon, title, desc) in _features)
+            div(classes: 'card card--lift feature-card', [
+              span(classes: 'icon-tile feature-icon', [icon]),
+              h3(classes: 'feature-title', [Component.text(title)]),
+              p(classes: 'feature-desc', [Component.text(desc)]),
+            ]),
         ]),
       ]),
-    ]);
-  }
-
-  Component _buildFeatureCard({required String icon, required String title, required String description}) {
-    return div(classes: 'feature-card', [
-      div(classes: 'feature-icon-wrapper', [
-        span(classes: 'icon-emoji', [Component.text(icon)]),
-      ]),
-      h3(classes: 'feature-title', [Component.text(title)]),
-      p(classes: 'feature-desc', [Component.text(description)]),
     ]);
   }
 
   @css
-  static final styles = [
-    css('.features-section').styles(
-      padding: Spacing.symmetric(vertical: 112.px, horizontal: 24.px),
-      backgroundColor: Colors.white,
-    ),
-    css('.features-section .container').styles(
-      width: 100.percent,
-      maxWidth: 1180.px,
-      margin: Spacing.symmetric(horizontal: Unit.auto),
-    ),
-    css('.section-header').styles(
-      margin: Spacing.only(bottom: 58.px),
-      display: Display.flex,
-      flexDirection: FlexDirection.column,
-      alignItems: AlignItems.center,
-      gap: Gap.all(14.px),
-    ),
-    css('.text-center').styles(
-      textAlign: TextAlign.center,
-    ),
-    css('.subtitle').styles(
-      color: Color('#E94B1B'),
-      fontWeight: FontWeight.bold,
-      letterSpacing: 1.8.px,
-      fontSize: 0.82.rem,
-    ),
-    css('.title').styles(
-      fontSize: 2.75.rem,
-      color: Color('#111827'),
-      maxWidth: 780.px,
-      lineHeight: 1.12.em,
-      letterSpacing: 0.px,
-    ),
-    css('.section-copy').styles(
-      color: Color('#667085'),
-      fontSize: 1.05.rem,
-      lineHeight: 1.7.em,
-      maxWidth: 720.px,
-      margin: Spacing.zero,
-    ),
+  static List<StyleRule> get styles => [
     css('.features-grid').styles(
       display: Display.grid,
-      maxWidth: 1080.px,
-      margin: Spacing.symmetric(horizontal: Unit.auto),
+      gap: Gap.all(22.px),
       gridTemplate: const GridTemplate(
         columns: GridTracks([
           GridTrack(TrackSize.fr(1)),
@@ -123,80 +83,35 @@ class FeaturesSection extends StatelessComponent {
           GridTrack(TrackSize.fr(1)),
         ]),
       ),
-      gap: Gap.all(24.px),
     ),
     css('.feature-card').styles(
       display: Display.flex,
       flexDirection: FlexDirection.column,
-      alignItems: AlignItems.start,
-      textAlign: TextAlign.left,
-      padding: Spacing.all(34.px),
-      radius: BorderRadius.circular(22.px),
-      transition: Transition('all', duration: Duration(milliseconds: 300)),
-      cursor: Cursor.pointer,
-      backgroundColor: Color('#FFFFFF'),
-      raw: {'border': '1px solid rgba(17, 24, 39, 0.08)'},
-    ),
-    css('.feature-card:hover').styles(
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 26.px, blur: 56.px, color: Color.rgba(17, 24, 39, 0.10)),
-      transform: Transform.translate(y: (-6).px),
-      raw: {'border-color': 'rgba(233, 75, 27, 0.28)'},
-    ),
-    css('.feature-icon-wrapper').styles(
-      position: Position.relative(),
-      width: 64.px,
-      height: 64.px,
-      display: Display.flex,
-      alignItems: AlignItems.center,
-      justifyContent: JustifyContent.center,
-      margin: Spacing.only(bottom: 24.px),
-      radius: BorderRadius.circular(18.px),
-      backgroundColor: Color('#FFF0E8'),
-    ),
-    css('.icon-emoji').styles(
-      fontSize: 1.6.rem,
-      position: Position.relative(),
-      zIndex: ZIndex(10),
-      lineHeight: 1.em,
+      gap: Gap.all(14.px),
     ),
     css('.feature-title').styles(
-      fontSize: 1.35.rem,
-      color: Color('#111827'),
-      margin: Spacing.only(bottom: 14.px),
+      color: Color.variable('--ink-900'),
+      fontSize: 1.1.rem,
+      fontWeight: FontWeight.bold,
     ),
     css('.feature-desc').styles(
-      color: Color('#667085'),
-      lineHeight: 1.7.em,
-      margin: Spacing.zero,
+      color: Color.variable('--ink-400'),
+      fontSize: 0.94.rem,
+      lineHeight: 1.65.em,
     ),
-    css('@media (max-width: 992px)').styles(
-      raw: {
-        ' .features-section': 'padding: 88px 24px;',
-        ' .features-grid': 'grid-template-columns: repeat(2, 1fr); gap: 32px;',
-        ' .title': 'font-size: 2.35rem;',
-      },
-    ),
-    css('@media (max-width: 768px)').styles(
-      raw: {
-        ' .features-section': 'padding: 64px 20px;',
-        ' .section-header': 'align-items: flex-start; text-align: left; margin-bottom: 36px;',
-        ' .features-grid': 'grid-template-columns: 1fr; gap: 20px;',
-        ' .title': 'font-size: 2rem;',
-        ' .section-copy': 'font-size: 0.98rem;',
-        ' .feature-card': 'padding: 26px;',
-      },
-    ),
-    css('@media (max-width: 520px)').styles(
-      raw: {
-        ' .features-section': 'padding: 54px 16px;',
-        ' .subtitle': 'font-size: 0.74rem; letter-spacing: 1.2px;',
-        ' .title': 'font-size: 1.72rem; line-height: 1.16;',
-        ' .section-copy': 'font-size: 0.94rem; line-height: 1.62;',
-        ' .feature-card': 'padding: 20px; border-radius: 18px;',
-        ' .feature-icon-wrapper': 'width: 52px; height: 52px; margin-bottom: 18px; border-radius: 15px;',
-        ' .feature-title': 'font-size: 1.18rem;',
-        ' .feature-desc': 'font-size: 0.94rem; line-height: 1.62;',
-      },
-    ),
+
+    css.media(MediaQuery.screen(maxWidth: bpLg.px), [
+      css('.features-grid').styles(
+        gridTemplate: const GridTemplate(
+          columns: GridTracks([GridTrack(TrackSize.fr(1)), GridTrack(TrackSize.fr(1))]),
+        ),
+      ),
+    ]),
+    css.media(MediaQuery.screen(maxWidth: bpSm.px), [
+      css('.features-grid').styles(
+        gap: Gap.all(14.px),
+        gridTemplate: const GridTemplate(columns: GridTracks([GridTrack(TrackSize.fr(1))])),
+      ),
+    ]),
   ];
 }

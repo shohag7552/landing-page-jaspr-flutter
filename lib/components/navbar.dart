@@ -1,8 +1,16 @@
-import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
-import 'package:jaspr_router/jaspr_router.dart';
+import 'package:jaspr/jaspr.dart';
 import 'package:universal_web/js_interop.dart';
 import 'package:universal_web/web.dart' as web;
+
+import '../content/site_links.dart';
+import '../theme.dart';
+import 'ui/brand_logo.dart';
+import 'ui/icons.dart';
+
+/// Theme preference key. Read by the no-flash script in main.server.dart too —
+/// keep the two in sync.
+const kThemeStorageKey = 'kikomart-theme';
 
 @client
 class Navbar extends StatefulComponent {
@@ -22,8 +30,10 @@ class NavbarState extends State<Navbar> {
   void initState() {
     super.initState();
     if (kIsWeb) {
-      isDarkMode = web.window.localStorage.getItem('foodflow-theme') == 'dark';
-      _applyTheme(isDarkMode);
+      // The theme class is already on <html> by now — the no-flash script in
+      // the document head applied it before first paint. Read it back rather
+      // than re-applying, so we never flash.
+      isDarkMode = web.document.documentElement?.classList.contains('dark-mode') ?? false;
       _scrollListener = ((web.Event event) => _handleScroll()).toJS;
       web.window.addEventListener('scroll', _scrollListener);
       _handleScroll();
@@ -46,7 +56,7 @@ class NavbarState extends State<Navbar> {
     final nextTheme = !isDarkMode;
 
     _applyTheme(nextTheme);
-    web.window.localStorage.setItem('foodflow-theme', nextTheme ? 'dark' : 'light');
+    web.window.localStorage.setItem(kThemeStorageKey, nextTheme ? 'dark' : 'light');
 
     setState(() {
       isDarkMode = nextTheme;
@@ -90,69 +100,83 @@ class NavbarState extends State<Navbar> {
     super.dispose();
   }
 
+  static const _navItems = <(String, String)>[
+    ('#home', 'Home'),
+    ('#shop', 'Food & Shop'),
+    ('#how-it-works', 'How it works'),
+    ('#delivery', 'Delivery'),
+    ('#contact', 'Contact'),
+  ];
+
   @override
   Component build(BuildContext context) {
     return header(
       classes: 'navbar ${isScrolled || isMenuOpen ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}',
       [
-        div(classes: 'container', [
-          // Logo
-          div(classes: 'logo-container', [
-            span(classes: 'logo-icon', [Component.text('🍔')]),
-            span(classes: 'logo-text', [
-              Component.text('Food'),
-              span(classes: 'text-primary', [Component.text('Flow')]),
-            ]),
+        div(classes: 'container nav-inner', [
+          const BrandLogo(),
+
+          nav(classes: 'nav-links desktop-only', attributes: const {'aria-label': 'Main'}, [
+            for (final (href, label) in _navItems)
+              a(href: href, classes: 'nav-link ${href == '#home' ? 'active' : ''}', [Component.text(label)]),
           ]),
 
-          // Desktop Links
-          nav(classes: 'nav-links desktop-only', [
-            Link(to: '#home', classes: 'nav-link active', child: Component.text('Home')),
-            Link(to: '#menu', classes: 'nav-link', child: Component.text('Marketplace')),
-            Link(to: '#features', classes: 'nav-link', child: Component.text('Platform')),
-            Link(to: '#contact', classes: 'nav-link', child: Component.text('Contact')),
-          ]),
-
-          // Action Buttons
+          // Two ways in, both present. "Order now" is solid because it is the
+          // action with no friction; "Get the app" is an anchor rather than a
+          // second button so the pair still fits at tablet width.
           div(classes: 'nav-actions desktop-only', [
-            button(classes: 'btn btn-ghost', [Component.text('Partner Login')]),
+            a(href: '#get-app', classes: 'nav-applink', [Component.text('Get the app')]),
             _buildThemeToggle(),
-            button(classes: 'btn btn-primary', [
-              Component.text('Book Demo'),
-              span(classes: 'icon', [Component.text('→')]),
-            ]),
+            a(
+              href: kWebAppUrl,
+              classes: 'btn btn-primary',
+              target: Target.blank,
+              attributes: const {'rel': 'noopener'},
+              [
+                Component.text('Order now'),
+                span(classes: 'btn-icon', [iconArrowRight(size: 17)]),
+              ],
+            ),
           ]),
 
-          // Mobile Menu Toggle
           div(classes: 'mobile-controls mobile-only', [
             _buildThemeToggle(),
             button(
               classes: 'mobile-menu-toggle ${isMenuOpen ? 'active' : ''}',
               type: ButtonType.button,
               onClick: _toggleMenu,
-              attributes: {'aria-label': isMenuOpen ? 'Close menu' : 'Open menu'},
-              [
-                span(classes: 'hamburger', []),
-              ],
+              attributes: {'aria-label': isMenuOpen ? 'Close menu' : 'Open menu', 'aria-expanded': '$isMenuOpen'},
+              [span(classes: 'hamburger', [])],
             ),
           ]),
         ]),
+
         div(classes: 'mobile-menu mobile-only ${isMenuOpen ? 'open' : ''}', [
           div(classes: 'mobile-menu-panel', [
-            nav(classes: 'mobile-nav-links', [
-              Link(to: '#home', classes: 'mobile-nav-link active', child: Component.text('Home')),
-              Link(to: '#menu', classes: 'mobile-nav-link', child: Component.text('Marketplace')),
-              Link(to: '#features', classes: 'mobile-nav-link', child: Component.text('Platform')),
-              Link(to: '#contact', classes: 'mobile-nav-link', child: Component.text('Contact')),
+            nav(classes: 'mobile-nav-links', attributes: const {'aria-label': 'Main'}, [
+              for (final (href, label) in _navItems)
+                a(
+                  href: href,
+                  classes: 'mobile-nav-link ${href == '#home' ? 'active' : ''}',
+                  onClick: _closeMenu,
+                  [Component.text(label)],
+                ),
             ]),
             div(classes: 'mobile-nav-actions', [
-              button(classes: 'btn btn-ghost mobile-action', onClick: _closeMenu, [
-                Component.text('Partner Login'),
-              ]),
-              button(classes: 'btn btn-primary mobile-action', onClick: _closeMenu, [
-                Component.text('Book Demo'),
-                span(classes: 'icon', [Component.text('→')]),
-              ]),
+              a(
+                href: kWebAppUrl,
+                classes: 'btn btn-primary btn-block',
+                target: Target.blank,
+                attributes: const {'rel': 'noopener'},
+                onClick: _closeMenu,
+                [Component.text('Order now')],
+              ),
+              a(
+                href: '#get-app',
+                classes: 'btn btn-secondary btn-block',
+                onClick: _closeMenu,
+                [Component.text('Get the app')],
+              ),
             ]),
           ]),
         ]),
@@ -168,279 +192,213 @@ class NavbarState extends State<Navbar> {
       attributes: {'aria-label': isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'},
       [
         span(classes: 'theme-toggle-track', [
-          span(classes: 'theme-toggle-thumb', [
-            Component.text(isDarkMode ? '☾' : '☀'),
-          ]),
+          span(classes: 'theme-toggle-thumb', [isDarkMode ? iconMoon(size: 14) : iconSun(size: 14)]),
         ]),
       ],
     );
   }
 
   @css
-  static final styles = [
+  static List<StyleRule> get styles => [
     css('.navbar').styles(
       position: Position.fixed(top: 0.px, left: 0.px, right: 0.px),
-      zIndex: ZIndex(1000),
-      padding: Spacing.symmetric(vertical: 22.px),
-      transition: Transition('all', duration: Duration(milliseconds: 300)),
+      zIndex: const ZIndex(1000),
+      padding: Spacing.symmetric(vertical: 18.px),
       backgroundColor: Colors.transparent,
+      transition: const Transition('all', duration: Duration(milliseconds: 300)),
       raw: {'backdrop-filter': 'blur(0px)'},
     ),
-    css('.navbar.menu-open').styles(
-      backgroundColor: Colors.white,
-      raw: {'backdrop-filter': 'blur(18px)'},
+    css('.navbar.scrolled, .navbar.menu-open').styles(
+      padding: Spacing.symmetric(vertical: 12.px),
+      backgroundColor: Color.variable('--surface-raised'),
+      raw: {
+        'backdrop-filter': 'blur(18px)',
+        'box-shadow': 'var(--shadow-card)',
+        'border-bottom': '1px solid var(--border-subtle)',
+      },
     ),
-    css('.navbar.scrolled').styles(
-      padding: Spacing.symmetric(vertical: 16.px),
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 16.px, blur: 40.px, color: Color.rgba(15, 23, 42, 0.08)),
-      backgroundColor: Colors.white,
-      raw: {'backdrop-filter': 'blur(18px)'},
-    ),
-    css('.navbar .container').styles(
+    css('.nav-inner').styles(
       display: Display.flex,
-      width: 100.percent,
-      maxWidth: 1180.px,
-      padding: Spacing.symmetric(horizontal: 28.px),
-      margin: Spacing.symmetric(horizontal: Unit.auto),
-      boxSizing: BoxSizing.borderBox,
+      alignItems: AlignItems.center,
       justifyContent: JustifyContent.spaceBetween,
-      alignItems: AlignItems.center,
+      gap: Gap.all(20.px),
     ),
-    css('.logo-container').styles(
-      display: Display.flex,
-      cursor: Cursor.pointer,
-      alignItems: AlignItems.center,
-      gap: Gap.all(12.px),
-    ),
-    css('.logo-icon').styles(
-      fontSize: 2.rem,
-      lineHeight: 1.em,
-      raw: {'filter': 'drop-shadow(0px 4px 8px rgba(255, 94, 30, 0.3))'},
-    ),
-    css('.logo-text').styles(
-      color: Color('#111827'),
-      fontFamily: const FontFamily.list([FontFamily('Outfit'), FontFamilies.sansSerif]),
-      fontSize: 1.55.rem,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.px,
-    ),
-    css('.text-primary').styles(
-      color: Color('#E94B1B'),
-    ),
+
     css('.nav-links').styles(
       display: Display.flex,
-      gap: Gap.all(28.px),
+      alignItems: AlignItems.center,
+      gap: Gap.all(26.px),
     ),
     css('.nav-link').styles(
-      fontSize: 0.95.rem,
-      fontWeight: FontWeight.w500,
-      color: Color('#596579'),
-      transition: Transition('color', duration: Duration(milliseconds: 200)),
       position: Position.relative(),
+      color: Color.variable('--ink-500'),
+      fontSize: 0.94.rem,
+      fontWeight: FontWeight.w500,
+      transition: const Transition('color', duration: Duration(milliseconds: 200)),
     ),
-    css('.nav-link:hover').styles(
-      color: Color('#E94B1B'),
+    css('.nav-link:hover, .nav-link.active').styles(
+      color: Color.variable('--brand-500'),
     ),
-    css('.nav-link.active').styles(
-      color: Color('#E94B1B'),
+    css('.nav-link.active::after').styles(
+      position: Position.absolute(left: 0.px, right: 0.px, bottom: (-7).px),
+      height: 2.px,
+      backgroundColor: Color.variable('--brand-500'),
+      raw: {'content': '""', 'border-radius': '2px'},
     ),
-    // Advanced underline effect for nav links using raw custom css in the App later if needed
+
     css('.nav-actions').styles(
       display: Display.flex,
       alignItems: AlignItems.center,
-      gap: Gap.all(14.px),
+      gap: Gap.all(16.px),
     ),
-    css('.btn').styles(
-      padding: Spacing.symmetric(horizontal: 22.px, vertical: 12.px),
-      radius: BorderRadius.circular(14.px),
-      fontSize: 0.95.rem,
+    css('.nav-applink').styles(
+      color: Color.variable('--ink-700'),
+      fontSize: 0.94.rem,
       fontWeight: FontWeight.w600,
-      transition: Transition('all', duration: Duration(milliseconds: 300)),
-      display: Display.flex,
-      alignItems: AlignItems.center,
-      gap: Gap.all(8.px),
+      transition: const Transition('color', duration: Duration(milliseconds: 200)),
     ),
-    css('.btn-ghost').styles(
-      color: Color('#182230'),
-    ),
-    css('.btn-ghost:hover').styles(
-      color: Color('#E94B1B'),
-      backgroundColor: Color('#FFF0E8'),
-    ),
-    css('.btn-primary').styles(
-      backgroundColor: Color('#111827'),
-      color: Colors.white,
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 14.px, blur: 26.px, color: Color.rgba(17, 24, 39, 0.18)),
-    ),
-    css('.btn-primary:hover').styles(
-      transform: Transform.translate(y: (-2).px),
-      backgroundColor: Color('#E94B1B'),
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 16.px, blur: 30.px, color: Color.rgba(233, 75, 27, 0.28)),
-    ),
-    css('.btn-primary .icon').styles(
-      transition: Transition('transform', duration: Duration(milliseconds: 300)),
-    ),
-    css('.btn-primary:hover .icon').styles(
-      transform: Transform.translate(x: 4.px),
-    ),
+    css('.nav-applink:hover').styles(color: Color.variable('--brand-500')),
+
+    // ── Theme toggle ────────────────────────────────────────────────────
     css('.theme-toggle').styles(
       display: Display.flex,
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
+      width: 56.px,
+      height: 32.px,
       padding: Spacing.zero,
-      width: 58.px,
-      height: 34.px,
-      radius: BorderRadius.circular(999.px),
-      transition: Transition('all', duration: Duration(milliseconds: 300)),
+      backgroundColor: Colors.transparent,
+      transition: const Transition('all', duration: Duration(milliseconds: 300)),
+      raw: {'border': 'none', 'border-radius': 'var(--radius-pill)'},
     ),
     css('.theme-toggle-track').styles(
       display: Display.flex,
       alignItems: AlignItems.center,
-      width: 58.px,
-      height: 34.px,
-      padding: Spacing.all(4.px),
-      radius: BorderRadius.circular(999.px),
-      backgroundColor: Color('#F2F4F7'),
-      raw: {'border': '1px solid rgba(17, 24, 39, 0.12)'},
+      width: 56.px,
+      height: 32.px,
+      padding: Spacing.all(3.px),
+      backgroundColor: Color.variable('--surface-2'),
+      boxSizing: BoxSizing.borderBox,
+      raw: {'border': '1px solid var(--border-strong)', 'border-radius': 'var(--radius-pill)'},
     ),
     css('.theme-toggle-thumb').styles(
       display: Display.flex,
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
-      width: 26.px,
-      height: 26.px,
-      radius: BorderRadius.circular(50.percent),
-      backgroundColor: Colors.white,
-      color: Color('#E94B1B'),
-      fontSize: 0.86.rem,
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 4.px, blur: 10.px, color: Color.rgba(17, 24, 39, 0.12)),
-      transition: Transition('all', duration: Duration(milliseconds: 300)),
-    ),
-    css('.theme-toggle.dark .theme-toggle-track').styles(
-      backgroundColor: Color('#111827'),
-      raw: {'border-color': 'rgba(255, 255, 255, 0.16)'},
+      width: 24.px,
+      height: 24.px,
+      backgroundColor: Color.variable('--surface-card'),
+      color: Color.variable('--brand-500'),
+      transition: const Transition('all', duration: Duration(milliseconds: 300)),
+      raw: {'border-radius': '50%', 'box-shadow': 'var(--shadow-sm)'},
     ),
     css('.theme-toggle.dark .theme-toggle-thumb').styles(
       transform: Transform.translate(x: 24.px),
-      color: Color('#FDBA74'),
-      backgroundColor: Color('#1F2937'),
+      backgroundColor: Color.variable('--surface-2'),
     ),
-    css('.mobile-only').styles(
-      display: Display.none,
-    ),
+
+    // ── Mobile ──────────────────────────────────────────────────────────
+    css('.mobile-only').styles(display: Display.none),
     css('.mobile-controls').styles(
       alignItems: AlignItems.center,
-      gap: Gap.all(12.px),
+      gap: Gap.all(10.px),
     ),
     css('.mobile-menu-toggle').styles(
-      width: 44.px,
-      height: 44.px,
       display: Display.flex,
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
-      radius: BorderRadius.circular(14.px),
-      backgroundColor: Color('#F2F4F7'),
-      raw: {'border': '1px solid rgba(17, 24, 39, 0.10)'},
+      width: 44.px,
+      height: 44.px,
+      backgroundColor: Color.variable('--surface-2'),
+      raw: {'border': '1px solid var(--border-strong)', 'border-radius': 'var(--radius-sm)'},
     ),
     css('.hamburger').styles(
       display: Display.block,
-      width: 24.px,
-      height: 2.px,
-      backgroundColor: Color('#1E293B'),
       position: Position.relative(),
-      transition: Transition('all', duration: Duration(milliseconds: 200)),
+      width: 22.px,
+      height: 2.px,
+      backgroundColor: Color.variable('--ink-900'),
+      transition: const Transition('all', duration: Duration(milliseconds: 200)),
+      raw: {'border-radius': '2px'},
     ),
     css('.hamburger::before, .hamburger::after').styles(
       position: Position.absolute(left: 0.px),
-      width: 24.px,
+      width: 22.px,
       height: 2.px,
-      backgroundColor: Color('#1E293B'),
-      transition: Transition('all', duration: Duration(milliseconds: 200)),
-      raw: {
-        'content': '""',
-      },
+      backgroundColor: Color.variable('--ink-900'),
+      transition: const Transition('all', duration: Duration(milliseconds: 200)),
+      raw: {'content': '""', 'border-radius': '2px'},
     ),
     css('.hamburger::before').styles(position: Position.absolute(top: (-7).px)),
     css('.hamburger::after').styles(position: Position.absolute(top: 7.px)),
+
     css('.mobile-menu').styles(
       display: Display.none,
-      maxWidth: 1180.px,
       width: 100.percent,
+      maxWidth: 1180.px,
       margin: Spacing.symmetric(horizontal: Unit.auto),
       padding: Spacing.only(left: 20.px, right: 20.px, top: 12.px),
       boxSizing: BoxSizing.borderBox,
-      raw: {'max-height': 'calc(100vh - 72px)', 'overflow-y': 'auto'},
+      raw: {'max-height': 'calc(100vh - 76px)', 'overflow-y': 'auto'},
+    ),
+    css('.mobile-menu-panel').styles(
+      padding: Spacing.all(10.px),
+      backgroundColor: Color.variable('--surface-card'),
+      raw: {
+        'border': '1px solid var(--border-subtle)',
+        'border-radius': 'var(--radius-xl)',
+        'box-shadow': 'var(--shadow-card)',
+      },
     ),
     css('.mobile-nav-links').styles(
       display: Display.flex,
       flexDirection: FlexDirection.column,
-      gap: Gap.all(6.px),
-      padding: Spacing.all(8.px),
-    ),
-    css('.mobile-menu-panel').styles(
-      backgroundColor: Colors.white,
-      padding: Spacing.all(10.px),
-      radius: BorderRadius.circular(24.px),
-      shadow: BoxShadow(offsetX: 0.px, offsetY: 18.px, blur: 45.px, color: Color.rgba(17, 24, 39, 0.12)),
-      raw: {'border': '1px solid rgba(17, 24, 39, 0.08)'},
+      gap: Gap.all(4.px),
+      padding: Spacing.all(6.px),
     ),
     css('.mobile-nav-link').styles(
-      padding: Spacing.symmetric(horizontal: 16.px, vertical: 13.px),
-      radius: BorderRadius.circular(14.px),
-      color: Color('#344054'),
+      padding: Spacing.symmetric(horizontal: 15.px, vertical: 13.px),
+      color: Color.variable('--ink-700'),
       fontWeight: FontWeight.w600,
+      raw: {'border-radius': 'var(--radius-sm)'},
     ),
     css('.mobile-nav-link.active, .mobile-nav-link:hover').styles(
-      color: Color('#E94B1B'),
-      backgroundColor: Color('#FFF0E8'),
+      backgroundColor: Color.variable('--brand-soft'),
+      color: Color.variable('--brand-500'),
     ),
     css('.mobile-nav-actions').styles(
       display: Display.grid,
-      gridTemplate: const GridTemplate(
-        columns: GridTracks([
-          GridTrack(TrackSize.fr(1)),
-          GridTrack(TrackSize.fr(1)),
-        ]),
+      gap: Gap.all(10.px),
+      padding: Spacing.only(top: 10.px, bottom: 8.px, left: 6.px, right: 6.px),
+    ),
+
+    // ── Responsive ──────────────────────────────────────────────────────
+    // Navigation switches to mobile at the same width the hero collapses to
+    // a single column. Previously these were 900 and 992, leaving a 92px
+    // band where the layout was stacked but the nav was still desktop.
+    css.media(MediaQuery.screen(maxWidth: bpLg.px), [
+      css('.desktop-only').styles(display: Display.none),
+      css('.mobile-only').styles(display: Display.flex),
+      css('.mobile-menu').styles(display: Display.none),
+      css('.mobile-menu.open').styles(display: Display.block),
+      css('.mobile-menu-toggle.active .hamburger').styles(backgroundColor: Colors.transparent),
+      css('.mobile-menu-toggle.active .hamburger::before').styles(
+        position: Position.absolute(top: 0.px),
+        transform: Transform.rotate(45.deg),
       ),
-      gap: Gap.all(12.px),
-      padding: Spacing.only(top: 12.px, bottom: 10.px),
-    ),
-    css('.mobile-action').styles(
-      justifyContent: JustifyContent.center,
-      width: 100.percent,
-    ),
-    css('@media (max-width: 900px)').styles(
-      raw: {
-        ' .navbar': 'padding: 12px 0;',
-        ' .navbar.scrolled': 'padding: 10px 0;',
-        ' .navbar .container': 'padding: 0 20px;',
-        ' .desktop-only': 'display: none;',
-        ' .mobile-only': 'display: flex;',
-        ' .mobile-menu': 'display: none;',
-        ' .mobile-menu.open': 'display: block;',
-        ' .mobile-menu-toggle.active .hamburger': 'background-color: transparent;',
-        ' .mobile-menu-toggle.active .hamburger::before': 'top: 0; transform: rotate(45deg);',
-        ' .mobile-menu-toggle.active .hamburger::after': 'top: 0; transform: rotate(-45deg);',
-      },
-    ),
-    css('@media (max-width: 520px)').styles(
-      raw: {
-        ' .navbar': 'padding: 10px 0;',
-        ' .navbar.scrolled': 'padding: 8px 0;',
-        ' .navbar .container': 'padding: 0 16px;',
-        ' .logo-icon': 'font-size: 1.7rem;',
-        ' .logo-text': 'font-size: 1.32rem;',
-        ' .theme-toggle, .theme-toggle-track': 'width: 52px; height: 32px;',
-        ' .theme-toggle-thumb': 'width: 24px; height: 24px;',
-        ' .theme-toggle.dark .theme-toggle-thumb': 'transform: translateX(20px);',
-        ' .mobile-controls': 'gap: 8px;',
-        ' .mobile-menu': 'padding: 10px 16px 0;',
-        ' .mobile-menu-toggle': 'width: 40px; height: 40px; border-radius: 12px;',
-        ' .mobile-menu-panel': 'padding: 8px; border-radius: 20px;',
-        ' .mobile-nav-links': 'padding: 4px;',
-        ' .mobile-nav-link': 'padding: 12px 14px;',
-        ' .mobile-nav-actions': 'grid-template-columns: 1fr;',
-      },
-    ),
+      css('.mobile-menu-toggle.active .hamburger::after').styles(
+        position: Position.absolute(top: 0.px),
+        transform: Transform.rotate((-45).deg),
+      ),
+    ]),
+    css.media(MediaQuery.screen(maxWidth: bpSm.px), [
+      css('.navbar').styles(padding: Spacing.symmetric(vertical: 10.px)),
+      css('.navbar.scrolled, .navbar.menu-open').styles(padding: Spacing.symmetric(vertical: 8.px)),
+      css('.mobile-menu').styles(padding: Spacing.only(left: 16.px, right: 16.px, top: 10.px)),
+      css('.mobile-menu-toggle').styles(width: 40.px, height: 40.px),
+      css('.theme-toggle, .theme-toggle-track').styles(width: 50.px, height: 30.px),
+      css('.theme-toggle-thumb').styles(width: 22.px, height: 22.px),
+      css('.theme-toggle.dark .theme-toggle-thumb').styles(transform: Transform.translate(x: 20.px)),
+    ]),
   ];
 }
