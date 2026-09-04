@@ -37,7 +37,7 @@ const bpXl = 1200;
 /// Needed because a few places are not CSS and so cannot read `var()`:
 /// the `theme-color` meta tag (which tints mobile browser chrome) and any
 /// future manifest. Keep it identical to `--brand-500` below.
-const kBrandHex = '#E94B1B';
+const kBrandHex = '#C6453E';
 
 @css
 List<StyleRule> get brandTokens => [
@@ -70,7 +70,7 @@ List<StyleRule> get brandTokens => [
       '--ink-a18': 'rgba(17, 24, 39, 0.18)',
 
       // ── Surfaces ───────────────────────────────────────────────────────
-      '--surface-0': '#FFFDF8',
+      '--surface-0': '#FFFCFA',
       '--surface-1': '#F8FAFC',
       '--surface-2': '#F2F4F7',
       '--surface-card': '#FFFFFF',

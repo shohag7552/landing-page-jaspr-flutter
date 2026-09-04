@@ -22,7 +22,7 @@ class FooterSection extends StatelessComponent {
 
   static const _shopLinks = <(String, String)>[
     ('Food menu', kBrowseFoodUrl),
-    ('Groceries', kBrowseShopUrl),
+    ('Shop products', kBrowseShopUrl),
     ('Offers', kWebAppUrl),
     ('New arrivals', kWebAppUrl),
   ];
@@ -44,7 +44,7 @@ class FooterSection extends StatelessComponent {
             const BrandLogo(),
             p(classes: 'footer-tagline', [
               Component.text(
-                'Fresh food and everyday essentials, delivered across $kCity. One cart, one rider.',
+                'Food and products, delivered across $kCity. One cart, one rider.',
               ),
             ]),
             div(classes: 'footer-social', [

@@ -12,30 +12,10 @@ class HowItWorks extends StatelessComponent {
   const HowItWorks({super.key});
 
   static final _steps = <(String, Component, String, String)>[
-    (
-      '01',
-      iconSearch(size: 22),
-      'Browse food & shop',
-      'Open the app or the website and add anything you like — a hot meal, your weekly groceries, or both.',
-    ),
-    (
-      '02',
-      iconCart(size: 22),
-      'Place your order',
-      'Checkout in a few taps. Pay by card, wallet or cash at the door — whichever suits you.',
-    ),
-    (
-      '03',
-      iconTruck(size: 22),
-      'We pack it, a rider picks it up',
-      'Our team packs your order and hands it to one of our own riders, who sets off straight to you.',
-    ),
-    (
-      '04',
-      iconHome(size: 22),
-      'Delivered to your door',
-      'Watch the rider approach on the live map and get a knock when your order arrives.',
-    ),
+    ('01', iconSearch(size: 22), 'Browse', 'Food and products, one cart.'),
+    ('02', iconCart(size: 22), 'Order', 'Pay by card, wallet or cash.'),
+    ('03', iconTruck(size: 22), 'We pack it', 'A rider collects it from us.'),
+    ('04', iconHome(size: 22), 'Delivered', 'Tracked live to your door.'),
   ];
 
   @override
@@ -44,10 +24,7 @@ class HowItWorks extends StatelessComponent {
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
           span(classes: 'section-eyebrow', [Component.text('How it works')]),
-          h2(classes: 'section-title', [Component.text('From your screen to your door in four steps')]),
-          p(classes: 'section-copy', [
-            Component.text('No phone calls, no guessing when it will turn up.'),
-          ]),
+          h2(classes: 'section-title', [Component.text('Four steps to your door')]),
         ]),
 
         div(classes: 'steps-grid', [

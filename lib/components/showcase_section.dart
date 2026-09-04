@@ -13,7 +13,6 @@ class _Item {
     required this.category,
     required this.price,
     required this.rating,
-    required this.reviews,
     required this.meta,
   });
 
@@ -22,7 +21,6 @@ class _Item {
   final String category;
   final String price;
   final String rating;
-  final String reviews;
 
   /// Prep time for food, pack size or stock for shop. The one field that
   /// differs between modules — everything else is shared.
@@ -48,7 +46,6 @@ class ShowcaseSection extends StatelessComponent {
       category: 'Burgers',
       price: '\$12.99',
       rating: '4.8',
-      reviews: '124',
       meta: '15–20 min',
     ),
     _Item(
@@ -57,7 +54,6 @@ class ShowcaseSection extends StatelessComponent {
       category: 'Pizza',
       price: '\$14.50',
       rating: '4.9',
-      reviews: '208',
       meta: '20–25 min',
     ),
     _Item(
@@ -66,7 +62,6 @@ class ShowcaseSection extends StatelessComponent {
       category: 'Healthy',
       price: '\$11.25',
       rating: '4.7',
-      reviews: '96',
       meta: '15–20 min',
     ),
     _Item(
@@ -75,47 +70,42 @@ class ShowcaseSection extends StatelessComponent {
       category: 'Salads',
       price: '\$9.75',
       rating: '4.6',
-      reviews: '73',
       meta: '10–15 min',
     ),
   ];
 
   static const _shop = <_Item>[
     _Item(
-      image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=800&auto=format&fit=crop',
-      title: 'Fresh Whole Milk',
-      category: 'Dairy',
-      price: '\$2.40',
-      rating: '4.8',
-      reviews: '312',
-      meta: '1 L carton',
-    ),
-    _Item(
-      image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=800&auto=format&fit=crop',
-      title: 'Seasonal Fruit Box',
-      category: 'Produce',
-      price: '\$8.90',
+      image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+      title: 'Cotton Casual Shirt',
+      category: 'Shirt',
+      price: '\$34.00',
       rating: '4.7',
-      reviews: '145',
-      meta: '2 kg box',
+      meta: '-29%',
     ),
     _Item(
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop',
-      title: 'Sourdough Loaf',
-      category: 'Bakery',
-      price: '\$4.20',
+      image: 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop',
+      title: 'Wireless Earbuds Pro',
+      category: 'Airpod',
+      price: '\$89.00',
       rating: '4.9',
-      reviews: '187',
-      meta: 'Baked today',
+      meta: 'In stock',
     ),
     _Item(
-      image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?q=80&w=800&auto=format&fit=crop',
-      title: 'Everyday Essentials Pack',
-      category: 'Household',
-      price: '\$15.60',
+      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop',
+      title: 'Graphic Print T-shirt',
+      category: 'T-shirt',
+      price: '\$18.50',
       rating: '4.6',
-      reviews: '64',
-      meta: 'In stock',
+      meta: '-15%',
+    ),
+    _Item(
+      image: 'https://images.unsplash.com/photo-1565374392669-f0d4e1a1b5f1?q=80&w=800&auto=format&fit=crop',
+      title: 'Table Fan 12 inch',
+      category: 'Fan',
+      price: '\$42.00',
+      rating: '4.5',
+      meta: '-20%',
     ),
   ];
 
@@ -126,9 +116,6 @@ class ShowcaseSection extends StatelessComponent {
         div(classes: 'section-header text-center', [
           span(classes: 'section-eyebrow', [Component.text("What's available")]),
           h2(classes: 'section-title', [Component.text('Popular right now')]),
-          p(classes: 'section-copy', [
-            Component.text('A taste of what our neighbours are ordering today — from both sides of the store.'),
-          ]),
         ]),
 
         // The radios must be direct siblings of BOTH the tab row and the
@@ -210,7 +197,6 @@ class ShowcaseSection extends StatelessComponent {
           span(classes: 'item-rating', [
             span(classes: 'item-star', [iconStar(size: 13)]),
             span(classes: 'item-rating-value', [Component.text(item.rating)]),
-            span(classes: 'item-reviews', [Component.text('(${item.reviews})')]),
           ]),
         ]),
         h3(classes: 'item-title', [Component.text(item.title)]),
@@ -353,10 +339,6 @@ class ShowcaseSection extends StatelessComponent {
       color: Color.variable('--ink-900'),
       fontSize: 0.83.rem,
       fontWeight: FontWeight.bold,
-    ),
-    css('.item-reviews').styles(
-      color: Color.variable('--ink-400'),
-      fontSize: 0.78.rem,
     ),
     css('.item-title').styles(
       color: Color.variable('--ink-900'),

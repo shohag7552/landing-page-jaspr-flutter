@@ -8,102 +8,64 @@ import 'ui/icons.dart';
 
 /// "Do we deliver to you?"
 ///
-/// This section is high on the page on purpose. In radius-based local commerce
-/// the single biggest bounce cause is a visitor who scrolls an entire site
-/// before discovering they're outside the delivery area. Answering it early
-/// costs one screen and saves every out-of-zone click; the in-zone reader gets
-/// a reason to keep going.
+/// High on the page on purpose. In radius-based delivery the single biggest
+/// bounce cause is a visitor who scrolls an entire site before discovering
+/// they're outside the area. Answering it early costs one screen and saves
+/// every out-of-zone click.
 ///
-/// The radius rings are pure CSS — no map SDK, no API key, no tile bill.
+/// Deliberately sparse: a radius, a list of names, three facts. Hours and fee
+/// tables belong in the app, not on the page that has five seconds to land.
+///
+/// The rings are pure CSS — no map SDK, no API key, no tile bill.
 class DeliveryZone extends StatelessComponent {
   const DeliveryZone({super.key});
 
   @override
   Component build(BuildContext context) {
     return section(id: 'delivery', classes: 'section section--alt zone', [
-      div(classes: 'container', [
-        div(classes: 'section-header', [
-          span(classes: 'section-eyebrow', [Component.text('Delivery area')]),
-          h2(classes: 'section-title', [Component.text('Do we deliver to you?')]),
-          p(classes: 'section-copy', [
-            Component.text(
-              'We deliver within $kDeliveryRadiusKm of our store in $kCity. '
-              "Here's where we go, when we're open, and what delivery costs.",
-            ),
+      div(classes: 'container zone-grid', [
+        div(classes: 'zone-map', [
+          div(classes: 'zone-rings', [
+            span(classes: 'zone-ring zone-ring--3', []),
+            span(classes: 'zone-ring zone-ring--2', []),
+            span(classes: 'zone-ring zone-ring--1', []),
+            span(classes: 'zone-pin', [iconMapPin(size: 22)]),
           ]),
+          span(classes: 'zone-map-caption', [Component.text('$kDeliveryRadiusKm from $kStoreAddress')]),
         ]),
 
-        div(classes: 'zone-grid', [
-          // Radius visual
-          div(classes: 'zone-map', [
-            div(classes: 'zone-rings', [
-              span(classes: 'zone-ring zone-ring--3', []),
-              span(classes: 'zone-ring zone-ring--2', []),
-              span(classes: 'zone-ring zone-ring--1', []),
-              span(classes: 'zone-pin', [iconMapPin(size: 22)]),
-            ]),
-            div(classes: 'zone-map-caption', [
-              span(classes: 'zone-map-store', [Component.text(kStoreAddress)]),
-              span(classes: 'zone-map-radius', [Component.text('$kDeliveryRadiusKm delivery radius')]),
+        div(classes: 'zone-copy', [
+          div(classes: 'section-header', [
+            span(classes: 'section-eyebrow', [Component.text('Delivery area')]),
+            h2(classes: 'section-title', [Component.text('Do we deliver to you?')]),
+            p(classes: 'section-copy', [
+              Component.text('We cover $kAreasCovered neighbourhoods within $kDeliveryRadiusKm of the store.'),
             ]),
           ]),
 
-          div(classes: 'zone-panels', [
-            // Areas
-            div(classes: 'card zone-card', [
-              div(classes: 'zone-card-head', [
-                span(classes: 'icon-tile icon-tile--sm', [iconMapPin(size: 18)]),
-                h3(classes: 'zone-card-title', [Component.text('Areas we cover')]),
-              ]),
-              div(classes: 'zone-areas', [
-                for (final area in kCoveredAreas) span(classes: 'chip zone-area', [Component.text(area)]),
-              ]),
-              p(classes: 'zone-note', [
-                Component.text('Not on the list? '),
-                a(href: kWhatsAppUrl, classes: 'link-arrow zone-note-link', [Component.text('Message us')]),
-                Component.text(" — we're adding areas."),
-              ]),
-            ]),
+          div(classes: 'zone-areas', [
+            for (final area in kCoveredAreas) span(classes: 'chip zone-area', [Component.text(area)]),
+          ]),
 
-            div(classes: 'zone-pair', [
-              // Hours
-              div(classes: 'card zone-card', [
-                div(classes: 'zone-card-head', [
-                  span(classes: 'icon-tile icon-tile--sm', [iconClock(size: 18)]),
-                  h3(classes: 'zone-card-title', [Component.text('Opening hours')]),
-                ]),
-                div(classes: 'zone-rows', [
-                  for (final (day, hours) in kHours)
-                    div(classes: 'zone-row', [
-                      span(classes: 'zone-row-key', [Component.text(day)]),
-                      span(classes: 'zone-row-val', [Component.text(hours)]),
-                    ]),
-                ]),
-              ]),
+          div(classes: 'zone-facts', [
+            _fact('Open daily', kOpeningHours),
+            _fact('Delivery from', kDeliveryFeeFrom),
+            _fact('Free over', kFreeDeliveryOver),
+          ]),
 
-              // Fees
-              div(classes: 'card zone-card', [
-                div(classes: 'zone-card-head', [
-                  span(classes: 'icon-tile icon-tile--sm', [iconTruck(size: 18)]),
-                  h3(classes: 'zone-card-title', [Component.text('Delivery fees')]),
-                ]),
-                div(classes: 'zone-rows', [
-                  for (final (band, fee) in kDeliveryFees)
-                    div(classes: 'zone-row', [
-                      span(classes: 'zone-row-key', [Component.text(band)]),
-                      span(classes: 'zone-row-val', [Component.text(fee)]),
-                    ]),
-                  div(classes: 'zone-row zone-row--free', [
-                    span(classes: 'zone-row-key', [Component.text('Orders over $kFreeDeliveryOver')]),
-                    span(classes: 'chip chip--success', [Component.text('Free')]),
-                  ]),
-                ]),
-                p(classes: 'zone-min', [Component.text('Minimum order $kMinimumOrder')]),
-              ]),
-            ]),
+          p(classes: 'zone-note', [
+            Component.text('Not on the list? '),
+            a(href: kWhatsAppUrl, classes: 'link-arrow zone-note-link', [Component.text('Message us')]),
           ]),
         ]),
       ]),
+    ]);
+  }
+
+  Component _fact(String label, String value) {
+    return div(classes: 'zone-fact', [
+      span(classes: 'zone-fact-label', [Component.text(label)]),
+      span(classes: 'zone-fact-value', [Component.text(value)]),
     ]);
   }
 
@@ -111,10 +73,10 @@ class DeliveryZone extends StatelessComponent {
   static List<StyleRule> get styles => [
     css('.zone-grid').styles(
       display: Display.grid,
-      alignItems: AlignItems.start,
-      gap: Gap.all(32.px),
+      alignItems: AlignItems.center,
+      gap: Gap.all(56.px),
       gridTemplate: const GridTemplate(
-        columns: GridTracks([GridTrack(TrackSize.fr(0.85)), GridTrack(TrackSize.fr(1.15))]),
+        columns: GridTracks([GridTrack(TrackSize.fr(0.8)), GridTrack(TrackSize.fr(1.2))]),
       ),
     ),
 
@@ -123,150 +85,106 @@ class DeliveryZone extends StatelessComponent {
       display: Display.flex,
       flexDirection: FlexDirection.column,
       alignItems: AlignItems.center,
-      gap: Gap.all(18.px),
-      padding: Spacing.symmetric(vertical: 40.px, horizontal: 24.px),
-      backgroundColor: Color.variable('--surface-card'),
-      raw: {
-        'border': '1px solid var(--border-subtle)',
-        'border-radius': 'var(--radius-xl)',
-        'box-shadow': 'var(--shadow-sm)',
-        'background-image': 'radial-gradient(circle at 50% 42%, var(--brand-a10), transparent 62%)',
-      },
+      gap: Gap.all(20.px),
     ),
     css('.zone-rings').styles(
       display: Display.flex,
       position: Position.relative(),
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
-      width: 260.px,
-      height: 260.px,
+      width: 280.px,
+      height: 280.px,
     ),
     css('.zone-ring').styles(
       position: Position.absolute(),
-      raw: {'border-radius': '50%', 'border': '1px dashed var(--brand-a28)'},
+      raw: {'border-radius': '50%', 'border': '1px solid var(--brand-a28)'},
     ),
-    css('.zone-ring--1').styles(width: 96.px, height: 96.px, backgroundColor: Color.variable('--brand-a10')),
-    css('.zone-ring--2').styles(width: 176.px, height: 176.px),
-    css('.zone-ring--3').styles(width: 256.px, height: 256.px),
+    css('.zone-ring--1').styles(width: 104.px, height: 104.px, backgroundColor: Color.variable('--brand-a10')),
+    css('.zone-ring--2').styles(width: 190.px, height: 190.px),
+    css('.zone-ring--3').styles(width: 276.px, height: 276.px),
     css('.zone-pin').styles(
       display: Display.inlineFlex,
       position: Position.relative(),
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
-      width: 48.px,
-      height: 48.px,
+      width: 52.px,
+      height: 52.px,
       backgroundColor: Color.variable('--brand-500'),
       color: Color.variable('--brand-on'),
       raw: {'border-radius': '50%', 'box-shadow': 'var(--shadow-brand)'},
     ),
     css('.zone-map-caption').styles(
-      display: Display.flex,
-      flexDirection: FlexDirection.column,
-      alignItems: AlignItems.center,
-      gap: Gap.all(4.px),
+      color: Color.variable('--ink-400'),
+      fontSize: 0.88.rem,
       textAlign: TextAlign.center,
     ),
-    css('.zone-map-store').styles(
-      color: Color.variable('--ink-900'),
-      fontSize: 0.95.rem,
-      fontWeight: FontWeight.bold,
-    ),
-    css('.zone-map-radius').styles(
-      color: Color.variable('--ink-400'),
-      fontSize: 0.85.rem,
-    ),
 
-    // ── Panels ──────────────────────────────────────────────────────────
-    css('.zone-panels').styles(
-      display: Display.flex,
-      flexDirection: FlexDirection.column,
-      gap: Gap.all(20.px),
-    ),
-    css('.zone-pair').styles(
-      display: Display.grid,
-      gap: Gap.all(20.px),
-      gridTemplate: const GridTemplate(
-        columns: GridTracks([GridTrack(TrackSize.fr(1)), GridTrack(TrackSize.fr(1))]),
-      ),
-    ),
-    css('.zone-card').styles(
-      display: Display.flex,
-      flexDirection: FlexDirection.column,
-      gap: Gap.all(16.px),
-    ),
-    css('.zone-card-head').styles(
-      display: Display.flex,
-      alignItems: AlignItems.center,
-      gap: Gap.all(12.px),
-    ),
-    css('.zone-card-title').styles(
-      color: Color.variable('--ink-900'),
-      fontSize: 1.08.rem,
-      fontWeight: FontWeight.bold,
-    ),
-
+    // ── Copy ────────────────────────────────────────────────────────────
+    css('.zone-copy .section-header').styles(margin: Spacing.only(bottom: 26.px)),
     css('.zone-areas').styles(
       display: Display.flex,
       flexWrap: FlexWrap.wrap,
       gap: Gap.all(8.px),
+      margin: Spacing.only(bottom: 30.px),
     ),
     css('.zone-area').styles(
-      backgroundColor: Color.variable('--surface-1'),
-      fontSize: 0.83.rem,
+      backgroundColor: Color.variable('--surface-card'),
+      color: Color.variable('--ink-500'),
+      fontSize: 0.85.rem,
       fontWeight: FontWeight.w500,
     ),
-    css('.zone-note').styles(
-      color: Color.variable('--ink-400'),
-      fontSize: 0.88.rem,
-      lineHeight: 1.6.em,
-    ),
-    css('.zone-note-link').styles(fontSize: 0.88.rem),
 
-    css('.zone-rows').styles(
+    css('.zone-facts').styles(
+      display: Display.grid,
+      gap: Gap.all(20.px),
+      padding: Spacing.symmetric(vertical: 22.px),
+      gridTemplate: const GridTemplate(
+        columns: GridTracks([
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+          GridTrack(TrackSize.fr(1)),
+        ]),
+      ),
+      raw: {'border-top': '1px solid var(--border-subtle)', 'border-bottom': '1px solid var(--border-subtle)'},
+    ),
+    css('.zone-fact').styles(
       display: Display.flex,
       flexDirection: FlexDirection.column,
-      gap: Gap.all(2.px),
+      gap: Gap.all(4.px),
     ),
-    css('.zone-row').styles(
-      display: Display.flex,
-      alignItems: AlignItems.center,
-      justifyContent: JustifyContent.spaceBetween,
-      gap: Gap.all(12.px),
-      padding: Spacing.symmetric(vertical: 10.px),
-      raw: {'border-bottom': '1px solid var(--border-subtle)'},
-    ),
-    css('.zone-row:last-child').styles(raw: {'border-bottom': 'none'}),
-    css('.zone-row-key').styles(
-      color: Color.variable('--ink-500'),
-      fontSize: 0.88.rem,
-    ),
-    css('.zone-row-val').styles(
-      color: Color.variable('--ink-900'),
-      fontSize: 0.9.rem,
-      fontWeight: FontWeight.w600,
-      raw: {'white-space': 'nowrap'},
-    ),
-    css('.zone-min').styles(
+    css('.zone-fact-label').styles(
       color: Color.variable('--ink-400'),
-      fontSize: 0.82.rem,
+      fontSize: 0.78.rem,
+      textTransform: TextTransform.upperCase,
+      letterSpacing: 0.7.px,
     ),
+    css('.zone-fact-value').styles(
+      color: Color.variable('--ink-900'),
+      fontSize: 1.02.rem,
+      fontWeight: FontWeight.bold,
+    ),
+
+    css('.zone-note').styles(
+      margin: Spacing.only(top: 20.px),
+      color: Color.variable('--ink-400'),
+      fontSize: 0.92.rem,
+    ),
+    css('.zone-note-link').styles(fontSize: 0.92.rem),
 
     // ── Responsive ──────────────────────────────────────────────────────
     css.media(MediaQuery.screen(maxWidth: bpLg.px), [
       css('.zone-grid').styles(
-        gap: Gap.all(24.px),
+        gap: Gap.all(40.px),
         gridTemplate: const GridTemplate(columns: GridTracks([GridTrack(TrackSize.fr(1))])),
       ),
     ]),
     css.media(MediaQuery.screen(maxWidth: bpMd.px), [
-      css('.zone-pair').styles(
-        gridTemplate: const GridTemplate(columns: GridTracks([GridTrack(TrackSize.fr(1))])),
-      ),
-      css('.zone-map').styles(padding: Spacing.symmetric(vertical: 30.px, horizontal: 18.px)),
-      css('.zone-rings').styles(width: 210.px, height: 210.px),
-      css('.zone-ring--3').styles(width: 206.px, height: 206.px),
-      css('.zone-ring--2').styles(width: 144.px, height: 144.px),
-      css('.zone-ring--1').styles(width: 82.px, height: 82.px),
+      css('.zone-rings').styles(width: 220.px, height: 220.px),
+      css('.zone-ring--3').styles(width: 216.px, height: 216.px),
+      css('.zone-ring--2').styles(width: 150.px, height: 150.px),
+      css('.zone-ring--1').styles(width: 84.px, height: 84.px),
+      css('.zone-facts').styles(gap: Gap.all(16.px)),
+      css('.zone-fact-value').styles(fontSize: 0.95.rem),
     ]),
   ];
 }

@@ -20,14 +20,9 @@ class ModuleSplit extends StatelessComponent {
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
           span(classes: 'section-eyebrow', [Component.text('What we deliver')]),
-          h2(classes: 'section-title', [
-            Component.text('One cart. Food from the kitchen, everything else from the shop.'),
-          ]),
+          h2(classes: 'section-title', [Component.text('Two stores. One cart.')]),
           p(classes: 'section-copy', [
-            Component.text(
-              'Add a hot curry and a carton of milk to the same order. '
-              'One delivery fee, one rider, one live map.',
-            ),
+            Component.text('Order a meal and a pair of headphones together. One delivery, one rider.'),
           ]),
         ]),
 
@@ -38,10 +33,9 @@ class ModuleSplit extends StatelessComponent {
             chip: 'Food',
             title: 'Hot meals, made to order',
             points: const [
-              'Breakfast, lunch and dinner from our kitchen',
-              'Live prep time and delivery estimate',
-              'Customise items before you order',
-              'Reorder your favourites in one tap',
+              'Breakfast, lunch and dinner',
+              'Customise before you order',
+              'Live prep and delivery time',
             ],
             ctaLabel: 'Browse food',
             ctaHref: kBrowseFoodUrl,
@@ -50,23 +44,17 @@ class ModuleSplit extends StatelessComponent {
             variant: 'shop',
             icon: iconBag(size: 26),
             chip: 'Shop',
-            title: 'Groceries & everyday essentials',
+            title: 'Products, picked and packed',
             points: const [
-              'Fresh produce, dairy and bakery',
-              'Household, personal care and drinks',
-              'Pack sizes and stock shown upfront',
-              'Weekly-shop cart saved for next time',
+              'Fashion, electronics and home',
+              'Flash sales and member offers',
+              'Live stock and easy returns',
             ],
-            ctaLabel: 'Browse the shop',
+            ctaLabel: 'Browse products',
             ctaHref: kBrowseShopUrl,
           ),
         ]),
 
-        div(classes: 'split-footnote', [
-          span(classes: 'chip chip--success', [iconCheck(size: 14), Component.text('One delivery fee')]),
-          span(classes: 'chip chip--success', [iconCheck(size: 14), Component.text('One rider')]),
-          span(classes: 'chip chip--success', [iconCheck(size: 14), Component.text('One live map')]),
-        ]),
       ]),
     ]);
   }
@@ -169,13 +157,6 @@ class ModuleSplit extends StatelessComponent {
     css('.split-cta').styles(margin: Spacing.only(top: 4.px)),
     css('.split-card--shop .split-cta').styles(color: Color.variable('--module-shop')),
 
-    css('.split-footnote').styles(
-      display: Display.flex,
-      flexWrap: FlexWrap.wrap,
-      justifyContent: JustifyContent.center,
-      gap: Gap.all(10.px),
-      margin: Spacing.only(top: 30.px),
-    ),
 
     css.media(MediaQuery.screen(maxWidth: bpLg.px), [
       css('.split-grid').styles(
@@ -186,7 +167,6 @@ class ModuleSplit extends StatelessComponent {
     css.media(MediaQuery.screen(maxWidth: bpMd.px), [
       css('.split-card').styles(padding: Spacing.all(24.px)),
       css('.split-card-title').styles(fontSize: 1.32.rem),
-      css('.split-footnote').styles(justifyContent: JustifyContent.start),
     ]),
   ];
 }

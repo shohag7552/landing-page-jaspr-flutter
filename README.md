@@ -6,7 +6,7 @@ linked from an Instagram bio and a Google Business Profile, printed as a QR
 code on packaging.
 
 It is not a sales page for the software. Every word on it is written for a
-shopper deciding whether to order dinner and their groceries from you.
+shopper deciding whether to order dinner — or a new pair of headphones — from you.
 
 Built with [Jaspr](https://jaspr.site) in `static` mode: one pre-rendered HTML
 page, no backend, no API calls, no database.
@@ -62,6 +62,13 @@ a second time.
 Your web app, app store listings, phone, email, socials. Anything left as `'#'`
 renders as a visibly disabled control rather than a dead link — the store
 badges, for instance, say "Coming soon to App Store" until you fill them in.
+
+### App screenshots
+
+`web/images/app-food.png` and `web/images/app-shop.png` are the phone mockups
+in the download section. Replace them whenever your app UI changes — they are
+the fastest-dating asset on the page. Portrait screenshots around 560px wide
+work well; the frame handles the rounding and the notch.
 
 ### Also worth doing
 

@@ -18,15 +18,15 @@ import 'theme.dart';
 // This file is generated automatically by Jaspr, do not remove or edit.
 import 'main.server.options.dart';
 
-const _title = '$kBrandName — Order Food & Groceries Online | Fast Local Delivery';
+const _title = '$kBrandName — Order Food & Products Online | Fast Local Delivery';
 const _description =
-    'Order food and groceries online from $kBrandName in $kCity. Fresh meals and '
-    'everyday essentials delivered to your door, with live rider tracking and '
-    'secure payment. Order on the web or get the app.';
+    'Order food and products online from $kBrandName in $kCity. Hot meals from '
+    'our kitchen and everything from our shop, delivered to your door with live '
+    'rider tracking. Order on the web, or get the Android and iPhone app.';
 
 /// TODO(owner): replace with your own 1200×630 share image. This is what
 /// people see when your link is pasted into WhatsApp or Facebook, so it is
-/// worth making properly — a photo of your food and a bag of groceries, with
+/// worth making properly — a photo of your food and a few of your products, with
 /// your logo, works well.
 const _ogImage = '$kSiteUrl/images/og-cover.jpg';
 
@@ -47,9 +47,9 @@ const _reducedMotionCss =
 
 /// Tells Google this is a real local business with a real service area.
 const _localBusinessJsonLd =
-    '{"@context":"https://schema.org","@type":"GroceryStore",'
+    '{"@context":"https://schema.org","@type":"Store",'
     '"name":"$kBrandName",'
-    '"description":"Food and grocery delivery in $kCity.",'
+    '"description":"Food and product delivery in $kCity.",'
     '"url":"$kSiteUrl",'
     '"telephone":"$kSupportPhone",'
     '"email":"$kSupportEmail",'
@@ -107,7 +107,7 @@ void main() {
           'og:image': _ogImage,
           'og:image:width': '1200',
           'og:image:height': '630',
-          'og:image:alt': '$kBrandName — food and grocery delivery in $kCity',
+          'og:image:alt': '$kBrandName — food and product delivery in $kCity',
           'og:locale': 'en_US',
         }),
         link(href: kSiteUrl, rel: 'canonical'),

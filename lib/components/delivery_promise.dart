@@ -19,27 +19,11 @@ import 'ui/icons.dart';
 class DeliveryPromise extends StatelessComponent {
   const DeliveryPromise({super.key});
 
-  static final _points = <(Component, String, String)>[
-    (
-      iconRoute(size: 20),
-      'Live map tracking',
-      'Follow your rider from our door to yours, moving in real time.',
-    ),
-    (
-      iconClock(size: 20),
-      'A real ETA',
-      'The estimate updates as they ride, so you know when to come to the door.',
-    ),
-    (
-      iconChat(size: 20),
-      'Call or chat',
-      'Reach your rider from inside the app — gate codes, directions, anything.',
-    ),
-    (
-      iconShield(size: 20),
-      'Contactless drop-off',
-      'Leave-at-door if you prefer, and pay by card, wallet or cash.',
-    ),
+  static final _points = <(Component, String)>[
+    (iconRoute(size: 20), 'Live map tracking'),
+    (iconClock(size: 20), 'A real ETA, updated as they ride'),
+    (iconChat(size: 20), 'Call or message your rider'),
+    (iconShield(size: 20), 'Contactless drop-off'),
   ];
 
   @override
@@ -49,24 +33,17 @@ class DeliveryPromise extends StatelessComponent {
         div(classes: 'tracking-copy', [
           div(classes: 'section-header', [
             span(classes: 'section-eyebrow', [Component.text('Our delivery team')]),
-            h2(classes: 'section-title', [Component.text('Your rider, tracked all the way.')]),
+            h2(classes: 'section-title', [Component.text('Tracked all the way.')]),
             p(classes: 'section-copy', [
-              Component.text(
-                'Every order is handed to one of our own riders — not a stranger from a '
-                'marketplace. Follow them live on the map, see a real ETA, and reach them '
-                'from inside the app.',
-              ),
+              Component.text('Every order goes to one of our own riders — not a stranger from a marketplace.'),
             ]),
           ]),
 
           div(classes: 'tracking-points', [
-            for (final (icon, title, desc) in _points)
+            for (final (icon, title) in _points)
               div(classes: 'tracking-point', [
                 span(classes: 'icon-tile icon-tile--sm icon-tile--rider', [icon]),
-                div(classes: 'tracking-point-body', [
-                  h3(classes: 'tracking-point-title', [Component.text(title)]),
-                  p(classes: 'tracking-point-desc', [Component.text(desc)]),
-                ]),
+                h3(classes: 'tracking-point-title', [Component.text(title)]),
               ]),
           ]),
 
@@ -149,23 +126,13 @@ class DeliveryPromise extends StatelessComponent {
     ),
     css('.tracking-point').styles(
       display: Display.flex,
-      alignItems: AlignItems.start,
+      alignItems: AlignItems.center,
       gap: Gap.all(13.px),
-    ),
-    css('.tracking-point-body').styles(
-      display: Display.flex,
-      flexDirection: FlexDirection.column,
-      gap: Gap.all(4.px),
     ),
     css('.tracking-point-title').styles(
       color: Color.variable('--ink-900'),
       fontSize: 0.99.rem,
       fontWeight: FontWeight.bold,
-    ),
-    css('.tracking-point-desc').styles(
-      color: Color.variable('--ink-400'),
-      fontSize: 0.89.rem,
-      lineHeight: 1.6.em,
     ),
     css('.tracking-recruit').styles(
       margin: Spacing.only(top: 28.px),

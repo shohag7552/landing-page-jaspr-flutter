@@ -22,23 +22,20 @@ class HeroSection extends StatelessComponent {
           ]),
 
           h1(classes: 'hero-title', [
-            Component.text('Hot food and daily essentials, '),
-            span(classes: 'hero-title-accent', [Component.text('at your door')]),
+            Component.text('Food and shopping, '),
+            span(classes: 'hero-title-accent', [Component.text('delivered')]),
             Component.text('.'),
           ]),
 
-          // The thesis. Everything on this page that says "two" has to resolve
-          // back into "one order" — this is where that starts.
+          // The thesis, in one line. Everything else on the page that says
+          // "two" has to resolve back into this "one".
           p(classes: 'hero-subtitle', [
-            Component.text(
-              'One app, one cart, one rider. Order from our kitchen and our shop '
-              'in a single order — and follow it live from checkout to doorstep.',
-            ),
+            Component.text('Meals from our kitchen, products from our shop — one cart, one rider.'),
           ]),
 
           div(classes: 'hero-modules', [
             span(classes: 'chip chip--food', [iconUtensils(size: 15), Component.text('Food')]),
-            span(classes: 'chip chip--shop', [iconBag(size: 15), Component.text('Groceries & essentials')]),
+            span(classes: 'chip chip--shop', [iconBag(size: 15), Component.text('Shop')]),
           ]),
 
           // Two ways in, at identical geometry. The grid — rather than a flex
@@ -61,11 +58,6 @@ class HeroSection extends StatelessComponent {
             ]),
           ]),
 
-          div(classes: 'hero-quick-info', [
-            _buildQuickInfo(iconClock(size: 15), '$kDeliveryWindow min average'),
-            _buildQuickInfo(iconTruck(size: 15), 'Free delivery over $kFreeDeliveryOver'),
-            _buildQuickInfo(iconStar(size: 15), '$kRating from $kRatingCount+ orders'),
-          ]),
 
           div(classes: 'hero-stats', [
             _buildStat('$kOrdersDelivered+', 'Orders delivered'),
@@ -124,13 +116,6 @@ class HeroSection extends StatelessComponent {
     return div(classes: 'stat-item', [
       span(classes: 'stat-value', [Component.text(value)]),
       span(classes: 'stat-label', [Component.text(label)]),
-    ]);
-  }
-
-  Component _buildQuickInfo(Component icon, String label) {
-    return div(classes: 'quick-info-item', [
-      span(classes: 'quick-info-icon', [icon]),
-      span(classes: 'quick-info-label', [Component.text(label)]),
     ]);
   }
 
@@ -234,30 +219,6 @@ class HeroSection extends StatelessComponent {
       color: Color.variable('--ink-700'),
     ),
 
-    css('.hero-quick-info').styles(
-      display: Display.flex,
-      flexWrap: FlexWrap.wrap,
-      gap: Gap.all(10.px),
-      margin: Spacing.only(bottom: 34.px),
-    ),
-    css('.quick-info-item').styles(
-      display: Display.inlineFlex,
-      alignItems: AlignItems.center,
-      gap: Gap.all(8.px),
-      padding: Spacing.symmetric(horizontal: 13.px, vertical: 9.px),
-      backgroundColor: Color.variable('--surface-card'),
-      raw: {'border': '1px solid var(--border-subtle)', 'border-radius': 'var(--radius-pill)'},
-    ),
-    css('.quick-info-icon').styles(
-      display: Display.inlineFlex,
-      color: Color.variable('--brand-500'),
-    ),
-    css('.quick-info-label').styles(
-      color: Color.variable('--ink-500'),
-      fontSize: 0.87.rem,
-      fontWeight: FontWeight.w500,
-      raw: {'white-space': 'nowrap'},
-    ),
 
     css('.hero-stats').styles(
       display: Display.grid,

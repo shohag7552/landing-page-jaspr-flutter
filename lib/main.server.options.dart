@@ -11,8 +11,6 @@ import 'package:food_delivery_landing/components/delivery_promise.dart'
     as _delivery_promise;
 import 'package:food_delivery_landing/components/delivery_zone.dart'
     as _delivery_zone;
-import 'package:food_delivery_landing/components/features_section.dart'
-    as _features_section;
 import 'package:food_delivery_landing/components/footer.dart' as _footer;
 import 'package:food_delivery_landing/components/get_the_app.dart'
     as _get_the_app;
@@ -56,7 +54,6 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._app.App.styles,
     ..._delivery_promise.DeliveryPromise.styles,
     ..._delivery_zone.DeliveryZone.styles,
-    ..._features_section.FeaturesSection.styles,
     ..._footer.FooterSection.styles,
     ..._get_the_app.GetTheApp.styles,
     ..._hero_section.HeroSection.styles,

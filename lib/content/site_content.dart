@@ -24,13 +24,13 @@ const kSiteUrl = 'https://kikomart.example';
 // order twice.
 
 const kAvgDeliveryMinutes = '32';
-const kDeliveryWindow = '30–45';
 const kRating = '4.8';
 const kRatingCount = '1,200';
 const kOrdersDelivered = '12,000';
 const kAreasCovered = '9';
 const kFreeDeliveryOver = '\$25';
 const kMinimumOrder = '\$10';
+const kDeliveryFeeFrom = '\$1.99';
 
 // ── Delivery zone ───────────────────────────────────────────────────────────
 
@@ -44,18 +44,4 @@ const kCoveredAreas = <String>[
   'Station Quarter',
   'Greenfield',
   'Mill Road',
-];
-
-/// Day label → hours. Shown as-is in the delivery section.
-const kHours = <(String, String)>[
-  ('Monday – Thursday', '9:00am – 11:00pm'),
-  ('Friday – Saturday', '9:00am – 12:00am'),
-  ('Sunday', '10:00am – 10:00pm'),
-];
-
-/// Distance band → fee.
-const kDeliveryFees = <(String, String)>[
-  ('Under 2 km', '\$1.99'),
-  ('2 – 3.5 km', '\$2.99'),
-  ('3.5 – 5 km', '\$3.99'),
 ];
