@@ -1,8 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../content/site_content.dart';
-import '../content/site_links.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
 
@@ -28,14 +27,16 @@ class DeliveryPromise extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    final data = LandingScope.of(context);
+
     return section(id: 'tracking', classes: 'section section--alt tracking', [
       div(classes: 'container tracking-grid', [
         div(classes: 'tracking-copy', [
           div(classes: 'section-header', [
             span(classes: 'section-eyebrow', [Component.text('Our delivery team')]),
-            h2(classes: 'section-title', [Component.text('Tracked all the way.')]),
+            h2(classes: 'section-title', [Component.text(data.riderTitle)]),
             p(classes: 'section-copy', [
-              Component.text('Every order goes to one of our own riders — not a stranger from a marketplace.'),
+              Component.text(data.riderSubtitle),
             ]),
           ]),
 
@@ -49,8 +50,8 @@ class DeliveryPromise extends StatelessComponent {
 
           p(classes: 'tracking-recruit', [
             Component.text('Want to ride with us? '),
-            a(href: kRiderApplyUrl, classes: 'link-arrow tracking-recruit-link', [
-              Component.text('Deliver with $kBrandName'),
+            a(href: data.riderApplyUrl, classes: 'link-arrow tracking-recruit-link', [
+              Component.text('Deliver with ${data.brandName}'),
               span(classes: 'btn-icon', [iconArrowRight(size: 15)]),
             ]),
           ]),
@@ -71,7 +72,7 @@ class DeliveryPromise extends StatelessComponent {
               span(classes: 'rider-avatar', [Component.text('AM')]),
               div(classes: 'rider-id', [
                 span(classes: 'rider-name', [Component.text('Your rider is on the way')]),
-                span(classes: 'rider-role', [Component.text('$kBrandName delivery team')]),
+                span(classes: 'rider-role', [Component.text('${data.brandName} delivery team')]),
               ]),
               span(classes: 'chip chip--success', [Component.text('Live')]),
             ]),

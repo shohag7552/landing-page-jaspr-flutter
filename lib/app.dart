@@ -11,6 +11,7 @@ import 'components/module_split.dart';
 import 'components/navbar.dart';
 import 'components/showcase_section.dart';
 import 'components/why_choose_us.dart';
+import 'data/landing_data.dart';
 
 /// The page.
 ///
@@ -38,16 +39,25 @@ class App extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    // Sections the store has switched off never render. A store running only
+    // the food module also loses the Shop half of the page, because the
+    // module flags in Business Setup are the single source of truth for it.
+    final data = LandingScope.of(context);
+
     return div(classes: 'app-wrapper', [
-      const Navbar(),
+      Navbar(
+        brandFirst: data.brandFirst,
+        brandSecond: data.brandSecond,
+        orderUrl: data.webAppUrl,
+      ),
       const HeroSection(),
       const WhyChooseUs(),
-      const DeliveryZone(),
+      if (data.showDelivery) const DeliveryZone(),
       const ModuleSplit(),
-      const ShowcaseSection(),
+      if (data.hasShowcase) const ShowcaseSection(),
       const HowItWorks(),
-      const DeliveryPromise(),
-      const GetTheApp(),
+      if (data.showRider) const DeliveryPromise(),
+      if (data.showApp) const GetTheApp(),
       const FooterSection(),
     ]);
   }

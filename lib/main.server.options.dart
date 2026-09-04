@@ -47,7 +47,12 @@ import 'package:food_delivery_landing/ui_kit.dart' as _ui_kit;
 /// ```
 ServerOptions get defaultServerOptions => ServerOptions(
   clientId: 'main.client.dart.js',
-  clients: {_navbar.Navbar: ClientTarget<_navbar.Navbar>('navbar')},
+  clients: {
+    _navbar.Navbar: ClientTarget<_navbar.Navbar>(
+      'navbar',
+      params: __navbarNavbar,
+    ),
+  },
   styles: () => [
     ..._theme.brandTokens,
     ..._ui_kit.uiKit,
@@ -66,3 +71,9 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._brand_logo.BrandMark.styles,
   ],
 );
+
+Map<String, Object?> __navbarNavbar(_navbar.Navbar c) => {
+  'brandFirst': c.brandFirst,
+  'brandSecond': c.brandSecond,
+  'orderUrl': c.orderUrl,
+};

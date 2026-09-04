@@ -11,7 +11,6 @@ library;
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../../content/site_content.dart';
 import '../../theme.dart';
 
 /// The mark on its own, no wordmark.
@@ -105,19 +104,37 @@ class BrandMark extends StatelessComponent {
 
 /// Mark plus wordmark. Used in the navbar and the footer.
 class BrandLogo extends StatelessComponent {
-  const BrandLogo({this.size = 38, super.key});
+  const BrandLogo({
+    required this.brandFirst,
+    required this.brandSecond,
+    this.size = 38,
+    super.key,
+  });
 
+  /// Passed in rather than read from [LandingScope]: this renders inside the
+  /// navbar, which is a `@client` island. On hydration that subtree rebuilds
+  /// on its own, with no scope above it to read.
+  final String brandFirst;
+  final String brandSecond;
   final double size;
 
   @override
   Component build(BuildContext context) {
-    return a(href: '#home', classes: 'brand-logo', attributes: const {'aria-label': '$kBrandName — home'}, [
-      BrandMark(size: size),
-      span(classes: 'brand-word', [
-        Component.text('$kBrandFirst '),
-        span(classes: 'brand-word-accent', [Component.text(kBrandSecond)]),
-      ]),
-    ]);
+    final name = brandSecond.isEmpty ? brandFirst : '$brandFirst $brandSecond';
+
+    return a(
+      href: '#home',
+      classes: 'brand-logo',
+      attributes: {'aria-label': '$name — home'},
+      [
+        BrandMark(size: size),
+        span(classes: 'brand-word', [
+          Component.text(brandSecond.isEmpty ? brandFirst : '$brandFirst '),
+          if (brandSecond.isNotEmpty)
+            span(classes: 'brand-word-accent', [Component.text(brandSecond)]),
+        ]),
+      ],
+    );
   }
 
   @css

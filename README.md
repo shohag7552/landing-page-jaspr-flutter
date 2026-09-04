@@ -33,9 +33,63 @@ Ordering is presented as **three equal paths** — web, Android, iPhone. On a
 phone the web card moves to the top, because a first-time visitor who has
 installed nothing can act immediately.
 
+## Where the content comes from
+
+The page is **data-driven**. It reads from the same Appwrite database the store
+panel and customer apps use, at build time, and bakes the result into static
+HTML — so the content is live but the site still deploys as plain files with
+full SEO and working link previews.
+
+| Shown on the page | Read from |
+|---|---|
+| Business name, opening hours, currency | `business_setup` / `store_setup` |
+| Delivery radius, fee, free-delivery threshold | `business_setup` |
+| Android / iOS app links | `business_setup.android_store_url` / `ios_store_url` |
+| **Which of Food / Shop appears at all** | `business_setup.is_food_module_enabled` / `is_ecommerce_module_enabled` |
+| Address, phone, email, socials | `store_setup` |
+| Popular products in each tab | `products`, ordered by `order_count` |
+| Everything else (hero copy, areas, screenshots, SEO, brand colour) | `landing_setup` |
+
+Edit the last one on **Settings → Landing Page** in the store panel. The rest is
+already maintained on the Store Setup and Business Setup screens — the landing
+page reads them so the two can never drift apart.
+
+### First-time setup
+
+1. Run the seed script once so the `landing_setup` table exists:
+   `dart run lib/scripts/seed_database.dart` (in the store panel repo)
+2. Fill in **Settings → Landing Page**
+3. Rebuild this site: `jaspr build`
+
+Content changes need a rebuild, because the data is baked in at build time.
+To make edits appear instantly instead, switch `jaspr: mode:` in `pubspec.yaml`
+from `static` to `server` and host it on a Dart-capable runtime — the data code
+is identical either way and needs no changes.
+
+### Pointing it at your own Appwrite
+
+Defaults live in `lib/data/appwrite_config.dart`. Override per deployment
+without editing source:
+
+```sh
+jaspr build \
+  --dart-define=APPWRITE_ENDPOINT=https://sgp.cloud.appwrite.io/v1 \
+  --dart-define=APPWRITE_PROJECT_ID=your_project_id \
+  --dart-define=APPWRITE_DATABASE_ID=food_delivery_db \
+  --dart-define=APPWRITE_BUCKET_ID=your_bucket_id
+```
+
+The site sends **only the public project id**. It never uses an API key, and it
+must not be given one — the tables it reads are all `Permission.read(Role.any())`.
+
+**If Appwrite is unreachable, not yet seeded, or half-filled, the build still
+succeeds** and every missing field falls back to the defaults below. Watch the
+build log: each failed read prints a warning naming the table.
+
 ## Making it yours
 
-Three files. That is the whole rebrand.
+The store panel is the normal way to edit content. The files below are the
+fallbacks used before anything is configured.
 
 ### 1. `lib/theme.dart` — colours
 

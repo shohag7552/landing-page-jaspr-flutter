@@ -1,8 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../content/site_content.dart';
-import '../content/site_links.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
 
@@ -20,6 +19,8 @@ class GetTheApp extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    final data = LandingScope.of(context);
+
     return section(id: 'get-app', classes: 'section getapp', [
       div(classes: 'container getapp-grid', [
         div(classes: 'getapp-copy', [
@@ -35,11 +36,11 @@ class GetTheApp extends StatelessComponent {
           // spans them, so no single path is presented as the fallback.
           div(classes: 'getapp-actions', [
             div(classes: 'getapp-stores', [
-              _storeBadge(kPlayStoreUrl, iconPlay(size: 21), 'Get it on', 'Google Play'),
-              _storeBadge(kAppStoreUrl, iconApple(size: 22), 'Download on the', 'App Store'),
+              _storeBadge(data.playStoreUrl, iconPlay(size: 21), 'Get it on', 'Google Play'),
+              _storeBadge(data.appStoreUrl, iconApple(size: 22), 'Download on the', 'App Store'),
             ]),
             a(
-              href: kWebAppUrl,
+              href: data.webAppUrl,
               classes: 'btn btn-secondary btn-block getapp-web',
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
@@ -52,14 +53,22 @@ class GetTheApp extends StatelessComponent {
           ]),
 
           div(classes: 'getapp-meta', [
-            span(classes: 'getapp-meta-item', [iconStar(size: 15), Component.text('$kRating from $kRatingCount+ orders')]),
-            span(classes: 'getapp-meta-item', [iconMapPin(size: 15), Component.text('Delivering across $kCity')]),
+            span(classes: 'getapp-meta-item', [
+              iconStar(size: 15),
+              Component.text('${data.rating} from ${data.ratingCount}+ orders'),
+            ]),
+            span(classes: 'getapp-meta-item', [
+              iconMapPin(size: 15),
+              Component.text('Delivering across ${data.city}'),
+            ]),
           ]),
         ]),
 
         div(classes: 'getapp-visual', [
-          _phone('/images/app-food.png', '$kBrandName app — food ordering screen', 'Food', 'food'),
-          _phone('/images/app-shop.png', '$kBrandName app — shop screen', 'Shop', 'shop'),
+          if (data.foodEnabled)
+            _phone(data.appFoodShot, '${data.brandName} app — food ordering screen', 'Food', 'food'),
+          if (data.shopEnabled)
+            _phone(data.appShopShot, '${data.brandName} app — shop screen', 'Shop', 'shop'),
         ]),
       ]),
     ]);
@@ -87,7 +96,9 @@ class GetTheApp extends StatelessComponent {
   /// matches the site and is fine for a marketing page, but swap in the
   /// official assets before you submit your apps.
   Component _storeBadge(String href, Component glyph, String kicker, String name) {
-    final live = isLive(href);
+    // A store that has not published its apps yet gets a visibly disabled
+    // badge rather than a link that goes nowhere.
+    final live = href.trim().isNotEmpty && href.trim() != '#';
     return a(
       href: href,
       classes: 'store-badge ${live ? '' : 'is-pending'}',

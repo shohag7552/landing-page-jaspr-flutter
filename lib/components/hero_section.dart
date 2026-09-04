@@ -1,8 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../content/site_content.dart';
-import '../content/site_links.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
 
@@ -11,31 +10,35 @@ class HeroSection extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    final data = LandingScope.of(context);
+
     return section(id: 'home', classes: 'hero', [
       div(classes: 'hero-container container', [
         div(classes: 'hero-content', [
           div(classes: 'hero-badge', [
             span(classes: 'badge-dot', []),
             span(classes: 'badge-text', [
-              Component.text('Delivering across $kCity · Open $kOpeningHours'),
+              Component.text(data.heroBadge),
             ]),
           ]),
 
           h1(classes: 'hero-title', [
-            Component.text('Food and shopping, '),
-            span(classes: 'hero-title-accent', [Component.text('delivered')]),
+            Component.text('${data.heroTitle} '),
+            span(classes: 'hero-title-accent', [Component.text(data.heroAccent)]),
             Component.text('.'),
           ]),
 
           // The thesis, in one line. Everything else on the page that says
           // "two" has to resolve back into this "one".
           p(classes: 'hero-subtitle', [
-            Component.text('Meals from our kitchen, products from our shop — one cart, one rider.'),
+            Component.text(data.heroSubtitle),
           ]),
 
           div(classes: 'hero-modules', [
-            span(classes: 'chip chip--food', [iconUtensils(size: 15), Component.text('Food')]),
-            span(classes: 'chip chip--shop', [iconBag(size: 15), Component.text('Shop')]),
+            if (data.foodEnabled)
+              span(classes: 'chip chip--food', [iconUtensils(size: 15), Component.text('Food')]),
+            if (data.shopEnabled)
+              span(classes: 'chip chip--shop', [iconBag(size: 15), Component.text('Shop')]),
           ]),
 
           // Two ways in, at identical geometry. The grid — rather than a flex
@@ -43,7 +46,7 @@ class HeroSection extends StatelessComponent {
           // longer label wider and quietly rank one path above the other.
           div(classes: 'hero-actions', [
             a(
-              href: kWebAppUrl,
+              href: data.webAppUrl,
               classes: 'btn btn-primary btn-lg',
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
@@ -60,16 +63,16 @@ class HeroSection extends StatelessComponent {
 
 
           div(classes: 'hero-stats', [
-            _buildStat('$kOrdersDelivered+', 'Orders delivered'),
-            _buildStat('$kAvgDeliveryMinutes min', 'Average delivery'),
-            _buildStat(kAreasCovered, 'Areas covered'),
+            _buildStat('${data.ordersDelivered}+', 'Orders delivered'),
+            _buildStat('${data.avgDeliveryMinutes} min', 'Average delivery'),
+            _buildStat('${data.areasCovered}', 'Areas covered'),
           ]),
         ]),
 
         div(classes: 'hero-visual', [
           img(
-            src: 'https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=1400&auto=format&fit=crop',
-            alt: 'A $kBrandName rider handing an order to a customer at their door',
+            src: data.heroImage,
+            alt: 'A ${data.brandName} rider on the way to a customer',
             classes: 'hero-image',
             width: 1400,
             height: 933,

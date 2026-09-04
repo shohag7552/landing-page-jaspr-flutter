@@ -1,8 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../content/site_content.dart';
-import '../content/site_links.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/brand_logo.dart';
 import 'ui/icons.dart';
@@ -20,70 +19,70 @@ import 'ui/icons.dart';
 class FooterSection extends StatelessComponent {
   const FooterSection({super.key});
 
-  static const _shopLinks = <(String, String)>[
-    ('Food menu', kBrowseFoodUrl),
-    ('Shop products', kBrowseShopUrl),
-    ('Offers', kWebAppUrl),
-    ('New arrivals', kWebAppUrl),
-  ];
-
   static const _helpLinks = <(String, String)>[
-    ('Track your order', kTrackOrderUrl),
     ('Delivery areas', '#delivery'),
     ('How it works', '#how-it-works'),
-    ('Returns & refunds', '#contact'),
+    ('Get the app', '#get-app'),
+    ('Contact us', '#contact'),
   ];
 
   @override
   Component build(BuildContext context) {
+    final data = LandingScope.of(context);
+    final shopLinks = <(String, String)>[
+      if (data.foodEnabled) ('Food menu', data.webAppUrl),
+      if (data.shopEnabled) ('Shop products', data.webAppUrl),
+      ('Track your order', data.webAppUrl),
+    ];
+
     return footer(id: 'contact', classes: 'footer', [
       div(classes: 'container', [
         div(classes: 'footer-top', [
           // Brand
           div(classes: 'footer-brand', [
-            const BrandLogo(),
+            BrandLogo(brandFirst: data.brandFirst, brandSecond: data.brandSecond),
             p(classes: 'footer-tagline', [
               Component.text(
-                'Food and products, delivered across $kCity. One cart, one rider.',
+                'Food and products, delivered across ${data.city}. One cart, one rider.',
               ),
             ]),
             div(classes: 'footer-social', [
-              _socialLink(kFacebookUrl, 'Facebook', 'f'),
-              _socialLink(kInstagramUrl, 'Instagram', 'ig'),
-              _socialLink(kTwitterUrl, 'X', 'x'),
+              _socialLink(data.facebookUrl, 'Facebook', 'f'),
+              _socialLink(data.instagramUrl, 'Instagram', 'ig'),
+              _socialLink(data.twitterUrl, 'X', 'x'),
             ]),
           ]),
 
-          _linksColumn('Shop', _shopLinks),
+          _linksColumn('Shop', shopLinks),
           _linksColumn('Help', _helpLinks),
 
           // Contact — replaces the old dead newsletter form.
           div(classes: 'footer-col footer-contact', [
             h3(classes: 'footer-col-title', [Component.text('Visit or call us')]),
             div(classes: 'footer-contact-list', [
-              _contactRow(iconMapPin(size: 17), kStoreAddress, null),
-              _contactRow(iconPhone(size: 17), kSupportPhone, kSupportPhoneHref),
-              _contactRow(iconChat(size: 17), kSupportEmail, kSupportEmailHref),
-              _contactRow(iconClock(size: 17), 'Open $kOpeningHours', null),
+              _contactRow(iconMapPin(size: 17), data.storeAddress, null),
+              _contactRow(iconPhone(size: 17), data.phone, data.phoneHref),
+              _contactRow(iconChat(size: 17), data.email, data.emailHref),
+              _contactRow(iconClock(size: 17), 'Open ${data.openingHours}', null),
             ]),
           ]),
         ]),
 
         div(classes: 'footer-bottom', [
           span(classes: 'footer-copy', [
-            Component.text('© 2026 $kBrandName. All rights reserved.'),
+            Component.text(data.copyright),
           ]),
           div(classes: 'footer-utility', [
             a(
-              href: kStorePanelUrl,
+              href: data.storePanelUrl,
               classes: 'footer-utility-link',
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
               [Component.text('Store login')],
             ),
-            a(href: kRiderApplyUrl, classes: 'footer-utility-link', [Component.text('Deliver with us')]),
-            a(href: kTermsUrl, classes: 'footer-utility-link', [Component.text('Terms')]),
-            a(href: kPrivacyUrl, classes: 'footer-utility-link', [Component.text('Privacy')]),
+            a(href: data.riderApplyUrl, classes: 'footer-utility-link', [Component.text('Deliver with us')]),
+            a(href: data.termsUrl, classes: 'footer-utility-link', [Component.text('Terms')]),
+            a(href: data.privacyUrl, classes: 'footer-utility-link', [Component.text('Privacy')]),
           ]),
         ]),
       ]),

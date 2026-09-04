@@ -28,7 +28,11 @@ import 'package:food_delivery_landing/components/navbar.dart'
 ClientOptions get defaultClientOptions => ClientOptions(
   clients: {
     'navbar': ClientLoader(
-      (p) => _navbar.Navbar(),
+      (p) => _navbar.Navbar(
+        brandFirst: p['brandFirst'] as String,
+        brandSecond: p['brandSecond'] as String,
+        orderUrl: p['orderUrl'] as String,
+      ),
       loader: _navbar.loadLibrary,
     ),
   },

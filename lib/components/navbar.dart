@@ -3,7 +3,6 @@ import 'package:jaspr/jaspr.dart';
 import 'package:universal_web/js_interop.dart';
 import 'package:universal_web/web.dart' as web;
 
-import '../content/site_links.dart';
 import '../theme.dart';
 import 'ui/brand_logo.dart';
 import 'ui/icons.dart';
@@ -14,7 +13,19 @@ const kThemeStorageKey = 'kikomart-theme';
 
 @client
 class Navbar extends StatefulComponent {
-  const Navbar({super.key});
+  const Navbar({
+    required this.brandFirst,
+    required this.brandSecond,
+    required this.orderUrl,
+    super.key,
+  });
+
+  /// Client islands are hydrated on their own, so anything this subtree needs
+  /// has to travel with it. Jaspr serialises these into the page and restores
+  /// them in the browser — reading LandingScope here would find nothing.
+  final String brandFirst;
+  final String brandSecond;
+  final String orderUrl;
 
   @override
   State<Navbar> createState() => NavbarState();
@@ -208,7 +219,7 @@ class NavbarState extends State<Navbar> {
       classes: 'navbar ${isScrolled || isMenuOpen ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}',
       [
         div(classes: 'container nav-inner', [
-          const BrandLogo(),
+          BrandLogo(brandFirst: component.brandFirst, brandSecond: component.brandSecond),
 
           nav(classes: 'nav-links desktop-only', attributes: const {'aria-label': 'Main'}, [
             for (final (href, label) in _navItems)
@@ -228,7 +239,7 @@ class NavbarState extends State<Navbar> {
             a(href: '#get-app', classes: 'nav-applink', [Component.text('Get the app')]),
             _buildThemeToggle(),
             a(
-              href: kWebAppUrl,
+              href: component.orderUrl,
               classes: 'btn btn-primary',
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
@@ -265,7 +276,7 @@ class NavbarState extends State<Navbar> {
             ]),
             div(classes: 'mobile-nav-actions', [
               a(
-                href: kWebAppUrl,
+                href: component.orderUrl,
                 classes: 'btn btn-primary btn-block',
                 target: Target.blank,
                 attributes: const {'rel': 'noopener'},

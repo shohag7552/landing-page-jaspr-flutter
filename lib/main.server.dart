@@ -11,24 +11,13 @@ import 'package:jaspr/server.dart';
 // Imports the [App] component.
 import 'app.dart';
 import 'components/navbar.dart' show kThemeStorageKey;
-import 'content/site_content.dart';
-import 'content/site_links.dart';
-import 'theme.dart';
+import 'data/landing_data.dart';
+import 'data/landing_repository.dart';
 
 // This file is generated automatically by Jaspr, do not remove or edit.
 import 'main.server.options.dart';
 
-const _title = '$kBrandName — Order Food & Products Online | Fast Local Delivery';
-const _description =
-    'Order food and products online from $kBrandName in $kCity. Hot meals from '
-    'our kitchen and everything from our shop, delivered to your door with live '
-    'rider tracking. Order on the web, or get the Android and iPhone app.';
 
-/// TODO(owner): replace with your own 1200×630 share image. This is what
-/// people see when your link is pasted into WhatsApp or Facebook, so it is
-/// worth making properly — a photo of your food and a few of your products, with
-/// your logo, works well.
-const _ogImage = '$kSiteUrl/images/og-cover.jpg';
 
 /// Applies the saved theme before the first paint.
 ///
@@ -45,21 +34,6 @@ const _reducedMotionCss =
     'animation-duration:0.01ms !important;animation-iteration-count:1 !important;'
     'transition-duration:0.01ms !important;scroll-behavior:auto !important}}';
 
-/// Tells Google this is a real local business with a real service area.
-const _localBusinessJsonLd =
-    '{"@context":"https://schema.org","@type":"Store",'
-    '"name":"$kBrandName",'
-    '"description":"Food and product delivery in $kCity.",'
-    '"url":"$kSiteUrl",'
-    '"telephone":"$kSupportPhone",'
-    '"email":"$kSupportEmail",'
-    '"image":"$_ogImage",'
-    '"priceRange":"\$\$",'
-    '"address":{"@type":"PostalAddress","streetAddress":"$kStoreAddress","addressLocality":"$kCity"},'
-    '"areaServed":{"@type":"GeoCircle",'
-    '"geoMidpoint":{"@type":"GeoCoordinates","address":"$kStoreAddress"},'
-    '"geoRadius":"5000"},'
-    '"aggregateRating":{"@type":"AggregateRating","ratingValue":"$kRating","reviewCount":"1200"}}';
 
 /// Open Graph needs `property=`, which `Document(meta:)` cannot emit.
 Iterable<Component> _ogMeta(Map<String, String> tags) {
@@ -72,27 +46,61 @@ Iterable<Component> _ogMeta(Map<String, String> tags) {
   );
 }
 
-void main() {
+/// Tells Google this is a real local business with a real service area.
+String _localBusinessJsonLd(LandingData d) =>
+    '{"@context":"https://schema.org","@type":"Store",'
+    '"name":"${_esc(d.brandName)}",'
+    '"description":"Food and product delivery in ${_esc(d.city)}.",'
+    '"url":"${_esc(d.siteUrl)}",'
+    '"telephone":"${_esc(d.phone)}",'
+    '"email":"${_esc(d.email)}",'
+    '"image":"${_esc(d.ogImage)}",'
+    '"priceRange":"\$\$",'
+    '"address":{"@type":"PostalAddress","streetAddress":"${_esc(d.storeAddress)}",'
+    '"addressLocality":"${_esc(d.city)}"},'
+    '"areaServed":{"@type":"GeoCircle",'
+    '"geoMidpoint":{"@type":"GeoCoordinates","address":"${_esc(d.storeAddress)}"},'
+    '"geoRadius":"5000"},'
+    '"aggregateRating":{"@type":"AggregateRating","ratingValue":"${_esc(d.rating)}",'
+    '"reviewCount":"${_esc(d.ratingCount.replaceAll(RegExp(r'[^0-9]'), ''))}"}}';
+
+/// Store-entered text lands inside a JSON string literal, so quotes and
+/// newlines have to be escaped or the whole block becomes invalid JSON-LD.
+String _esc(String value) => value
+    .replaceAll(r'\', r'\\')
+    .replaceAll('"', r'\"')
+    .replaceAll('\n', ' ')
+    .trim();
+
+/// The brand colour is a value, not a stylesheet, so it is injected as a
+/// custom property override rather than templated into every rule.
+String _brandOverrideCss(String hex) => ':root{--brand-500:$hex}';
+
+Future<void> main() async {
   Jaspr.initializeApp(
     options: defaultServerOptions,
   );
 
+  // Runs once per build in `mode: static`, and once per request should this
+  // ever be switched to `mode: server` — the call site is identical either way.
+  final data = await LandingRepository().fetch();
+
   runApp(
     Document(
-      title: _title,
+      title: data.metaTitle,
       lang: 'en',
       meta: {
-        'description': _description,
+        'description': data.metaDescription,
         'viewport': 'width=device-width, initial-scale=1.0',
-        'theme-color': kBrandHex,
+        'theme-color': data.brandHex,
         // NOTE: Open Graph tags are NOT here. Document(meta:) renders
         // `name="..."`, but the Open Graph protocol requires `property="..."`,
         // and Facebook/WhatsApp read only `property`. They are emitted as raw
         // <meta property> elements in `head:` below instead.
         'twitter:card': 'summary_large_image',
-        'twitter:title': _title,
-        'twitter:description': _description,
-        'twitter:image': _ogImage,
+        'twitter:title': data.metaTitle,
+        'twitter:description': data.metaDescription,
+        'twitter:image': data.ogImage,
       },
       head: [
         // Link previews. This page's whole distribution model is someone
@@ -100,17 +108,17 @@ void main() {
         // share with no card is a dead post.
         ..._ogMeta({
           'og:type': 'website',
-          'og:site_name': kBrandName,
-          'og:title': _title,
-          'og:description': _description,
-          'og:url': kSiteUrl,
-          'og:image': _ogImage,
+          'og:site_name': data.brandName,
+          'og:title': data.metaTitle,
+          'og:description': data.metaDescription,
+          'og:url': data.siteUrl,
+          'og:image': data.ogImage,
           'og:image:width': '1200',
           'og:image:height': '630',
-          'og:image:alt': '$kBrandName — food and product delivery in $kCity',
+          'og:image:alt': '${data.brandName} — food and product delivery in ${data.city}',
           'og:locale': 'en_US',
         }),
-        link(href: kSiteUrl, rel: 'canonical'),
+        link(href: data.siteUrl, rel: 'canonical'),
         link(href: 'https://fonts.googleapis.com', rel: 'preconnect'),
         link(href: 'https://fonts.gstatic.com', rel: 'preconnect', attributes: const {'crossorigin': ''}),
         link(
@@ -124,8 +132,12 @@ void main() {
         Component.element(tag: 'style', children: const [RawText(_reducedMotionCss)]),
         script(
           attributes: const {'type': 'application/ld+json'},
-          content: _localBusinessJsonLd,
+          content: _localBusinessJsonLd(data),
         ),
+        // Overrides the token defined in lib/theme.dart. Every other shade on
+        // the page derives from it via color-mix(), so this one line re-skins
+        // the site from the store panel.
+        Component.element(tag: 'style', children: [RawText(_brandOverrideCss(data.brandHex))]),
       ],
       styles: [
         // ── Base resets & typography ────────────────────────────────────
@@ -180,7 +192,7 @@ void main() {
         ),
         css('html.dark-mode .hero-store-glyphs').styles(color: Color.variable('--ink-700')),
       ],
-      body: const App(),
+      body: LandingScope(data: data, child: const App()),
     ),
   );
 }

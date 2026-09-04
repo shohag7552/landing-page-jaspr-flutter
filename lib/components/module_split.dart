@@ -1,7 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../content/site_links.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
 
@@ -16,42 +16,41 @@ class ModuleSplit extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    final data = LandingScope.of(context);
+
     return section(id: 'shop', classes: 'section split', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
           span(classes: 'section-eyebrow', [Component.text('What we deliver')]),
-          h2(classes: 'section-title', [Component.text('Two stores. One cart.')]),
-          p(classes: 'section-copy', [
-            Component.text('Order a meal and a pair of headphones together. One delivery, one rider.'),
+          h2(classes: 'section-title', [
+            Component.text(data.isDualModule ? 'Two stores. One cart.' : 'What we deliver'),
           ]),
+          if (data.isDualModule)
+            p(classes: 'section-copy', [
+              Component.text('Order a meal and a pair of headphones together. One delivery, one rider.'),
+            ]),
         ]),
 
-        div(classes: 'split-grid', [
-          _buildModule(
+        div(classes: 'split-grid ${data.isDualModule ? '' : 'split-grid--single'}', [
+          if (data.foodEnabled)
+            _buildModule(
             variant: 'food',
             icon: iconUtensils(size: 26),
             chip: 'Food',
-            title: 'Hot meals, made to order',
-            points: const [
-              'Breakfast, lunch and dinner',
-              'Customise before you order',
-              'Live prep and delivery time',
-            ],
+            title: data.foodTitle,
+            points: data.foodPoints,
             ctaLabel: 'Browse food',
-            ctaHref: kBrowseFoodUrl,
+            ctaHref: data.webAppUrl,
           ),
-          _buildModule(
+          if (data.shopEnabled)
+            _buildModule(
             variant: 'shop',
             icon: iconBag(size: 26),
             chip: 'Shop',
-            title: 'Products, picked and packed',
-            points: const [
-              'Fashion, electronics and home',
-              'Flash sales and member offers',
-              'Live stock and easy returns',
-            ],
+            title: data.shopTitle,
+            points: data.shopPoints,
             ctaLabel: 'Browse products',
-            ctaHref: kBrowseShopUrl,
+            ctaHref: data.webAppUrl,
           ),
         ]),
 
@@ -103,6 +102,11 @@ class ModuleSplit extends StatelessComponent {
       gridTemplate: const GridTemplate(
         columns: GridTracks([GridTrack(TrackSize.fr(1)), GridTrack(TrackSize.fr(1))]),
       ),
+    ),
+    css('.split-grid--single').styles(
+      maxWidth: 620.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+      gridTemplate: const GridTemplate(columns: GridTracks([GridTrack(TrackSize.fr(1))])),
     ),
     css('.split-card').styles(
       display: Display.flex,
@@ -165,7 +169,12 @@ class ModuleSplit extends StatelessComponent {
       ),
     ]),
     css.media(MediaQuery.screen(maxWidth: bpMd.px), [
-      css('.split-card').styles(padding: Spacing.all(24.px)),
+      css('.split-grid--single').styles(
+      maxWidth: 620.px,
+      margin: Spacing.symmetric(horizontal: Unit.auto),
+      gridTemplate: const GridTemplate(columns: GridTracks([GridTrack(TrackSize.fr(1))])),
+    ),
+    css('.split-card').styles(padding: Spacing.all(24.px)),
       css('.split-card-title').styles(fontSize: 1.32.rem),
     ]),
   ];

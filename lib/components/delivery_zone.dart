@@ -1,8 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../content/site_content.dart';
-import '../content/site_links.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
 
@@ -22,6 +21,8 @@ class DeliveryZone extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    final data = LandingScope.of(context);
+
     return section(id: 'delivery', classes: 'section section--alt zone', [
       div(classes: 'container zone-grid', [
         div(classes: 'zone-map', [
@@ -31,7 +32,9 @@ class DeliveryZone extends StatelessComponent {
             span(classes: 'zone-ring zone-ring--1', []),
             span(classes: 'zone-pin', [iconMapPin(size: 22)]),
           ]),
-          span(classes: 'zone-map-caption', [Component.text('$kDeliveryRadiusKm from $kStoreAddress')]),
+          span(classes: 'zone-map-caption', [
+            Component.text('${data.deliveryRadius} from ${data.storeAddress}'),
+          ]),
         ]),
 
         div(classes: 'zone-copy', [
@@ -39,23 +42,26 @@ class DeliveryZone extends StatelessComponent {
             span(classes: 'section-eyebrow', [Component.text('Delivery area')]),
             h2(classes: 'section-title', [Component.text('Do we deliver to you?')]),
             p(classes: 'section-copy', [
-              Component.text('We cover $kAreasCovered neighbourhoods within $kDeliveryRadiusKm of the store.'),
+              Component.text(
+                'We cover ${data.areasCovered} neighbourhoods within ${data.deliveryRadius} of the store.',
+              ),
             ]),
           ]),
 
           div(classes: 'zone-areas', [
-            for (final area in kCoveredAreas) span(classes: 'chip zone-area', [Component.text(area)]),
+            for (final area in data.coveredAreas)
+              span(classes: 'chip zone-area', [Component.text(area)]),
           ]),
 
           div(classes: 'zone-facts', [
-            _fact('Open daily', kOpeningHours),
-            _fact('Delivery from', kDeliveryFeeFrom),
-            _fact('Free over', kFreeDeliveryOver),
+            _fact('Open daily', data.openingHours),
+            _fact('Delivery from', data.deliveryFeeFrom),
+            _fact('Free over', data.freeDeliveryOver),
           ]),
 
           p(classes: 'zone-note', [
             Component.text('Not on the list? '),
-            a(href: kWhatsAppUrl, classes: 'link-arrow zone-note-link', [Component.text('Message us')]),
+            a(href: data.whatsappUrl, classes: 'link-arrow zone-note-link', [Component.text('Message us')]),
           ]),
         ]),
       ]),

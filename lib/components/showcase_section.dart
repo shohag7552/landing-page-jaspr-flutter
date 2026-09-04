@@ -1,31 +1,9 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
-import '../content/site_links.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
-
-/// One item, as it appears in either tab.
-class _Item {
-  const _Item({
-    required this.image,
-    required this.title,
-    required this.category,
-    required this.price,
-    required this.rating,
-    required this.meta,
-  });
-
-  final String image;
-  final String title;
-  final String category;
-  final String price;
-  final String rating;
-
-  /// Prep time for food, pack size or stock for shop. The one field that
-  /// differs between modules — everything else is shared.
-  final String meta;
-}
 
 /// The catalogue proof: a tabbed grid showing food and shop items.
 ///
@@ -39,78 +17,16 @@ class _Item {
 class ShowcaseSection extends StatelessComponent {
   const ShowcaseSection({super.key});
 
-  static const _food = <_Item>[
-    _Item(
-      image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop',
-      title: 'Signature Smash Burger',
-      category: 'Burgers',
-      price: '\$12.99',
-      rating: '4.8',
-      meta: '15–20 min',
-    ),
-    _Item(
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop',
-      title: 'Wood-Fired Margherita',
-      category: 'Pizza',
-      price: '\$14.50',
-      rating: '4.9',
-      meta: '20–25 min',
-    ),
-    _Item(
-      image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop',
-      title: 'Grilled Chicken Bowl',
-      category: 'Healthy',
-      price: '\$11.25',
-      rating: '4.7',
-      meta: '15–20 min',
-    ),
-    _Item(
-      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop',
-      title: 'Garden Caesar Salad',
-      category: 'Salads',
-      price: '\$9.75',
-      rating: '4.6',
-      meta: '10–15 min',
-    ),
-  ];
-
-  static const _shop = <_Item>[
-    _Item(
-      image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
-      title: 'Cotton Casual Shirt',
-      category: 'Shirt',
-      price: '\$34.00',
-      rating: '4.7',
-      meta: '-29%',
-    ),
-    _Item(
-      image: 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop',
-      title: 'Wireless Earbuds Pro',
-      category: 'Airpod',
-      price: '\$89.00',
-      rating: '4.9',
-      meta: 'In stock',
-    ),
-    _Item(
-      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop',
-      title: 'Graphic Print T-shirt',
-      category: 'T-shirt',
-      price: '\$18.50',
-      rating: '4.6',
-      meta: '-15%',
-    ),
-    _Item(
-      image: 'https://images.unsplash.com/photo-1565374392669-f0d4e1a1b5f1?q=80&w=800&auto=format&fit=crop',
-      title: 'Table Fan 12 inch',
-      category: 'Fan',
-      price: '\$42.00',
-      rating: '4.5',
-      meta: '-20%',
-    ),
-  ];
-
   @override
   Component build(BuildContext context) {
+    final data = LandingScope.of(context);
+    // A tab with nothing behind it is worse than no tab.
+    final showFood = data.foodEnabled && data.foodItems.isNotEmpty;
+    final showShop = data.shopEnabled && data.shopItems.isNotEmpty;
+    final bothTabs = showFood && showShop;
+    // Whichever tab is first must be the one checked on load.
+    final foodFirst = showFood;
+
     return section(id: 'showcase', classes: 'section section--alt showcase', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
@@ -122,36 +38,44 @@ class ShowcaseSection extends StatelessComponent {
         // panels for `~` to reach them. Don't nest them.
         fieldset(classes: 'showcase-tabset', [
           legend(classes: 'sr-only', [Component.text('Choose a category')]),
-          input(
-            type: InputType.radio,
-            id: 'tab-food',
-            name: 'showcase-tab',
-            classes: 'showcase-radio',
-            attributes: const {'checked': 'checked'},
-          ),
-          input(
-            type: InputType.radio,
-            id: 'tab-shop',
-            name: 'showcase-tab',
-            classes: 'showcase-radio',
-          ),
-          div(classes: 'showcase-tabs', [
-            label(classes: 'showcase-tab', htmlFor: 'tab-food', [
-              iconUtensils(size: 16),
-              Component.text('Food'),
+          if (showFood)
+            input(
+              type: InputType.radio,
+              id: 'tab-food',
+              name: 'showcase-tab',
+              classes: 'showcase-radio',
+              attributes: foodFirst ? const {'checked': 'checked'} : const {},
+            ),
+          if (showShop)
+            input(
+              type: InputType.radio,
+              id: 'tab-shop',
+              name: 'showcase-tab',
+              classes: 'showcase-radio',
+              attributes: foodFirst ? const {} : const {'checked': 'checked'},
+            ),
+          // One module means one list — the tab strip would be a control with
+          // nothing to switch between.
+          if (bothTabs)
+            div(classes: 'showcase-tabs', [
+              label(classes: 'showcase-tab', htmlFor: 'tab-food', [
+                iconUtensils(size: 16),
+                Component.text('Food'),
+              ]),
+              label(classes: 'showcase-tab', htmlFor: 'tab-shop', [
+                iconBag(size: 16),
+                Component.text('Shop'),
+              ]),
             ]),
-            label(classes: 'showcase-tab', htmlFor: 'tab-shop', [
-              iconBag(size: 16),
-              Component.text('Shop'),
-            ]),
-          ]),
-          div(classes: 'showcase-panels', [
-            div(classes: 'showcase-panel showcase-panel--food', [
-              for (final item in _food) _buildItemCard(item, 'food'),
-            ]),
-            div(classes: 'showcase-panel showcase-panel--shop', [
-              for (final item in _shop) _buildItemCard(item, 'shop'),
-            ]),
+          div(classes: 'showcase-panels ${bothTabs ? '' : 'showcase-panels--single'}', [
+            if (showFood)
+              div(classes: 'showcase-panel showcase-panel--food', [
+                for (final item in data.foodItems) _buildItemCard(item, 'food', data.webAppUrl),
+              ]),
+            if (showShop)
+              div(classes: 'showcase-panel showcase-panel--shop', [
+                for (final item in data.shopItems) _buildItemCard(item, 'shop', data.webAppUrl),
+              ]),
           ]),
         ]),
 
@@ -160,14 +84,14 @@ class ShowcaseSection extends StatelessComponent {
         div(classes: 'showcase-footnote', [
           span(classes: 'showcase-footnote-text', [Component.text('Prefer the app?')]),
           a(
-            href: kPlayStoreUrl,
+            href: data.playStoreUrl,
             classes: 'showcase-store',
             target: Target.blank,
             attributes: const {'rel': 'noopener'},
             [iconPlay(size: 15), Component.text('Google Play')],
           ),
           a(
-            href: kAppStoreUrl,
+            href: data.appStoreUrl,
             classes: 'showcase-store',
             target: Target.blank,
             attributes: const {'rel': 'noopener'},
@@ -178,7 +102,7 @@ class ShowcaseSection extends StatelessComponent {
     ]);
   }
 
-  Component _buildItemCard(_Item item, String variant) {
+  Component _buildItemCard(ShowcaseItem item, String variant, String orderUrl) {
     return article(classes: 'card card--lift item-card', [
       div(classes: 'item-media', [
         img(
@@ -189,21 +113,22 @@ class ShowcaseSection extends StatelessComponent {
           height: 600,
           attributes: const {'loading': 'lazy', 'decoding': 'async'},
         ),
-        span(classes: 'chip item-meta-badge', [Component.text(item.meta)]),
+        if (item.meta.isNotEmpty) span(classes: 'chip item-meta-badge', [Component.text(item.meta)]),
       ]),
       div(classes: 'item-body', [
         div(classes: 'item-toprow', [
           span(classes: 'item-category item-category--$variant', [Component.text(item.category)]),
-          span(classes: 'item-rating', [
-            span(classes: 'item-star', [iconStar(size: 13)]),
-            span(classes: 'item-rating-value', [Component.text(item.rating)]),
-          ]),
+          if (item.rating.isNotEmpty)
+            span(classes: 'item-rating', [
+              span(classes: 'item-star', [iconStar(size: 13)]),
+              span(classes: 'item-rating-value', [Component.text(item.rating)]),
+            ]),
         ]),
         h3(classes: 'item-title', [Component.text(item.title)]),
         div(classes: 'item-bottomrow', [
           span(classes: 'item-price', [Component.text(item.price)]),
           a(
-            href: variant == 'food' ? kBrowseFoodUrl : kBrowseShopUrl,
+            href: orderUrl,
             classes: 'item-add',
             target: Target.blank,
             attributes: {'rel': 'noopener', 'aria-label': 'Order ${item.title}'},
@@ -255,6 +180,7 @@ class ShowcaseSection extends StatelessComponent {
     css('.showcase-tab:hover').styles(color: Color.variable('--ink-900')),
 
     css('.showcase-panel').styles(display: Display.none),
+    css('.showcase-panels--single .showcase-panel').styles(display: Display.grid),
     css('.showcase-panels').styles(raw: {'min-width': '0'}),
 
     // The tab machinery.
