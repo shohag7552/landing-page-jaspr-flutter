@@ -24,7 +24,22 @@ class NavbarState extends State<Navbar> {
   bool isScrolled = false;
   bool isDarkMode = false;
   bool isMenuOpen = false;
+
+  /// The nav item currently highlighted. Driven by scroll position, not by
+  /// what was last clicked, so it stays honest if the reader scrolls away.
+  String activeId = _navItems.first.$1;
+
   web.EventListener? _scrollListener;
+  web.EventListener? _resizeListener;
+
+  /// After a click we hold the highlight still for a moment. Smooth scrolling
+  /// fires a scroll event for every frame of the animation, and without this
+  /// the underline strobes through every section between here and the target.
+  int _holdUntilMs = 0;
+
+  /// Where a section counts as "current": just below the fixed navbar, which
+  /// is also roughly where its heading lands thanks to `scroll-margin-top`.
+  static const _spyLine = 120;
 
   @override
   void initState() {
@@ -35,20 +50,91 @@ class NavbarState extends State<Navbar> {
       // than re-applying, so we never flash.
       isDarkMode = web.document.documentElement?.classList.contains('dark-mode') ?? false;
       _scrollListener = ((web.Event event) => _handleScroll()).toJS;
+      _resizeListener = ((web.Event event) => _handleScroll()).toJS;
       web.window.addEventListener('scroll', _scrollListener);
+      // Section offsets move when the layout reflows, so recompute on resize.
+      web.window.addEventListener('resize', _resizeListener);
       _handleScroll();
     }
   }
 
   void _handleScroll() {
-    final shouldShowBackground = web.window.scrollY > 8;
+    if (!mounted) {
+      return;
+    }
 
-    if (shouldShowBackground == isScrolled || !mounted) {
+    final shouldShowBackground = web.window.scrollY > 8;
+    final nextActive = _activeSection();
+
+    if (shouldShowBackground == isScrolled && nextActive == activeId) {
       return;
     }
 
     setState(() {
       isScrolled = shouldShowBackground;
+      activeId = nextActive;
+    });
+  }
+
+  /// The section whose top has most recently passed under the navbar.
+  ///
+  /// Picks the greatest offset still above the line rather than the last one
+  /// in the list, because the nav order and the DOM order need not agree.
+  String _activeSection() {
+    if (DateTime.now().millisecondsSinceEpoch < _holdUntilMs) {
+      return activeId;
+    }
+
+    final root = web.document.documentElement;
+    if (root == null) {
+      return activeId;
+    }
+
+    final scrollY = web.window.scrollY;
+
+    // The last section can be too short to ever reach the line, so anyone who
+    // has hit the bottom of the page is looking at it by definition.
+    if (scrollY + web.window.innerHeight >= root.scrollHeight - 2) {
+      return _navItems.last.$1;
+    }
+
+    final line = scrollY + _spyLine;
+    var current = _navItems.first.$1;
+    var bestTop = double.negativeInfinity;
+
+    for (final (href, _) in _navItems) {
+      final element = web.document.querySelector(href);
+      if (element == null) {
+        continue;
+      }
+
+      final top = element.getBoundingClientRect().top + scrollY;
+      if (top <= line && top > bestTop) {
+        bestTop = top;
+        current = href;
+      }
+    }
+
+    return current;
+  }
+
+  /// Highlight the clicked item straight away; the browser handles the scroll.
+  ///
+  /// IMPORTANT: every anchor that calls this must bind through `events:`,
+  /// never through `onClick:`. Jaspr's `onClick` helper calls
+  /// `preventDefault()` when the target is an anchor (see `events.dart` in the
+  /// jaspr package), which cancels the browser's own hash navigation — the
+  /// link then highlights but never scrolls. The raw event map does not.
+  void _selectSection(String href) {
+    _holdUntilMs = DateTime.now().millisecondsSinceEpoch + 700;
+    _closeMenu();
+
+    if (href == activeId) {
+      return;
+    }
+
+    setState(() {
+      activeId = href;
     });
   }
 
@@ -94,17 +180,25 @@ class NavbarState extends State<Navbar> {
 
   @override
   void dispose() {
-    if (kIsWeb && _scrollListener != null) {
-      web.window.removeEventListener('scroll', _scrollListener);
+    if (kIsWeb) {
+      if (_scrollListener != null) {
+        web.window.removeEventListener('scroll', _scrollListener);
+      }
+      if (_resizeListener != null) {
+        web.window.removeEventListener('resize', _resizeListener);
+      }
     }
     super.dispose();
   }
 
+  /// Ordered to match the page, not by importance. With an underline that
+  /// tracks scroll position, a nav whose order disagrees with the document
+  /// makes the highlight jump backwards as you read.
   static const _navItems = <(String, String)>[
     ('#home', 'Home'),
+    ('#delivery', 'Delivery'),
     ('#shop', 'Food & Shop'),
     ('#how-it-works', 'How it works'),
-    ('#delivery', 'Delivery'),
     ('#contact', 'Contact'),
   ];
 
@@ -118,7 +212,13 @@ class NavbarState extends State<Navbar> {
 
           nav(classes: 'nav-links desktop-only', attributes: const {'aria-label': 'Main'}, [
             for (final (href, label) in _navItems)
-              a(href: href, classes: 'nav-link ${href == '#home' ? 'active' : ''}', [Component.text(label)]),
+              a(
+                href: href,
+                classes: 'nav-link ${href == activeId ? 'active' : ''}',
+                // NOT `onClick`. See _selectSection.
+                events: {'click': (_) => _selectSection(href)},
+                [Component.text(label)],
+              ),
           ]),
 
           // Two ways in, both present. "Order now" is solid because it is the
@@ -157,8 +257,9 @@ class NavbarState extends State<Navbar> {
               for (final (href, label) in _navItems)
                 a(
                   href: href,
-                  classes: 'mobile-nav-link ${href == '#home' ? 'active' : ''}',
-                  onClick: _closeMenu,
+                  classes: 'mobile-nav-link ${href == activeId ? 'active' : ''}',
+                  // NOT `onClick`. See _selectSection.
+                  events: {'click': (_) => _selectSection(href)},
                   [Component.text(label)],
                 ),
             ]),
@@ -168,13 +269,13 @@ class NavbarState extends State<Navbar> {
                 classes: 'btn btn-primary btn-block',
                 target: Target.blank,
                 attributes: const {'rel': 'noopener'},
-                onClick: _closeMenu,
+                events: {'click': (_) => _closeMenu()},
                 [Component.text('Order now')],
               ),
               a(
                 href: '#get-app',
                 classes: 'btn btn-secondary btn-block',
-                onClick: _closeMenu,
+                events: {'click': (_) => _closeMenu()},
                 [Component.text('Get the app')],
               ),
             ]),
