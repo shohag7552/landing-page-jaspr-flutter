@@ -10,8 +10,10 @@ environment:
 
 dependencies:
   jaspr: ^0.23.0
-  # jaspr_router was dropped: this is a single page with hash anchors, so
-  # plain <a href="#..."> does the job with one fewer dependency to ship.
+  # Back in use: the router is what registers /terms and /privacy with the
+  # static build so each becomes a real, crawlable page. Navigation itself is
+  # still plain <a href>, so the router never ships to the browser.
+  jaspr_router: ^0.8.2
   universal_web: ^1.1.1+1
   # Works on the Dart VM and in the browser, so one Appwrite client
   # serves both the build-time render and the runtime refresh.

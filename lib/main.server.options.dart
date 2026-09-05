@@ -23,6 +23,8 @@ import 'package:food_delivery_landing/components/landing_root.dart'
 import 'package:food_delivery_landing/components/module_split.dart'
     as _module_split;
 import 'package:food_delivery_landing/components/navbar.dart' as _navbar;
+import 'package:food_delivery_landing/components/policy_page.dart'
+    as _policy_page;
 import 'package:food_delivery_landing/components/showcase_section.dart'
     as _showcase_section;
 import 'package:food_delivery_landing/components/why_choose_us.dart'
@@ -67,6 +69,7 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._how_it_works.HowItWorks.styles,
     ..._module_split.ModuleSplit.styles,
     ..._navbar.NavbarState.styles,
+    ..._policy_page.PolicyPage.styles,
     ..._showcase_section.ShowcaseSection.styles,
     ..._why_choose_us.WhyChooseUs.styles,
     ..._brand_logo.BrandLogo.styles,
@@ -76,4 +79,5 @@ ServerOptions get defaultServerOptions => ServerOptions(
 
 Map<String, Object?> __landing_rootLandingRoot(_landing_root.LandingRoot c) => {
   'initialJson': c.initialJson,
+  'page': c.page,
 };

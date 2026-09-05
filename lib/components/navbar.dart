@@ -17,6 +17,7 @@ class Navbar extends StatefulComponent {
     required this.brandSecond,
     required this.orderUrl,
     this.logoUrl = '',
+    this.linkPrefix = '',
     super.key,
   });
 
@@ -26,6 +27,11 @@ class Navbar extends StatefulComponent {
   final String brandSecond;
   final String orderUrl;
   final String logoUrl;
+
+  /// Prepended to the section anchors. Empty on the landing page, where
+  /// `#delivery` scrolls. `/` on the policy pages, where that fragment points
+  /// at a section that isn't there — the link has to go home first.
+  final String linkPrefix;
 
   @override
   State<Navbar> createState() => NavbarState();
@@ -87,11 +93,20 @@ class NavbarState extends State<Navbar> {
     });
   }
 
+  /// Away from the landing page there is nothing to highlight: those anchors
+  /// point at sections on another page.
+  bool _isActive(String href) => component.linkPrefix.isEmpty && href == activeId;
+
   /// The section whose top has most recently passed under the navbar.
   ///
   /// Picks the greatest offset still above the line rather than the last one
   /// in the list, because the nav order and the DOM order need not agree.
   String _activeSection() {
+    // The policy pages carry none of these sections, so spying would just pin
+    // the first item on permanently.
+    if (component.linkPrefix.isNotEmpty) {
+      return activeId;
+    }
     if (DateTime.now().millisecondsSinceEpoch < _holdUntilMs) {
       return activeId;
     }
@@ -228,8 +243,8 @@ class NavbarState extends State<Navbar> {
           nav(classes: 'nav-links desktop-only', attributes: const {'aria-label': 'Main'}, [
             for (final (href, label) in _navItems)
               a(
-                href: href,
-                classes: 'nav-link ${href == activeId ? 'active' : ''}',
+                href: '${component.linkPrefix}$href',
+                classes: 'nav-link ${_isActive(href) ? 'active' : ''}',
                 // NOT `onClick`. See _selectSection.
                 events: {'click': (_) => _selectSection(href)},
                 [Component.text(label)],
@@ -271,8 +286,8 @@ class NavbarState extends State<Navbar> {
             nav(classes: 'mobile-nav-links', attributes: const {'aria-label': 'Main'}, [
               for (final (href, label) in _navItems)
                 a(
-                  href: href,
-                  classes: 'mobile-nav-link ${href == activeId ? 'active' : ''}',
+                  href: '${component.linkPrefix}$href',
+                  classes: 'mobile-nav-link ${_isActive(href) ? 'active' : ''}',
                   // NOT `onClick`. See _selectSection.
                   events: {'click': (_) => _selectSection(href)},
                   [Component.text(label)],

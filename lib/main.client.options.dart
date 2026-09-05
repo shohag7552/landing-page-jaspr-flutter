@@ -28,7 +28,10 @@ import 'package:food_delivery_landing/components/landing_root.dart'
 ClientOptions get defaultClientOptions => ClientOptions(
   clients: {
     'landing_root': ClientLoader(
-      (p) => _landing_root.LandingRoot(initialJson: p['initialJson'] as String),
+      (p) => _landing_root.LandingRoot(
+        initialJson: p['initialJson'] as String,
+        page: p['page'] as String,
+      ),
       loader: _landing_root.loadLibrary,
     ),
   },

@@ -5,6 +5,7 @@ import 'package:jaspr/jaspr.dart';
 import '../app.dart';
 import '../data/landing_data.dart';
 import '../data/landing_repository.dart';
+import 'policy_page.dart';
 
 /// The page root, and the reason content updates without a rebuild.
 ///
@@ -24,11 +25,15 @@ import '../data/landing_repository.dart';
 /// values until the site is rebuilt.
 @client
 class LandingRoot extends StatefulComponent {
-  const LandingRoot({required this.initialJson, super.key});
+  const LandingRoot({required this.initialJson, this.page = 'home', super.key});
 
   /// [LandingData] as JSON. A single String keeps the client payload trivially
   /// serialisable, rather than teaching the framework about the whole model.
   final String initialJson;
+
+  /// Which page this is: `home`, `terms`, `privacy` or `about`. A plain String
+  /// keeps the client payload trivially serialisable, same as [initialJson].
+  final String page;
 
   @override
   State<LandingRoot> createState() => LandingRootState();
@@ -74,6 +79,16 @@ class LandingRootState extends State<LandingRoot> {
 
   @override
   Component build(BuildContext context) {
-    return LandingScope(data: _data, child: const App());
+    // Every page shares the scope, so the navbar and footer read the same
+    // live data whichever route the visitor landed on.
+    return LandingScope(
+      data: _data,
+      child: switch (component.page) {
+        'terms' => const PolicyPage(kind: PolicyKind.terms),
+        'privacy' => const PolicyPage(kind: PolicyKind.privacy),
+        'about' => const PolicyPage(kind: PolicyKind.about),
+        _ => const App(),
+      },
+    );
   }
 }

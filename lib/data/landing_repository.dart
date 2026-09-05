@@ -29,6 +29,7 @@ class LandingRepository {
       _client.firstRow(AppwriteTables.businessSetup),
       _client.firstRow(AppwriteTables.storeSetup),
       _client.firstRow(AppwriteTables.landingSetup),
+      _client.firstRow(AppwriteTables.privacyPolicy),
       _popularProducts('food'),
       _popularProducts('ecommerce'),
     ]);
@@ -36,8 +37,9 @@ class LandingRepository {
     final business = results[0] as Map<String, dynamic>?;
     final store = results[1] as Map<String, dynamic>?;
     final landing = results[2] as Map<String, dynamic>?;
-    final foodRows = results[3] as List<Map<String, dynamic>>;
-    final shopRows = results[4] as List<Map<String, dynamic>>;
+    final policies = results[3] as Map<String, dynamic>?;
+    final foodRows = results[4] as List<Map<String, dynamic>>;
+    final shopRows = results[5] as List<Map<String, dynamic>>;
 
     final currency = (business?['currency_symbol'] ?? r'$').toString();
     final foodMeta = _prepWindow(business);
@@ -46,6 +48,7 @@ class LandingRepository {
       business: business,
       store: store,
       landing: landing,
+      policies: policies,
       foodItems: foodRows
           .map((row) => showcaseItemFromRow(row, currency: currency, foodMeta: foodMeta))
           .where((item) => item.title.isNotEmpty)

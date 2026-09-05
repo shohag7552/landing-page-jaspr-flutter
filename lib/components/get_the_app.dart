@@ -82,8 +82,10 @@ class GetTheApp extends StatelessComponent {
           src: src,
           alt: alt,
           classes: 'phone-screen',
+          // Matches the aspect-ratio above so the space is reserved correctly
+          // before the image loads.
           width: 560,
-          height: 1244,
+          height: 1213,
           attributes: const {'loading': 'lazy', 'decoding': 'async'},
         ),
       ]),
@@ -236,7 +238,16 @@ class GetTheApp extends StatelessComponent {
       display: Display.block,
       width: 100.percent,
       height: Unit.auto,
-      raw: {'border-radius': '26px'},
+      backgroundColor: Color.variable('--surface-2'),
+      raw: {
+        'border-radius': '26px',
+        // Store owners upload their own screenshots at whatever size their
+        // phone produced. Fixing the frame's ratio and cropping to fill keeps
+        // the mockup a phone shape instead of stretching to the image.
+        'aspect-ratio': '9 / 19.5',
+        'object-fit': 'cover',
+        'object-position': 'top',
+      },
     ),
     css('.phone-label').styles(backgroundColor: Color.variable('--surface-card')),
 

@@ -98,6 +98,9 @@ class LandingData {
     required this.twitterUrl,
     required this.termsUrl,
     required this.privacyUrl,
+    required this.termsHtml,
+    required this.privacyHtml,
+    required this.aboutHtml,
     required this.copyright,
     required this.siteUrl,
     required this.metaTitle,
@@ -173,6 +176,14 @@ class LandingData {
   final String twitterUrl;
   final String termsUrl;
   final String privacyUrl;
+
+  /// The policy documents the store writes under Settings → Policies. When a
+  /// document has content the footer links to a page on this site that renders
+  /// it; when it is empty the link falls back to whatever external URL the
+  /// store set, and disappears if there is neither.
+  final String termsHtml;
+  final String privacyHtml;
+  final String aboutHtml;
   final String copyright;
 
   // SEO
@@ -244,6 +255,9 @@ class LandingData {
     'twitterUrl': twitterUrl,
     'termsUrl': termsUrl,
     'privacyUrl': privacyUrl,
+    'termsHtml': termsHtml,
+    'privacyHtml': privacyHtml,
+    'aboutHtml': aboutHtml,
     'copyright': copyright,
     'siteUrl': siteUrl,
     'metaTitle': metaTitle,
@@ -304,6 +318,9 @@ class LandingData {
       twitterUrl: json['twitterUrl'] as String? ?? base.twitterUrl,
       termsUrl: json['termsUrl'] as String? ?? base.termsUrl,
       privacyUrl: json['privacyUrl'] as String? ?? base.privacyUrl,
+      termsHtml: json['termsHtml'] as String? ?? base.termsHtml,
+      privacyHtml: json['privacyHtml'] as String? ?? base.privacyHtml,
+      aboutHtml: json['aboutHtml'] as String? ?? base.aboutHtml,
       copyright: json['copyright'] as String? ?? base.copyright,
       siteUrl: json['siteUrl'] as String? ?? base.siteUrl,
       metaTitle: json['metaTitle'] as String? ?? base.metaTitle,
@@ -323,6 +340,14 @@ class LandingData {
       isLive: json['isLive'] as bool? ?? base.isLive,
     );
   }
+
+  /// Where the footer's Terms link should point: an on-site page when the
+  /// store has written the document, otherwise its own external URL.
+  String get termsHref => termsHtml.isNotEmpty ? '/terms' : termsUrl;
+  String get privacyHref => privacyHtml.isNotEmpty ? '/privacy' : privacyUrl;
+
+  bool get hasTerms => termsHtml.isNotEmpty || (termsUrl.isNotEmpty && termsUrl != '#');
+  bool get hasPrivacy => privacyHtml.isNotEmpty || (privacyUrl.isNotEmpty && privacyUrl != '#');
 
   String get brandName => '$brandFirst $brandSecond';
   String get phoneHref => 'tel:${phone.replaceAll(RegExp(r'[^0-9+]'), '')}';
@@ -388,6 +413,9 @@ class LandingData {
     twitterUrl: links.kTwitterUrl,
     termsUrl: links.kTermsUrl,
     privacyUrl: links.kPrivacyUrl,
+    termsHtml: '',
+    privacyHtml: '',
+    aboutHtml: '',
     copyright: '© 2026 ${defaults.kBrandName}. All rights reserved.',
     siteUrl: defaults.kSiteUrl,
     metaTitle: '${defaults.kBrandName} — Order Food & Products Online | Fast Local Delivery',
@@ -415,6 +443,7 @@ class LandingData {
     Map<String, dynamic>? business,
     Map<String, dynamic>? store,
     Map<String, dynamic>? landing,
+    Map<String, dynamic>? policies,
     List<ShowcaseItem> foodItems = const [],
     List<ShowcaseItem> shopItems = const [],
   }) {
@@ -422,7 +451,8 @@ class LandingData {
     final b = business ?? const {};
     final s = store ?? const {};
     final l = landing ?? const {};
-    final live = business != null || store != null || landing != null;
+    final policy = policies ?? const {};
+    final live = business != null || store != null || landing != null || policies != null;
 
     String pick(Map<String, dynamic> row, String key, String orElse) {
       final value = row[key];
@@ -517,6 +547,9 @@ class LandingData {
       twitterUrl: pick(s, 'twitter', base.twitterUrl),
       termsUrl: pick(l, 'terms_url', base.termsUrl),
       privacyUrl: pick(l, 'privacy_url', base.privacyUrl),
+      termsHtml: pick(policy, 'terms_and_conditions_html', ''),
+      privacyHtml: pick(policy, 'privacy_policy_html', ''),
+      aboutHtml: pick(policy, 'about_us_html', ''),
       copyright: pick(b, 'copyright_text', '© 2026 $resolvedName. All rights reserved.'),
       siteUrl: siteUrl,
       metaTitle: pick(l, 'meta_title', '$resolvedName — Order Food & Products Online | Fast Local Delivery'),

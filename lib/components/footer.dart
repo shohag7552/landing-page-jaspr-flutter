@@ -85,8 +85,13 @@ class FooterSection extends StatelessComponent {
               [Component.text('Store login')],
             ),
             a(href: data.riderApplyUrl, classes: 'footer-utility-link', [Component.text('Deliver with us')]),
-            a(href: data.termsUrl, classes: 'footer-utility-link', [Component.text('Terms')]),
-            a(href: data.privacyUrl, classes: 'footer-utility-link', [Component.text('Privacy')]),
+            // Points at this site's own page when the store has written the
+            // document, at its external URL otherwise, and is dropped when
+            // there is neither — a dead "Terms" link is worse than none.
+            if (data.hasTerms)
+              a(href: data.termsHref, classes: 'footer-utility-link', [Component.text('Terms')]),
+            if (data.hasPrivacy)
+              a(href: data.privacyHref, classes: 'footer-utility-link', [Component.text('Privacy')]),
           ]),
         ]),
       ]),

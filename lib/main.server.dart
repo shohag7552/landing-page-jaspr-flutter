@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:jaspr/dom.dart';
 // Server-specific Jaspr import.
 import 'package:jaspr/server.dart';
+import 'package:jaspr_router/jaspr_router.dart';
 
 // Imports the [App] component.
 import 'components/landing_root.dart';
@@ -36,6 +37,30 @@ const _reducedMotionCss =
     'animation-duration:0.01ms !important;animation-iteration-count:1 !important;'
     'transition-duration:0.01ms !important;scroll-behavior:auto !important}}';
 
+
+/// One route per page the static build should generate.
+///
+/// The policy routes are only declared when the store has actually written
+/// that document — publishing an empty "Privacy Policy" page would be worse
+/// than not having one.
+List<RouteBase> _routes(String payload, LandingData data) => [
+  Route(path: '/', builder: (context, state) => LandingRoot(initialJson: payload)),
+  if (data.termsHtml.isNotEmpty)
+    Route(
+      path: '/terms',
+      builder: (context, state) => LandingRoot(initialJson: payload, page: 'terms'),
+    ),
+  if (data.privacyHtml.isNotEmpty)
+    Route(
+      path: '/privacy',
+      builder: (context, state) => LandingRoot(initialJson: payload, page: 'privacy'),
+    ),
+  if (data.aboutHtml.isNotEmpty)
+    Route(
+      path: '/about',
+      builder: (context, state) => LandingRoot(initialJson: payload, page: 'about'),
+    ),
+];
 
 /// Open Graph needs `property=`, which `Document(meta:)` cannot emit.
 Iterable<Component> _ogMeta(Map<String, String> tags) {
@@ -194,7 +219,10 @@ Future<void> main() async {
         ),
         css('html.dark-mode .hero-store-glyphs').styles(color: Color.variable('--ink-700')),
       ],
-      body: LandingRoot(initialJson: jsonEncode(data.toJson())),
+      // The router exists so the static build discovers /terms and /privacy
+      // and writes a real HTML file for each. Links between pages are plain
+      // anchors, so the router itself never reaches the browser.
+      body: Router(routes: _routes(jsonEncode(data.toJson()), data)),
     ),
   );
 }

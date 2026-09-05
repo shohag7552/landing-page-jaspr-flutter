@@ -41,6 +41,8 @@ class AppwriteTables {
   static const storeSetup = 'store_setup';
   static const landingSetup = 'landing_setup';
   static const products = 'products';
+  /// Terms, privacy and about copy, written in the panel under Policies.
+  static const privacyPolicy = 'privacy_policy';
 }
 
 /// Resolves whatever the database holds in an image column to a usable URL.
