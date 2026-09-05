@@ -13,6 +13,9 @@ dependencies:
   # jaspr_router was dropped: this is a single page with hash anchors, so
   # plain <a href="#..."> does the job with one fewer dependency to ship.
   universal_web: ^1.1.1+1
+  # Works on the Dart VM and in the browser, so one Appwrite client
+  # serves both the build-time render and the runtime refresh.
+  http: ^1.2.2
 
 dev_dependencies:
   build_runner: ^2.15.0

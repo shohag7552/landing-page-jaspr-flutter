@@ -40,7 +40,11 @@ class FooterSection extends StatelessComponent {
         div(classes: 'footer-top', [
           // Brand
           div(classes: 'footer-brand', [
-            BrandLogo(brandFirst: data.brandFirst, brandSecond: data.brandSecond),
+            BrandLogo(
+              brandFirst: data.brandFirst,
+              brandSecond: data.brandSecond,
+              logoUrl: data.logoUrl,
+            ),
             p(classes: 'footer-tagline', [
               Component.text(
                 'Food and products, delivered across ${data.city}. One cart, one rider.',

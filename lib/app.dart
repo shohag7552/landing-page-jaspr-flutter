@@ -49,6 +49,7 @@ class App extends StatelessComponent {
         brandFirst: data.brandFirst,
         brandSecond: data.brandSecond,
         orderUrl: data.webAppUrl,
+        logoUrl: data.logoUrl,
       ),
       const HeroSection(),
       const WhyChooseUs(),

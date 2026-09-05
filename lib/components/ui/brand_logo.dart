@@ -107,9 +107,14 @@ class BrandLogo extends StatelessComponent {
   const BrandLogo({
     required this.brandFirst,
     required this.brandSecond,
+    this.logoUrl = '',
     this.size = 38,
     super.key,
   });
+
+  /// The store's uploaded logo. Empty falls back to the drawn mark, so a store
+  /// that has not set one still gets a finished header rather than a gap.
+  final String logoUrl;
 
   /// Passed in rather than read from [LandingScope]: this renders inside the
   /// navbar, which is a `@client` island. On hydration that subtree rebuilds
@@ -127,7 +132,16 @@ class BrandLogo extends StatelessComponent {
       classes: 'brand-logo',
       attributes: {'aria-label': '$name — home'},
       [
-        BrandMark(size: size),
+        if (logoUrl.isNotEmpty)
+          img(
+            src: logoUrl,
+            alt: '$name logo',
+            classes: 'brand-logo-image',
+            width: size.round(),
+            height: size.round(),
+          )
+        else
+          BrandMark(size: size),
         span(classes: 'brand-word', [
           Component.text(brandSecond.isEmpty ? brandFirst : '$brandFirst '),
           if (brandSecond.isNotEmpty)
@@ -145,6 +159,17 @@ class BrandLogo extends StatelessComponent {
       alignItems: AlignItems.center,
       gap: Gap.all(11.px),
     ),
+    // Square-cropped so a wide or tall upload cannot stretch the header.
+    css('.brand-logo-image').styles(
+      width: 38.px,
+      height: 38.px,
+      raw: {
+        'object-fit': 'cover',
+        'border-radius': '11px',
+        'box-shadow': '0 6px 14px var(--brand-a28)',
+        'flex-shrink': '0',
+      },
+    ),
     css('.brand-word').styles(
       color: Color.variable('--ink-900'),
       fontFamily: const FontFamily.list([FontFamily('Outfit'), FontFamilies.sansSerif]),
@@ -156,7 +181,18 @@ class BrandLogo extends StatelessComponent {
       color: Color.variable('--brand-500'),
     ),
     css.media(MediaQuery.screen(maxWidth: bpSm.px), [
-      css('.brand-word').styles(fontSize: 1.28.rem),
+      // Square-cropped so a wide or tall upload cannot stretch the header.
+    css('.brand-logo-image').styles(
+      width: 38.px,
+      height: 38.px,
+      raw: {
+        'object-fit': 'cover',
+        'border-radius': '11px',
+        'box-shadow': '0 6px 14px var(--brand-a28)',
+        'flex-shrink': '0',
+      },
+    ),
+    css('.brand-word').styles(fontSize: 1.28.rem),
     ]),
   ];
 }

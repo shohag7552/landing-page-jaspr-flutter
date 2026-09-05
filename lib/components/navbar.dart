@@ -11,21 +11,21 @@ import 'ui/icons.dart';
 /// keep the two in sync.
 const kThemeStorageKey = 'kikomart-theme';
 
-@client
 class Navbar extends StatefulComponent {
   const Navbar({
     required this.brandFirst,
     required this.brandSecond,
     required this.orderUrl,
+    this.logoUrl = '',
     super.key,
   });
 
-  /// Client islands are hydrated on their own, so anything this subtree needs
-  /// has to travel with it. Jaspr serialises these into the page and restores
-  /// them in the browser — reading LandingScope here would find nothing.
+  /// Passed in rather than read from the scope: it keeps this component
+  /// independent of where it sits, and the footer reuses the same widget.
   final String brandFirst;
   final String brandSecond;
   final String orderUrl;
+  final String logoUrl;
 
   @override
   State<Navbar> createState() => NavbarState();
@@ -219,7 +219,11 @@ class NavbarState extends State<Navbar> {
       classes: 'navbar ${isScrolled || isMenuOpen ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}',
       [
         div(classes: 'container nav-inner', [
-          BrandLogo(brandFirst: component.brandFirst, brandSecond: component.brandSecond),
+          BrandLogo(
+            brandFirst: component.brandFirst,
+            brandSecond: component.brandSecond,
+            logoUrl: component.logoUrl,
+          ),
 
           nav(classes: 'nav-links desktop-only', attributes: const {'aria-label': 'Main'}, [
             for (final (href, label) in _navItems)

@@ -18,6 +18,8 @@ import 'package:food_delivery_landing/components/hero_section.dart'
     as _hero_section;
 import 'package:food_delivery_landing/components/how_it_works.dart'
     as _how_it_works;
+import 'package:food_delivery_landing/components/landing_root.dart'
+    as _landing_root;
 import 'package:food_delivery_landing/components/module_split.dart'
     as _module_split;
 import 'package:food_delivery_landing/components/navbar.dart' as _navbar;
@@ -48,9 +50,9 @@ import 'package:food_delivery_landing/ui_kit.dart' as _ui_kit;
 ServerOptions get defaultServerOptions => ServerOptions(
   clientId: 'main.client.dart.js',
   clients: {
-    _navbar.Navbar: ClientTarget<_navbar.Navbar>(
-      'navbar',
-      params: __navbarNavbar,
+    _landing_root.LandingRoot: ClientTarget<_landing_root.LandingRoot>(
+      'landing_root',
+      params: __landing_rootLandingRoot,
     ),
   },
   styles: () => [
@@ -72,8 +74,6 @@ ServerOptions get defaultServerOptions => ServerOptions(
   ],
 );
 
-Map<String, Object?> __navbarNavbar(_navbar.Navbar c) => {
-  'brandFirst': c.brandFirst,
-  'brandSecond': c.brandSecond,
-  'orderUrl': c.orderUrl,
+Map<String, Object?> __landing_rootLandingRoot(_landing_root.LandingRoot c) => {
+  'initialJson': c.initialJson,
 };

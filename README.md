@@ -54,6 +54,52 @@ Edit the last one on **Settings → Landing Page** in the store panel. The rest 
 already maintained on the Store Setup and Business Setup screens — the landing
 page reads them so the two can never drift apart.
 
+### How updates reach the page
+
+The page renders **twice**, and that is what lets a buyer host it anywhere:
+
+1. **At build time** the server reads Appwrite and writes the result into
+   `index.html`, along with a JSON copy of the same data. That gives search
+   engines, WhatsApp and Facebook real content, and it means the page is
+   correct before a single byte of JavaScript runs.
+2. **On every page load** the browser re-reads Appwrite and re-renders. It
+   hydrates from the embedded JSON first, so the first frame matches the server
+   exactly with no flash of placeholder text, then swaps in anything the store
+   has changed since.
+
+So a store owner edits copy in the panel, reloads the page, and sees it — with
+no rebuild, no Dart SDK, no Jaspr CLI and no redeploy. Upload the contents of
+`build/jaspr` to any static host: shared hosting, cPanel, S3, Netlify, Firebase.
+
+**The one exception** is `<title>`, the meta description and the Open Graph
+tags. Crawlers and chat apps read those straight from the HTML without running
+JavaScript, so they keep their build-time values until the site is rebuilt.
+They are set-once fields in practice — but if a store renames itself, rebuild
+once so its link previews catch up.
+
+If Appwrite is unreachable the runtime refresh does nothing at all and the
+build-time content stays on screen, so an outage degrades to a slightly stale
+page rather than a broken one.
+
+### Publishing a content change
+
+```sh
+firebase deploy          # jaspr build runs first, automatically
+```
+
+`firebase.json` declares a `predeploy` hook that rebuilds the site before
+uploading. That matters because the content is **baked into the HTML at build
+time**: `firebase deploy` on its own just uploads whatever is already sitting in
+`build/jaspr`, so editing text in the store panel and deploying without a
+rebuild ships the previous snapshot and looks like the database change was
+ignored.
+
+The hosting config also sets `Cache-Control: no-cache, must-revalidate` on HTML
+and JS. Firebase's default is `max-age=3600`, which kept the old page alive in
+browsers and on the CDN for an hour after a correct deploy — the same symptom,
+from a different cause. Revalidation is cheap: unchanged files answer `304`.
+Images keep a one-day cache.
+
 ### First-time setup
 
 1. Run the seed script once so the `landing_setup` table exists:
@@ -61,10 +107,12 @@ page reads them so the two can never drift apart.
 2. Fill in **Settings → Landing Page**
 3. Rebuild this site: `jaspr build`
 
-Content changes need a rebuild, because the data is baked in at build time.
-To make edits appear instantly instead, switch `jaspr: mode:` in `pubspec.yaml`
-from `static` to `server` and host it on a Dart-capable runtime — the data code
-is identical either way and needs no changes.
+Rebuilding is only needed to refresh the metadata described above, or to ship
+code changes — everything visible on the page updates on reload.
+
+Hosting on a Dart-capable runtime (Cloud Run, a VPS)? Switch `jaspr: mode:` in
+`pubspec.yaml` from `static` to `server` and the metadata goes live too. The
+data code is identical either way and needs no changes.
 
 ### Pointing it at your own Appwrite
 

@@ -34,12 +34,31 @@ class ShowcaseItem {
 
   /// Prep time for food, stock or discount for shop.
   final String meta;
+
+  Map<String, dynamic> toJson() => {
+    'image': image,
+    'title': title,
+    'category': category,
+    'price': price,
+    'rating': rating,
+    'meta': meta,
+  };
+
+  factory ShowcaseItem.fromJson(Map<String, dynamic> json) => ShowcaseItem(
+    image: json['image'] as String? ?? '',
+    title: json['title'] as String? ?? '',
+    category: json['category'] as String? ?? '',
+    price: json['price'] as String? ?? '',
+    rating: json['rating'] as String? ?? '',
+    meta: json['meta'] as String? ?? '',
+  );
 }
 
 class LandingData {
   const LandingData({
     required this.brandFirst,
     required this.brandSecond,
+    required this.logoUrl,
     required this.city,
     required this.storeAddress,
     required this.openingHours,
@@ -97,6 +116,10 @@ class LandingData {
   // Identity
   final String brandFirst;
   final String brandSecond;
+
+  /// The store's own logo, from Store Setup. Empty falls back to the built-in
+  /// mark so a store that has not uploaded one still gets a finished header.
+  final String logoUrl;
   final String city;
   final String storeAddress;
   final String openingHours;
@@ -173,6 +196,134 @@ class LandingData {
   /// is rendering entirely from the built-in defaults.
   final bool isLive;
 
+  /// Serialised into the page so the browser hydrates with exactly what the
+  /// server rendered.
+  ///
+  /// Without this the client would rebuild from defaults and the real content
+  /// would visibly flash to placeholder text and back on every load.
+  Map<String, dynamic> toJson() => {
+    'brandFirst': brandFirst,
+    'brandSecond': brandSecond,
+    'logoUrl': logoUrl,
+    'city': city,
+    'storeAddress': storeAddress,
+    'openingHours': openingHours,
+    'deliveryRadius': deliveryRadius,
+    'heroBadge': heroBadge,
+    'heroTitle': heroTitle,
+    'heroAccent': heroAccent,
+    'heroSubtitle': heroSubtitle,
+    'heroImage': heroImage,
+    'ordersDelivered': ordersDelivered,
+    'avgDeliveryMinutes': avgDeliveryMinutes,
+    'rating': rating,
+    'ratingCount': ratingCount,
+    'coveredAreas': coveredAreas,
+    'deliveryFeeFrom': deliveryFeeFrom,
+    'freeDeliveryOver': freeDeliveryOver,
+    'foodEnabled': foodEnabled,
+    'shopEnabled': shopEnabled,
+    'foodTitle': foodTitle,
+    'foodPoints': foodPoints,
+    'shopTitle': shopTitle,
+    'shopPoints': shopPoints,
+    'riderTitle': riderTitle,
+    'riderSubtitle': riderSubtitle,
+    'riderApplyUrl': riderApplyUrl,
+    'appFoodShot': appFoodShot,
+    'appShopShot': appShopShot,
+    'webAppUrl': webAppUrl,
+    'appStoreUrl': appStoreUrl,
+    'playStoreUrl': playStoreUrl,
+    'storePanelUrl': storePanelUrl,
+    'phone': phone,
+    'email': email,
+    'whatsappUrl': whatsappUrl,
+    'facebookUrl': facebookUrl,
+    'instagramUrl': instagramUrl,
+    'twitterUrl': twitterUrl,
+    'termsUrl': termsUrl,
+    'privacyUrl': privacyUrl,
+    'copyright': copyright,
+    'siteUrl': siteUrl,
+    'metaTitle': metaTitle,
+    'metaDescription': metaDescription,
+    'ogImage': ogImage,
+    'brandHex': brandHex,
+    'showDelivery': showDelivery,
+    'showShowcase': showShowcase,
+    'showRider': showRider,
+    'showApp': showApp,
+    'foodItems': foodItems.map((e) => e.toJson()).toList(),
+    'shopItems': shopItems.map((e) => e.toJson()).toList(),
+    'isLive': isLive,
+  };
+
+  factory LandingData.fromJson(Map<String, dynamic> json) {
+    final base = LandingData.fallback();
+    return LandingData(
+      brandFirst: json['brandFirst'] as String? ?? base.brandFirst,
+      brandSecond: json['brandSecond'] as String? ?? base.brandSecond,
+      logoUrl: json['logoUrl'] as String? ?? base.logoUrl,
+      city: json['city'] as String? ?? base.city,
+      storeAddress: json['storeAddress'] as String? ?? base.storeAddress,
+      openingHours: json['openingHours'] as String? ?? base.openingHours,
+      deliveryRadius: json['deliveryRadius'] as String? ?? base.deliveryRadius,
+      heroBadge: json['heroBadge'] as String? ?? base.heroBadge,
+      heroTitle: json['heroTitle'] as String? ?? base.heroTitle,
+      heroAccent: json['heroAccent'] as String? ?? base.heroAccent,
+      heroSubtitle: json['heroSubtitle'] as String? ?? base.heroSubtitle,
+      heroImage: json['heroImage'] as String? ?? base.heroImage,
+      ordersDelivered: json['ordersDelivered'] as String? ?? base.ordersDelivered,
+      avgDeliveryMinutes: json['avgDeliveryMinutes'] as String? ?? base.avgDeliveryMinutes,
+      rating: json['rating'] as String? ?? base.rating,
+      ratingCount: json['ratingCount'] as String? ?? base.ratingCount,
+      coveredAreas: (json['coveredAreas'] as List? ?? const []).map((e) => e.toString()).toList(),
+      deliveryFeeFrom: json['deliveryFeeFrom'] as String? ?? base.deliveryFeeFrom,
+      freeDeliveryOver: json['freeDeliveryOver'] as String? ?? base.freeDeliveryOver,
+      foodEnabled: json['foodEnabled'] as bool? ?? base.foodEnabled,
+      shopEnabled: json['shopEnabled'] as bool? ?? base.shopEnabled,
+      foodTitle: json['foodTitle'] as String? ?? base.foodTitle,
+      foodPoints: (json['foodPoints'] as List? ?? const []).map((e) => e.toString()).toList(),
+      shopTitle: json['shopTitle'] as String? ?? base.shopTitle,
+      shopPoints: (json['shopPoints'] as List? ?? const []).map((e) => e.toString()).toList(),
+      riderTitle: json['riderTitle'] as String? ?? base.riderTitle,
+      riderSubtitle: json['riderSubtitle'] as String? ?? base.riderSubtitle,
+      riderApplyUrl: json['riderApplyUrl'] as String? ?? base.riderApplyUrl,
+      appFoodShot: json['appFoodShot'] as String? ?? base.appFoodShot,
+      appShopShot: json['appShopShot'] as String? ?? base.appShopShot,
+      webAppUrl: json['webAppUrl'] as String? ?? base.webAppUrl,
+      appStoreUrl: json['appStoreUrl'] as String? ?? base.appStoreUrl,
+      playStoreUrl: json['playStoreUrl'] as String? ?? base.playStoreUrl,
+      storePanelUrl: json['storePanelUrl'] as String? ?? base.storePanelUrl,
+      phone: json['phone'] as String? ?? base.phone,
+      email: json['email'] as String? ?? base.email,
+      whatsappUrl: json['whatsappUrl'] as String? ?? base.whatsappUrl,
+      facebookUrl: json['facebookUrl'] as String? ?? base.facebookUrl,
+      instagramUrl: json['instagramUrl'] as String? ?? base.instagramUrl,
+      twitterUrl: json['twitterUrl'] as String? ?? base.twitterUrl,
+      termsUrl: json['termsUrl'] as String? ?? base.termsUrl,
+      privacyUrl: json['privacyUrl'] as String? ?? base.privacyUrl,
+      copyright: json['copyright'] as String? ?? base.copyright,
+      siteUrl: json['siteUrl'] as String? ?? base.siteUrl,
+      metaTitle: json['metaTitle'] as String? ?? base.metaTitle,
+      metaDescription: json['metaDescription'] as String? ?? base.metaDescription,
+      ogImage: json['ogImage'] as String? ?? base.ogImage,
+      brandHex: json['brandHex'] as String? ?? base.brandHex,
+      showDelivery: json['showDelivery'] as bool? ?? base.showDelivery,
+      showShowcase: json['showShowcase'] as bool? ?? base.showShowcase,
+      showRider: json['showRider'] as bool? ?? base.showRider,
+      showApp: json['showApp'] as bool? ?? base.showApp,
+      foodItems: (json['foodItems'] as List? ?? const [])
+          .map((e) => ShowcaseItem.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList(),
+      shopItems: (json['shopItems'] as List? ?? const [])
+          .map((e) => ShowcaseItem.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList(),
+      isLive: json['isLive'] as bool? ?? base.isLive,
+    );
+  }
+
   String get brandName => '$brandFirst $brandSecond';
   String get phoneHref => 'tel:${phone.replaceAll(RegExp(r'[^0-9+]'), '')}';
   String get emailHref => 'mailto:$email';
@@ -189,6 +340,7 @@ class LandingData {
   static LandingData fallback() => LandingData(
     brandFirst: defaults.kBrandFirst,
     brandSecond: defaults.kBrandSecond,
+    logoUrl: '',
     city: defaults.kCity,
     storeAddress: defaults.kStoreAddress,
     openingHours: defaults.kOpeningHours,
@@ -301,9 +453,7 @@ class LandingData {
 
     final storeName = localised(s['store_name']);
     final businessName = localised(b['business_name']);
-    final brandName = storeName.isNotEmpty
-        ? storeName
-        : (businessName.isNotEmpty ? businessName : base.brandName);
+    final brandName = storeName.isNotEmpty ? storeName : (businessName.isNotEmpty ? businessName : base.brandName);
     final parts = brandName.split(' ');
     final brandFirst = parts.first;
     final brandSecond = parts.length > 1 ? parts.sublist(1).join(' ') : '';
@@ -327,6 +477,7 @@ class LandingData {
     return LandingData(
       brandFirst: brandFirst,
       brandSecond: brandSecond,
+      logoUrl: pick(s, 'logo_url', ''),
       city: city,
       storeAddress: address,
       openingHours: hours,
@@ -415,8 +566,6 @@ class LandingData {
   }
 }
 
-
-
 /// Resolves a localised value to plain text.
 ///
 /// Several columns store `{"en":"Burger","bn":"বারগার"}` rather than a string,
@@ -485,9 +634,11 @@ String formatBusinessHours(dynamic raw, String orElse) {
 
     final rendered = slots
         .whereType<Map>()
-        .map((slot) =>
-            '${_clock(slot['open_hour'], slot['open_minute'])} – '
-            '${_clock(slot['close_hour'], slot['close_minute'])}')
+        .map(
+          (slot) =>
+              '${_clock(slot['open_hour'], slot['open_minute'])} – '
+              '${_clock(slot['close_hour'], slot['close_minute'])}',
+        )
         .join(', ');
 
     if (rendered.isEmpty) continue;

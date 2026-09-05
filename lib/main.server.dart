@@ -4,12 +4,14 @@
 /// To run code on the client, check the `main.client.dart` file.
 library;
 
+import 'dart:convert';
+
 import 'package:jaspr/dom.dart';
 // Server-specific Jaspr import.
 import 'package:jaspr/server.dart';
 
 // Imports the [App] component.
-import 'app.dart';
+import 'components/landing_root.dart';
 import 'components/navbar.dart' show kThemeStorageKey;
 import 'data/landing_data.dart';
 import 'data/landing_repository.dart';
@@ -192,7 +194,7 @@ Future<void> main() async {
         ),
         css('html.dark-mode .hero-store-glyphs').styles(color: Color.variable('--ink-700')),
       ],
-      body: LandingScope(data: data, child: const App()),
+      body: LandingRoot(initialJson: jsonEncode(data.toJson())),
     ),
   );
 }

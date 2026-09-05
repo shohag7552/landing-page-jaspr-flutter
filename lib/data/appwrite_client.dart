@@ -1,22 +1,26 @@
 /// A tiny read-only Appwrite client.
 ///
-/// Deliberately not the Appwrite SDK: this site only ever reads a handful of
-/// public rows, and the SDK would pull a dependency tree plus an auth surface
-/// it has no use for.
+/// Runs in **both** places: on the Dart VM while `jaspr build` renders the
+/// page, and in the browser when the page refreshes itself on load. That is
+/// why it uses `package:http` rather than `dart:io` — one client, one code
+/// path, no conditional imports.
 ///
-/// SECURITY: this client sends the **project id only**. The store panel's
-/// `AppwriteConfig` also holds a server API key with write scope — that key
-/// must never reach a browser or a published site. Public reads work without
-/// it because `business_setup`, `store_setup`, `landing_setup` and `products`
-/// all grant `Permission.read(Role.any())`.
+/// Deliberately not the Appwrite SDK: this only ever reads a handful of public
+/// rows, and the SDK would pull in an auth surface it has no use for.
+///
+/// SECURITY: sends the **project id only**. The store panel's `AppwriteConfig`
+/// also holds a server API key with write scope — that key must never reach a
+/// browser. Public reads work without it because `business_setup`,
+/// `store_setup`, `landing_setup` and `products` all grant
+/// `Permission.read(Role.any())`.
 library;
 
 import 'dart:convert';
-import 'dart:io';
+
+import 'package:http/http.dart' as http;
 
 import 'appwrite_config.dart';
 
-/// Reads rows from Appwrite's TablesDB REST API.
 class AppwriteClient {
   AppwriteClient({
     this.endpoint = kAppwriteEndpoint,
@@ -29,17 +33,18 @@ class AppwriteClient {
   final String projectId;
   final String databaseId;
 
-  /// Kept short on purpose. A slow backend must not stall a site build, and a
-  /// page rendered from defaults beats a build that hangs.
+  /// Kept short on purpose. A slow backend must not stall a site build, and in
+  /// the browser the page is already on screen — a late refresh is worse than
+  /// no refresh.
   final Duration timeout;
 
   bool get isConfigured => projectId.isNotEmpty && databaseId.isNotEmpty;
 
   /// Returns the rows of [table], or an empty list on any failure.
   ///
-  /// Never throws. The landing page must build even when Appwrite is
-  /// unreachable, half-configured, or has not been seeded yet — a buyer's very
-  /// first build happens before they have entered anything.
+  /// Never throws. The page must render even when Appwrite is unreachable,
+  /// half-configured, or has not been seeded — a buyer's first build happens
+  /// before they have entered anything.
   Future<List<Map<String, dynamic>>> listRows(
     String table, {
     List<String> queries = const [],
@@ -49,7 +54,7 @@ class AppwriteClient {
       return const [];
     }
 
-    final params = <String, dynamic>{};
+    final params = <String, String>{};
     for (var i = 0; i < queries.length; i++) {
       params['queries[$i]'] = queries[i];
     }
@@ -57,22 +62,21 @@ class AppwriteClient {
     final uri = Uri.parse('$endpoint/tablesdb/$databaseId/tables/$table/rows')
         .replace(queryParameters: params.isEmpty ? null : params);
 
-    HttpClient? client;
     try {
-      client = HttpClient()..connectionTimeout = timeout;
-      final request = await client.getUrl(uri).timeout(timeout);
-      request.headers.set('X-Appwrite-Project', projectId);
-      request.headers.set('X-Appwrite-Response-Format', '1.8.0');
-
-      final response = await request.close().timeout(timeout);
-      final body = await response.transform(utf8.decoder).join().timeout(timeout);
+      final response = await http.get(
+        uri,
+        headers: {
+          'X-Appwrite-Project': projectId,
+          'X-Appwrite-Response-Format': '1.8.0',
+        },
+      ).timeout(timeout);
 
       if (response.statusCode != 200) {
-        _warn(table, 'HTTP ${response.statusCode}: ${_clip(body)}');
+        _warn(table, 'HTTP ${response.statusCode}: ${_clip(response.body)}');
         return const [];
       }
 
-      final decoded = jsonDecode(body);
+      final decoded = jsonDecode(response.body);
       if (decoded is! Map<String, dynamic>) {
         _warn(table, 'unexpected response shape');
         return const [];
@@ -89,8 +93,6 @@ class AppwriteClient {
     } catch (e) {
       _warn(table, '$e');
       return const [];
-    } finally {
-      client?.close(force: true);
     }
   }
 
@@ -103,7 +105,8 @@ class AppwriteClient {
   void _warn(String table, String message) {
     // Loud on purpose: a silent fall back to placeholder copy is how a store
     // ends up publishing "Riverside" as its city.
-    stderr.writeln('[landing] Appwrite read failed for "$table" — using defaults. $message');
+    // ignore: avoid_print
+    print('[landing] Appwrite read failed for "$table" — using defaults. $message');
   }
 
   static String _clip(String value) =>

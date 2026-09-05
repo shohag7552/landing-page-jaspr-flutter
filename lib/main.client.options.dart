@@ -6,8 +6,8 @@
 
 import 'package:jaspr/client.dart';
 
-import 'package:food_delivery_landing/components/navbar.dart'
-    deferred as _navbar;
+import 'package:food_delivery_landing/components/landing_root.dart'
+    deferred as _landing_root;
 
 /// Default [ClientOptions] for use with your Jaspr project.
 ///
@@ -27,13 +27,9 @@ import 'package:food_delivery_landing/components/navbar.dart'
 /// ```
 ClientOptions get defaultClientOptions => ClientOptions(
   clients: {
-    'navbar': ClientLoader(
-      (p) => _navbar.Navbar(
-        brandFirst: p['brandFirst'] as String,
-        brandSecond: p['brandSecond'] as String,
-        orderUrl: p['orderUrl'] as String,
-      ),
-      loader: _navbar.loadLibrary,
+    'landing_root': ClientLoader(
+      (p) => _landing_root.LandingRoot(initialJson: p['initialJson'] as String),
+      loader: _landing_root.loadLibrary,
     ),
   },
 );
