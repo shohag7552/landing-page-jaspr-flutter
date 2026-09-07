@@ -1,6 +1,8 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
 
@@ -11,24 +13,26 @@ import 'ui/icons.dart';
 class HowItWorks extends StatelessComponent {
   const HowItWorks({super.key});
 
-  static final _steps = <(String, Component, String, String)>[
-    ('01', iconSearch(size: 22), 'Browse', 'Food and products, one cart.'),
-    ('02', iconCart(size: 22), 'Order', 'Pay by card, wallet or cash.'),
-    ('03', iconTruck(size: 22), 'We pack it', 'A rider collects it from us.'),
-    ('04', iconHome(size: 22), 'Delivered', 'Tracked live to your door.'),
+  static List<(String, Component, String, String)> _steps(SiteStrings t) => [
+    ('01', iconSearch(size: 22), t.step1Title, t.step1Body),
+    ('02', iconCart(size: 22), t.step2Title, t.step2Body),
+    ('03', iconTruck(size: 22), t.step3Title, t.step3Body),
+    ('04', iconHome(size: 22), t.step4Title, t.step4Body),
   ];
 
   @override
   Component build(BuildContext context) {
+    final t = LandingScope.of(context).strings;
+
     return section(id: 'how-it-works', classes: 'section steps', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
-          span(classes: 'section-eyebrow', [Component.text('How it works')]),
-          h2(classes: 'section-title', [Component.text('Four steps to your door')]),
+          span(classes: 'section-eyebrow', [Component.text(t.stepsEyebrow)]),
+          h2(classes: 'section-title', [Component.text(t.stepsTitle)]),
         ]),
 
         div(classes: 'steps-grid', [
-          for (final (number, icon, title, desc) in _steps)
+          for (final (number, icon, title, desc) in _steps(t))
             div(classes: 'step-item', [
               span(classes: 'step-number', [Component.text(number)]),
               span(classes: 'icon-tile step-icon', [icon]),

@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
 import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/brand_logo.dart';
@@ -19,20 +20,21 @@ import 'ui/icons.dart';
 class FooterSection extends StatelessComponent {
   const FooterSection({super.key});
 
-  static const _helpLinks = <(String, String)>[
-    ('Delivery areas', '#delivery'),
-    ('How it works', '#how-it-works'),
-    ('Get the app', '#get-app'),
-    ('Contact us', '#contact'),
+  static List<(String, String)> _helpLinks(SiteStrings t) => [
+    (t.footerDeliveryAreas, '#delivery'),
+    (t.footerHowItWorks, '#how-it-works'),
+    (t.footerGetTheApp, '#get-app'),
+    (t.footerContactUs, '#contact'),
   ];
 
   @override
   Component build(BuildContext context) {
     final data = LandingScope.of(context);
+    final t = data.strings;
     final shopLinks = <(String, String)>[
-      if (data.foodEnabled) ('Food menu', data.webAppUrl),
-      if (data.shopEnabled) ('Shop products', data.webAppUrl),
-      ('Track your order', data.webAppUrl),
+      if (data.foodEnabled) (t.footerFoodMenu, data.webAppUrl),
+      if (data.shopEnabled) (t.footerShopProducts, data.webAppUrl),
+      (t.footerTrackOrder, data.webAppUrl),
     ];
 
     return footer(id: 'contact', classes: 'footer', [
@@ -47,27 +49,27 @@ class FooterSection extends StatelessComponent {
             ),
             p(classes: 'footer-tagline', [
               Component.text(
-                'Food and products, delivered across ${data.city}. One cart, one rider.',
+                t.footerTagline.fill({'city': data.city}),
               ),
             ]),
             div(classes: 'footer-social', [
-              _socialLink(data.facebookUrl, 'Facebook', 'f'),
-              _socialLink(data.instagramUrl, 'Instagram', 'ig'),
-              _socialLink(data.twitterUrl, 'X', 'x'),
+              _socialLink(data.facebookUrl, t.socialFacebook, 'f'),
+              _socialLink(data.instagramUrl, t.socialInstagram, 'ig'),
+              _socialLink(data.twitterUrl, t.socialTwitter, 'x'),
             ]),
           ]),
 
-          _linksColumn('Shop', shopLinks),
-          _linksColumn('Help', _helpLinks),
+          _linksColumn(t.footerShop, shopLinks),
+          _linksColumn(t.footerHelp, _helpLinks(t)),
 
           // Contact — replaces the old dead newsletter form.
           div(classes: 'footer-col footer-contact', [
-            h3(classes: 'footer-col-title', [Component.text('Visit or call us')]),
+            h3(classes: 'footer-col-title', [Component.text(t.footerContactTitle)]),
             div(classes: 'footer-contact-list', [
               _contactRow(iconMapPin(size: 17), data.storeAddress, null),
               _contactRow(iconPhone(size: 17), data.phone, data.phoneHref),
               _contactRow(iconChat(size: 17), data.email, data.emailHref),
-              _contactRow(iconClock(size: 17), 'Open ${data.openingHours}', null),
+              _contactRow(iconClock(size: 17), t.footerOpenHours.fill({'hours': data.openingHours}), null),
             ]),
           ]),
         ]),
@@ -82,16 +84,16 @@ class FooterSection extends StatelessComponent {
               classes: 'footer-utility-link',
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
-              [Component.text('Store login')],
+              [Component.text(t.footerStoreLogin)],
             ),
-            a(href: data.riderApplyUrl, classes: 'footer-utility-link', [Component.text('Deliver with us')]),
+            a(href: data.riderApplyUrl, classes: 'footer-utility-link', [Component.text(t.footerDeliverWithUs)]),
             // Points at this site's own page when the store has written the
             // document, at its external URL otherwise, and is dropped when
             // there is neither — a dead "Terms" link is worse than none.
             if (data.hasTerms)
-              a(href: data.termsHref, classes: 'footer-utility-link', [Component.text('Terms')]),
+              a(href: data.termsHref, classes: 'footer-utility-link', [Component.text(t.footerTerms)]),
             if (data.hasPrivacy)
-              a(href: data.privacyHref, classes: 'footer-utility-link', [Component.text('Privacy')]),
+              a(href: data.privacyHref, classes: 'footer-utility-link', [Component.text(t.footerPrivacy)]),
           ]),
         ]),
       ]),

@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
 import '../data/landing_data.dart';
 import '../theme.dart';
 import 'footer.dart';
@@ -23,10 +24,10 @@ class PolicyPage extends StatelessComponent {
 
   final PolicyKind kind;
 
-  String _title(LandingData data) => switch (kind) {
-    PolicyKind.terms => 'Terms & Conditions',
-    PolicyKind.privacy => 'Privacy Policy',
-    PolicyKind.about => 'About ${data.brandName}',
+  String _title(LandingData data, SiteStrings t) => switch (kind) {
+    PolicyKind.terms => t.policyTerms,
+    PolicyKind.privacy => t.policyPrivacy,
+    PolicyKind.about => t.policyAbout.fill({'brand': data.brandName}),
   };
 
   String _body(LandingData data) => switch (kind) {
@@ -41,7 +42,8 @@ class PolicyPage extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     final data = LandingScope.of(context);
-    final title = _title(data);
+    final t = data.strings;
+    final title = _title(data, t);
     final body = _body(data);
 
     return div(classes: 'app-wrapper', [
@@ -49,7 +51,7 @@ class PolicyPage extends StatelessComponent {
       // Online" helps nobody.
       Document.head(
         title: '$title — ${data.brandName}',
-        meta: {'description': '$title for ${data.brandName}, ${data.city}.'},
+        meta: {'description': t.policyMetaDescription.fill({'title': title, 'brand': data.brandName, 'city': data.city})},
       ),
 
       Navbar(
@@ -62,12 +64,12 @@ class PolicyPage extends StatelessComponent {
 
       section(classes: 'policy', [
         div(classes: 'container policy-inner', [
-          a(href: '/', classes: 'link-arrow policy-back', [Component.text('← Back to home')]),
+          a(href: '/', classes: 'link-arrow policy-back', [Component.text(t.policyBack)]),
           h1(classes: 'policy-title', [Component.text(title)]),
 
           if (body.isEmpty)
             p(classes: 'policy-empty', [
-              Component.text('This document has not been published yet.'),
+              Component.text(t.policyEmpty),
             ])
           else
             // These fields hold whatever the store pasted: sometimes real

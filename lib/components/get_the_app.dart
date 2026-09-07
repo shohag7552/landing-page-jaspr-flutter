@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
 import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
@@ -20,15 +21,16 @@ class GetTheApp extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     final data = LandingScope.of(context);
+    final t = data.strings;
 
     return section(id: 'get-app', classes: 'section getapp', [
       div(classes: 'container getapp-grid', [
         div(classes: 'getapp-copy', [
           div(classes: 'section-header', [
-            span(classes: 'section-eyebrow', [Component.text('Get started')]),
-            h2(classes: 'section-title', [Component.text('Order however you like')]),
+            span(classes: 'section-eyebrow', [Component.text(t.getAppEyebrow)]),
+            h2(classes: 'section-title', [Component.text(t.getAppTitle)]),
             p(classes: 'section-copy', [
-              Component.text('Same account, same cart — on Android, iPhone, or the web.'),
+              Component.text(t.getAppCopy),
             ]),
           ]),
 
@@ -36,8 +38,8 @@ class GetTheApp extends StatelessComponent {
           // spans them, so no single path is presented as the fallback.
           div(classes: 'getapp-actions', [
             div(classes: 'getapp-stores', [
-              _storeBadge(data.playStoreUrl, iconPlay(size: 21), 'Get it on', 'Google Play'),
-              _storeBadge(data.appStoreUrl, iconApple(size: 22), 'Download on the', 'App Store'),
+              _storeBadge(data.playStoreUrl, iconPlay(size: 21), t.badgePlayKicker, t.badgePlayName, t),
+              _storeBadge(data.appStoreUrl, iconApple(size: 22), t.badgeAppleKicker, t.badgeAppleName, t),
             ]),
             a(
               href: data.webAppUrl,
@@ -46,7 +48,7 @@ class GetTheApp extends StatelessComponent {
               attributes: const {'rel': 'noopener'},
               [
                 iconMonitor(size: 18),
-                Component.text('Or order in your browser'),
+                Component.text(t.getAppWebButton),
                 span(classes: 'btn-icon', [iconArrowRight(size: 17)]),
               ],
             ),
@@ -55,20 +57,20 @@ class GetTheApp extends StatelessComponent {
           div(classes: 'getapp-meta', [
             span(classes: 'getapp-meta-item', [
               iconStar(size: 15),
-              Component.text('${data.rating} from ${data.ratingCount}+ orders'),
+              Component.text(t.getAppRating.fill({'rating': data.rating, 'count': data.ratingCount})),
             ]),
             span(classes: 'getapp-meta-item', [
               iconMapPin(size: 15),
-              Component.text('Delivering across ${data.city}'),
+              Component.text(t.getAppCity.fill({'city': data.city})),
             ]),
           ]),
         ]),
 
         div(classes: 'getapp-visual', [
           if (data.foodEnabled)
-            _phone(data.appFoodShot, '${data.brandName} app — food ordering screen', 'Food', 'food'),
+            _phone(data.appFoodShot, t.appShotFoodAlt.fill({'brand': data.brandName}), t.moduleFood, 'food'),
           if (data.shopEnabled)
-            _phone(data.appShopShot, '${data.brandName} app — shop screen', 'Shop', 'shop'),
+            _phone(data.appShopShot, t.appShotShopAlt.fill({'brand': data.brandName}), t.moduleShop, 'shop'),
         ]),
       ]),
     ]);
@@ -97,7 +99,7 @@ class GetTheApp extends StatelessComponent {
   /// artwork on published listings and forbid recolouring it. This custom pill
   /// matches the site and is fine for a marketing page, but swap in the
   /// official assets before you submit your apps.
-  Component _storeBadge(String href, Component glyph, String kicker, String name) {
+  Component _storeBadge(String href, Component glyph, String kicker, String name, SiteStrings t) {
     // A store that has not published its apps yet gets a visibly disabled
     // badge rather than a link that goes nowhere.
     final live = href.trim().isNotEmpty && href.trim() != '#';
@@ -109,7 +111,7 @@ class GetTheApp extends StatelessComponent {
       [
         span(classes: 'store-badge-glyph', [glyph]),
         span(classes: 'store-badge-text', [
-          span(classes: 'store-badge-kicker', [Component.text(live ? kicker : 'Coming soon to')]),
+          span(classes: 'store-badge-kicker', [Component.text(live ? kicker : t.badgeComingSoon)]),
           span(classes: 'store-badge-name', [Component.text(name)]),
         ]),
       ],

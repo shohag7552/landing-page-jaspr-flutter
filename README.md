@@ -165,6 +165,70 @@ Your web app, app store listings, phone, email, socials. Anything left as `'#'`
 renders as a visibly disabled control rather than a dead link — the store
 badges, for instance, say "Coming soon to App Store" until you fill them in.
 
+### Languages
+
+The site ships in **English, বাংলা and العربية**. The store owner picks one on
+**Settings → Landing Page**; the whole site renders in it, including
+`<html lang>`, the link-preview locale, and `dir="rtl"` for Arabic.
+
+- `lib/content/site_strings.dart` — the field definitions. No English text
+  lives here; every entry defaults to empty
+- `lib/content/strings/strings_en.dart` — **English, and the template.** The
+  complete set, and the source every other language falls back to
+- `lib/content/strings/strings_bn.dart`, `strings_ar.dart` — the translations
+- `lib/content/site_languages.dart` — the registry
+
+**Adding a language:**
+
+1. Copy `strings_en.dart` to `strings_<code>.dart` and translate the values.
+   Delete any line you have not translated — untranslated entries fall back to
+   English one by one, so a half-finished translation still renders a complete
+   page rather than blanks.
+2. Add one entry to `kSiteLanguages` in `site_languages.dart`. Set `isRtl: true`
+   for right-to-left scripts, and a `googleFontFamily` if Inter and Outfit do
+   not cover the script (they cover Latin only — without it the page renders as
+   empty boxes).
+3. Add the same code to `_languages` in the panel's `landing_setup_screen.dart`
+   so the owner can pick it.
+
+Entries with `{placeholders}` have values dropped in at render time, and a
+translation is free to reorder them:
+
+```dart
+heroBadge: 'Delivering across {city} · Open {hours}',   // en
+heroBadge: '{city} জুড়ে ডেলিভারি · খোলা {hours}',        // bn
+```
+
+Screen-reader labels (`aria-label`, image `alt`), clock markers (`am`/`pm`) and
+units (`km`) are in there too — they sit next to translated text, so leaving
+them English half-translates the page.
+
+To see how far a translation has got:
+
+```sh
+dart run tool/i18n_check.dart
+```
+
+It lists the entries still rendering in English. Some are meant to stay that
+way — the Google Play and App Store wordmarks (use their official localised
+artwork instead), social network names, and numerals.
+
+**What is not translated automatically:** anything the store owner writes —
+business name, hero copy, area names, module card text, product names and the
+policy documents. Those come from Appwrite; write them in the language you
+picked. The panel says so on the language picker.
+
+**What is *not* in that file:** anything the store owner writes. The business
+name, hero copy, area names, module card text, product names and the policy
+documents all come from Appwrite and are translated in the store panel, which
+already stores several of them per language.
+
+Two other places carry language:
+
+- `lang: 'en'` and `'og:locale': 'en_US'` in `lib/main.server.dart`
+- `lib/content/site_content.dart` — the placeholder city, address and hours
+  used before the store fills anything in
+
 ### App screenshots
 
 `web/images/app-food.png` and `web/images/app-shop.png` are the phone mockups

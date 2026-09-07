@@ -3,6 +3,8 @@ import 'package:jaspr/jaspr.dart';
 import 'package:universal_web/js_interop.dart';
 import 'package:universal_web/web.dart' as web;
 
+import '../content/site_strings.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/brand_logo.dart';
 import 'ui/icons.dart';
@@ -44,7 +46,7 @@ class NavbarState extends State<Navbar> {
 
   /// The nav item currently highlighted. Driven by scroll position, not by
   /// what was last clicked, so it stays honest if the reader scrolls away.
-  String activeId = _navItems.first.$1;
+  String activeId = _sectionAnchors.first;
 
   web.EventListener? _scrollListener;
   web.EventListener? _resizeListener;
@@ -121,14 +123,14 @@ class NavbarState extends State<Navbar> {
     // The last section can be too short to ever reach the line, so anyone who
     // has hit the bottom of the page is looking at it by definition.
     if (scrollY + web.window.innerHeight >= root.scrollHeight - 2) {
-      return _navItems.last.$1;
+      return _sectionAnchors.last;
     }
 
     final line = scrollY + _spyLine;
-    var current = _navItems.first.$1;
+    var current = _sectionAnchors.first;
     var bestTop = double.negativeInfinity;
 
-    for (final (href, _) in _navItems) {
+    for (final href in _sectionAnchors) {
       final element = web.document.querySelector(href);
       if (element == null) {
         continue;
@@ -220,16 +222,26 @@ class NavbarState extends State<Navbar> {
   /// Ordered to match the page, not by importance. With an underline that
   /// tracks scroll position, a nav whose order disagrees with the document
   /// makes the highlight jump backwards as you read.
-  static const _navItems = <(String, String)>[
-    ('#home', 'Home'),
-    ('#delivery', 'Delivery'),
-    ('#shop', 'Food & Shop'),
-    ('#how-it-works', 'How it works'),
-    ('#contact', 'Contact'),
+  ///
+  /// A function of the language: the labels change with it, so they cannot be
+  /// a const list. The anchors never change, which is what the scroll-spy
+  /// actually needs — see [_sectionAnchors].
+  static List<(String, String)> _navItems(SiteStrings t) => [
+    ('#home', t.navHome),
+    ('#delivery', t.navDelivery),
+    ('#shop', t.navShop),
+    ('#how-it-works', t.navHowItWorks),
+    ('#contact', t.navContact),
   ];
+
+  /// Just the anchors, in page order. The scroll-spy runs against these so it
+  /// never has to care which language the labels are in.
+  static const _sectionAnchors = ['#home', '#delivery', '#shop', '#how-it-works', '#contact'];
 
   @override
   Component build(BuildContext context) {
+    final t = LandingScope.of(context).strings;
+
     return header(
       classes: 'navbar ${isScrolled || isMenuOpen ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}',
       [
@@ -240,8 +252,8 @@ class NavbarState extends State<Navbar> {
             logoUrl: component.logoUrl,
           ),
 
-          nav(classes: 'nav-links desktop-only', attributes: const {'aria-label': 'Main'}, [
-            for (final (href, label) in _navItems)
+          nav(classes: 'nav-links desktop-only', attributes: {'aria-label': t.navAriaMain}, [
+            for (final (href, label) in _navItems(t))
               a(
                 href: '${component.linkPrefix}$href',
                 classes: 'nav-link ${_isActive(href) ? 'active' : ''}',
@@ -255,27 +267,27 @@ class NavbarState extends State<Navbar> {
           // action with no friction; "Get the app" is an anchor rather than a
           // second button so the pair still fits at tablet width.
           div(classes: 'nav-actions desktop-only', [
-            a(href: '#get-app', classes: 'nav-applink', [Component.text('Get the app')]),
-            _buildThemeToggle(),
+            a(href: '#get-app', classes: 'nav-applink', [Component.text(t.getTheApp)]),
+            _buildThemeToggle(t),
             a(
               href: component.orderUrl,
               classes: 'btn btn-primary',
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
               [
-                Component.text('Order now'),
+                Component.text(t.orderNow),
                 span(classes: 'btn-icon', [iconArrowRight(size: 17)]),
               ],
             ),
           ]),
 
           div(classes: 'mobile-controls mobile-only', [
-            _buildThemeToggle(),
+            _buildThemeToggle(t),
             button(
               classes: 'mobile-menu-toggle ${isMenuOpen ? 'active' : ''}',
               type: ButtonType.button,
               onClick: _toggleMenu,
-              attributes: {'aria-label': isMenuOpen ? 'Close menu' : 'Open menu', 'aria-expanded': '$isMenuOpen'},
+              attributes: {'aria-label': isMenuOpen ? t.navAriaCloseMenu : t.navAriaOpenMenu, 'aria-expanded': '$isMenuOpen'},
               [span(classes: 'hamburger', [])],
             ),
           ]),
@@ -283,8 +295,8 @@ class NavbarState extends State<Navbar> {
 
         div(classes: 'mobile-menu mobile-only ${isMenuOpen ? 'open' : ''}', [
           div(classes: 'mobile-menu-panel', [
-            nav(classes: 'mobile-nav-links', attributes: const {'aria-label': 'Main'}, [
-              for (final (href, label) in _navItems)
+            nav(classes: 'mobile-nav-links', attributes: {'aria-label': t.navAriaMain}, [
+              for (final (href, label) in _navItems(t))
                 a(
                   href: '${component.linkPrefix}$href',
                   classes: 'mobile-nav-link ${_isActive(href) ? 'active' : ''}',
@@ -300,13 +312,13 @@ class NavbarState extends State<Navbar> {
                 target: Target.blank,
                 attributes: const {'rel': 'noopener'},
                 events: {'click': (_) => _closeMenu()},
-                [Component.text('Order now')],
+                [Component.text(t.orderNow)],
               ),
               a(
                 href: '#get-app',
                 classes: 'btn btn-secondary btn-block',
                 events: {'click': (_) => _closeMenu()},
-                [Component.text('Get the app')],
+                [Component.text(t.getTheApp)],
               ),
             ]),
           ]),
@@ -315,12 +327,12 @@ class NavbarState extends State<Navbar> {
     );
   }
 
-  Component _buildThemeToggle() {
+  Component _buildThemeToggle(t) {
     return button(
       classes: 'theme-toggle ${isDarkMode ? 'dark' : 'light'}',
       type: ButtonType.button,
       onClick: _toggleTheme,
-      attributes: {'aria-label': isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'},
+      attributes: {'aria-label': isDarkMode ? t.navAriaLightMode : t.navAriaDarkMode},
       [
         span(classes: 'theme-toggle-track', [
           span(classes: 'theme-toggle-thumb', [isDarkMode ? iconMoon(size: 14) : iconSun(size: 14)]),

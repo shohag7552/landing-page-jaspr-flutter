@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
 import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
@@ -18,22 +19,23 @@ import 'ui/icons.dart';
 class DeliveryPromise extends StatelessComponent {
   const DeliveryPromise({super.key});
 
-  static final _points = <(Component, String)>[
-    (iconRoute(size: 20), 'Live map tracking'),
-    (iconClock(size: 20), 'A real ETA, updated as they ride'),
-    (iconChat(size: 20), 'Call or message your rider'),
-    (iconShield(size: 20), 'Contactless drop-off'),
+  static List<(Component, String)> _points(SiteStrings t) => [
+    (iconRoute(size: 20), t.riderPointTracking),
+    (iconClock(size: 20), t.riderPointEta),
+    (iconChat(size: 20), t.riderPointContact),
+    (iconShield(size: 20), t.riderPointContactless),
   ];
 
   @override
   Component build(BuildContext context) {
     final data = LandingScope.of(context);
+    final t = data.strings;
 
     return section(id: 'tracking', classes: 'section section--alt tracking', [
       div(classes: 'container tracking-grid', [
         div(classes: 'tracking-copy', [
           div(classes: 'section-header', [
-            span(classes: 'section-eyebrow', [Component.text('Our delivery team')]),
+            span(classes: 'section-eyebrow', [Component.text(t.riderEyebrow)]),
             h2(classes: 'section-title', [Component.text(data.riderTitle)]),
             p(classes: 'section-copy', [
               Component.text(data.riderSubtitle),
@@ -41,7 +43,7 @@ class DeliveryPromise extends StatelessComponent {
           ]),
 
           div(classes: 'tracking-points', [
-            for (final (icon, title) in _points)
+            for (final (icon, title) in _points(t))
               div(classes: 'tracking-point', [
                 span(classes: 'icon-tile icon-tile--sm icon-tile--rider', [icon]),
                 h3(classes: 'tracking-point-title', [Component.text(title)]),
@@ -49,9 +51,9 @@ class DeliveryPromise extends StatelessComponent {
           ]),
 
           p(classes: 'tracking-recruit', [
-            Component.text('Want to ride with us? '),
+            Component.text(t.riderRecruitLead),
             a(href: data.riderApplyUrl, classes: 'link-arrow tracking-recruit-link', [
-              Component.text('Deliver with ${data.brandName}'),
+              Component.text(t.riderRecruitLink.fill({'brand': data.brandName})),
               span(classes: 'btn-icon', [iconArrowRight(size: 15)]),
             ]),
           ]),
@@ -60,30 +62,30 @@ class DeliveryPromise extends StatelessComponent {
         // Store → Rider → Door
         div(classes: 'tracking-visual', [
           div(classes: 'journey', [
-            _buildNode(iconBag(size: 20), 'Our store', 'Packed', true),
+            _buildNode(iconBag(size: 20), t.journeyStore, t.journeyStoreMeta, true),
             div(classes: 'journey-bar journey-bar--done', []),
-            _buildNode(iconTruck(size: 20), 'On the way', 'Now', true),
+            _buildNode(iconTruck(size: 20), t.journeyOnTheWay, t.journeyOnTheWayMeta, true),
             div(classes: 'journey-bar', []),
-            _buildNode(iconHome(size: 20), 'Your door', '~12 min', false),
+            _buildNode(iconHome(size: 20), t.journeyDoor, t.journeyDoorMeta, false),
           ]),
 
           div(classes: 'rider-card', [
             div(classes: 'rider-head', [
-              span(classes: 'rider-avatar', [Component.text('AM')]),
+              span(classes: 'rider-avatar', [Component.text(t.riderCardInitials)]),
               div(classes: 'rider-id', [
-                span(classes: 'rider-name', [Component.text('Your rider is on the way')]),
-                span(classes: 'rider-role', [Component.text('${data.brandName} delivery team')]),
+                span(classes: 'rider-name', [Component.text(t.riderCardName)]),
+                span(classes: 'rider-role', [Component.text(t.riderCardTeam.fill({'brand': data.brandName}))]),
               ]),
-              span(classes: 'chip chip--success', [Component.text('Live')]),
+              span(classes: 'chip chip--success', [Component.text(t.riderCardLive)]),
             ]),
             div(classes: 'rider-metrics', [
-              _buildMetricBox('12 min', 'ETA'),
-              _buildMetricBox('1.8 km', 'Away'),
-              _buildMetricBox('4.9', 'Rating'),
+              _buildMetricBox(t.riderMetricEtaValue, t.riderMetricEta),
+              _buildMetricBox(t.riderMetricAwayValue, t.riderMetricAway),
+              _buildMetricBox(t.riderMetricRatingValue, t.riderMetricRating),
             ]),
             div(classes: 'rider-actions', [
-              span(classes: 'rider-action', [iconPhone(size: 16), Component.text('Call')]),
-              span(classes: 'rider-action', [iconChat(size: 16), Component.text('Message')]),
+              span(classes: 'rider-action', [iconPhone(size: 16), Component.text(t.riderActionCall)]),
+              span(classes: 'rider-action', [iconChat(size: 16), Component.text(t.riderActionMessage)]),
             ]),
           ]),
         ]),

@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
 import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
@@ -11,6 +12,7 @@ class HeroSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     final data = LandingScope.of(context);
+    final t = data.strings;
 
     return section(id: 'home', classes: 'hero', [
       div(classes: 'hero-container container', [
@@ -25,7 +27,7 @@ class HeroSection extends StatelessComponent {
           h1(classes: 'hero-title', [
             Component.text('${data.heroTitle} '),
             span(classes: 'hero-title-accent', [Component.text(data.heroAccent)]),
-            Component.text('.'),
+            Component.text(t.heroTitleTerminator),
           ]),
 
           // The thesis, in one line. Everything else on the page that says
@@ -36,9 +38,9 @@ class HeroSection extends StatelessComponent {
 
           div(classes: 'hero-modules', [
             if (data.foodEnabled)
-              span(classes: 'chip chip--food', [iconUtensils(size: 15), Component.text('Food')]),
+              span(classes: 'chip chip--food', [iconUtensils(size: 15), Component.text(t.moduleFood)]),
             if (data.shopEnabled)
-              span(classes: 'chip chip--shop', [iconBag(size: 15), Component.text('Shop')]),
+              span(classes: 'chip chip--shop', [iconBag(size: 15), Component.text(t.moduleShop)]),
           ]),
 
           // Two ways in, at identical geometry. The grid — rather than a flex
@@ -51,28 +53,28 @@ class HeroSection extends StatelessComponent {
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
               [
-                Component.text('Order now'),
+                Component.text(t.orderNow),
                 span(classes: 'btn-icon', [iconArrowRight(size: 18)]),
               ],
             ),
             a(href: '#get-app', classes: 'btn btn-secondary btn-lg', [
               span(classes: 'hero-store-glyphs', [iconApple(size: 16), iconPlay(size: 15)]),
-              Component.text('Get the app'),
+              Component.text(t.getTheApp),
             ]),
           ]),
 
 
           div(classes: 'hero-stats', [
-            _buildStat('${data.ordersDelivered}+', 'Orders delivered'),
-            _buildStat('${data.avgDeliveryMinutes} min', 'Average delivery'),
-            _buildStat('${data.areasCovered}', 'Areas covered'),
+            _buildStat('${data.ordersDelivered}+', t.heroStatOrders),
+            _buildStat('${data.avgDeliveryMinutes} min', t.heroStatDelivery),
+            _buildStat('${data.areasCovered}', t.heroStatAreas),
           ]),
         ]),
 
         div(classes: 'hero-visual', [
           img(
             src: data.heroImage,
-            alt: 'A ${data.brandName} rider on the way to a customer',
+            alt: t.heroImageAlt.fill({'brand': data.brandName}),
             classes: 'hero-image',
             width: 1400,
             height: 933,
@@ -84,8 +86,8 @@ class HeroSection extends StatelessComponent {
           // milk.
           div(classes: 'tracking-panel', [
             div(classes: 'panel-topline', [
-              span(classes: 'panel-label', [Component.text('Order #4821')]),
-              span(classes: 'panel-status', [Component.text('On the way')]),
+              span(classes: 'panel-label', [Component.text(t.trackOrderRef)]),
+              span(classes: 'panel-status', [Component.text(t.trackOnTheWay)]),
             ]),
             div(classes: 'route-line', [
               span(classes: 'route-point active', []),
@@ -97,17 +99,17 @@ class HeroSection extends StatelessComponent {
               span(classes: 'route-point', []),
             ]),
             div(classes: 'panel-metrics', [
-              _buildMetric('12 min', 'ETA'),
-              _buildMetric('1.8 km', 'Distance'),
-              _buildMetric('Paid', 'Status'),
+              _buildMetric(t.trackEtaValue, t.trackEta),
+              _buildMetric(t.trackDistanceValue, t.trackDistance),
+              _buildMetric(t.trackStatusValue, t.trackStatus),
             ]),
           ]),
 
           div(classes: 'notification-card', [
             div(classes: 'icon-tile icon-tile--sm notif-icon', [iconBell(size: 19)]),
             div(classes: 'notif-body', [
-              span(classes: 'notif-title', [Component.text('Order update')]),
-              span(classes: 'notif-text', [Component.text('Your rider is almost there — arriving in 3 min.')]),
+              span(classes: 'notif-title', [Component.text(t.notifTitle)]),
+              span(classes: 'notif-text', [Component.text(t.notifBody)]),
             ]),
           ]),
         ]),

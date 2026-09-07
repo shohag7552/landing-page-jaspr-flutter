@@ -1,6 +1,8 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
+import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
 
@@ -13,18 +15,22 @@ import 'ui/icons.dart';
 class WhyChooseUs extends StatelessComponent {
   const WhyChooseUs({super.key});
 
-  static final _points = <(Component, String)>[
-    (iconTruck(size: 20), 'Fast local delivery'),
-    (iconRoute(size: 20), 'Live rider tracking'),
-    (iconCreditCard(size: 20), 'Card, wallet or cash'),
-    (iconHeadset(size: 20), 'Real people on support'),
+  /// A function of the language rather than a const list: the labels change
+  /// with it, so they cannot be resolved before the page knows which one.
+  static List<(Component, String)> _points(SiteStrings t) => [
+    (iconTruck(size: 20), t.trustFastDelivery),
+    (iconRoute(size: 20), t.trustLiveTracking),
+    (iconCreditCard(size: 20), t.trustPayment),
+    (iconHeadset(size: 20), t.trustSupport),
   ];
 
   @override
   Component build(BuildContext context) {
+    final t = LandingScope.of(context).strings;
+
     return section(classes: 'reassurance', [
       div(classes: 'container reassurance-row', [
-        for (final (icon, label) in _points)
+        for (final (icon, label) in _points(t))
           div(classes: 'reassurance-item', [
             span(classes: 'reassurance-icon', [icon]),
             span(classes: 'reassurance-label', [Component.text(label)]),

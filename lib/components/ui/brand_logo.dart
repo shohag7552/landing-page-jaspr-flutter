@@ -11,6 +11,8 @@ library;
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../../content/site_strings.dart';
+import '../../data/landing_data.dart';
 import '../../theme.dart';
 
 /// The mark on its own, no wordmark.
@@ -125,17 +127,18 @@ class BrandLogo extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    final t = LandingScope.of(context).strings;
     final name = brandSecond.isEmpty ? brandFirst : '$brandFirst $brandSecond';
 
     return a(
       href: '#home',
       classes: 'brand-logo',
-      attributes: {'aria-label': '$name — home'},
+      attributes: {'aria-label': t.brandAriaHome.fill({'brand': name})},
       [
         if (logoUrl.isNotEmpty)
           img(
             src: logoUrl,
-            alt: '$name logo',
+            alt: t.logoAlt.fill({'brand': name}),
             classes: 'brand-logo-image',
             width: size.round(),
             height: size.round(),

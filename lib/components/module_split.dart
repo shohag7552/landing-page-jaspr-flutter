@@ -17,17 +17,18 @@ class ModuleSplit extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     final data = LandingScope.of(context);
+    final t = data.strings;
 
     return section(id: 'shop', classes: 'section split', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
-          span(classes: 'section-eyebrow', [Component.text('What we deliver')]),
+          span(classes: 'section-eyebrow', [Component.text(t.splitEyebrow)]),
           h2(classes: 'section-title', [
-            Component.text(data.isDualModule ? 'Two stores. One cart.' : 'What we deliver'),
+            Component.text(data.isDualModule ? t.splitTitleBoth : t.splitTitleSingle),
           ]),
           if (data.isDualModule)
             p(classes: 'section-copy', [
-              Component.text('Order a meal and a pair of headphones together. One delivery, one rider.'),
+              Component.text(t.splitCopy),
             ]),
         ]),
 
@@ -36,20 +37,20 @@ class ModuleSplit extends StatelessComponent {
             _buildModule(
             variant: 'food',
             icon: iconUtensils(size: 26),
-            chip: 'Food',
+            chip: t.moduleFood,
             title: data.foodTitle,
             points: data.foodPoints,
-            ctaLabel: 'Browse food',
+            ctaLabel: t.splitBrowseFood,
             ctaHref: data.webAppUrl,
           ),
           if (data.shopEnabled)
             _buildModule(
             variant: 'shop',
             icon: iconBag(size: 26),
-            chip: 'Shop',
+            chip: t.moduleShop,
             title: data.shopTitle,
             points: data.shopPoints,
-            ctaLabel: 'Browse products',
+            ctaLabel: t.splitBrowseShop,
             ctaHref: data.webAppUrl,
           ),
         ]),

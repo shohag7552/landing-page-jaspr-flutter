@@ -276,6 +276,31 @@ List<StyleRule> get uiKit => [
   // NOTE: the `prefers-reduced-motion` guard lives in the document head
   // (main.server.dart) — jaspr's typed MediaQuery has no constructor for it.
 
+  // ── Right-to-left ─────────────────────────────────────────────────────
+  // `dir="rtl"` on <html> already mirrors text, flex and grid flow. What it
+  // does NOT mirror is anything pinned with a physical side — `left`/`right`
+  // offsets, one-sided padding, borders and translations. Those are listed
+  // here; everything else was written with logical properties or symmetric
+  // values and needs nothing.
+  css('[dir="rtl"] .section-header, [dir="rtl"] .policy-inner').styles(
+    textAlign: TextAlign.right,
+  ),
+  css('[dir="rtl"] .section-header.text-center').styles(textAlign: TextAlign.center),
+  // Bulleted lists indent from the other side.
+  css('[dir="rtl"] .policy-body ul, [dir="rtl"] .policy-body ol').styles(
+    padding: Spacing.only(right: 22.px, left: 0.px),
+  ),
+  // The arrow in "Browse food →" points the other way when reading right to
+  // left; flipping the glyph is what keeps it meaning "onward".
+  css('[dir="rtl"] .btn-icon, [dir="rtl"] .link-arrow svg:last-child').styles(
+    raw: {'transform': 'scaleX(-1)'},
+  ),
+  // Still "onward", which after the flip means leftward.
+  css('[dir="rtl"] .btn:hover .btn-icon').styles(
+    raw: {'transform': 'scaleX(-1) translateX(3px)'},
+  ),
+  css('[dir="rtl"] .link-arrow:hover').styles(gap: Gap.all(11.px)),
+
   // ── Responsive ────────────────────────────────────────────────────────
   css.media(MediaQuery.screen(maxWidth: bpLg.px), [
     css('.section').styles(padding: Spacing.symmetric(vertical: 84.px, horizontal: 0.px)),

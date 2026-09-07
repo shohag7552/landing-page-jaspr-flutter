@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../content/site_strings.dart';
 import '../data/landing_data.dart';
 import '../theme.dart';
 import 'ui/icons.dart';
@@ -20,6 +21,7 @@ class ShowcaseSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     final data = LandingScope.of(context);
+    final t = data.strings;
     // A tab with nothing behind it is worse than no tab.
     final showFood = data.foodEnabled && data.foodItems.isNotEmpty;
     final showShop = data.shopEnabled && data.shopItems.isNotEmpty;
@@ -30,14 +32,14 @@ class ShowcaseSection extends StatelessComponent {
     return section(id: 'showcase', classes: 'section section--alt showcase', [
       div(classes: 'container', [
         div(classes: 'section-header text-center', [
-          span(classes: 'section-eyebrow', [Component.text("What's available")]),
-          h2(classes: 'section-title', [Component.text('Popular right now')]),
+          span(classes: 'section-eyebrow', [Component.text(t.showcaseEyebrow)]),
+          h2(classes: 'section-title', [Component.text(t.showcaseTitle)]),
         ]),
 
         // The radios must be direct siblings of BOTH the tab row and the
         // panels for `~` to reach them. Don't nest them.
         fieldset(classes: 'showcase-tabset', [
-          legend(classes: 'sr-only', [Component.text('Choose a category')]),
+          legend(classes: 'sr-only', [Component.text(t.showcaseChooseCategory)]),
           if (showFood)
             input(
               type: InputType.radio,
@@ -60,21 +62,21 @@ class ShowcaseSection extends StatelessComponent {
             div(classes: 'showcase-tabs', [
               label(classes: 'showcase-tab', htmlFor: 'tab-food', [
                 iconUtensils(size: 16),
-                Component.text('Food'),
+                Component.text(t.moduleFood),
               ]),
               label(classes: 'showcase-tab', htmlFor: 'tab-shop', [
                 iconBag(size: 16),
-                Component.text('Shop'),
+                Component.text(t.moduleShop),
               ]),
             ]),
           div(classes: 'showcase-panels ${bothTabs ? '' : 'showcase-panels--single'}', [
             if (showFood)
               div(classes: 'showcase-panel showcase-panel--food', [
-                for (final item in data.foodItems) _buildItemCard(item, 'food', data.webAppUrl),
+                for (final item in data.foodItems) _buildItemCard(item, 'food', data.webAppUrl, t),
               ]),
             if (showShop)
               div(classes: 'showcase-panel showcase-panel--shop', [
-                for (final item in data.shopItems) _buildItemCard(item, 'shop', data.webAppUrl),
+                for (final item in data.shopItems) _buildItemCard(item, 'shop', data.webAppUrl, t),
               ]),
           ]),
         ]),
@@ -82,27 +84,27 @@ class ShowcaseSection extends StatelessComponent {
         // The app path, stated once, quietly — the web path already has the
         // hero and the module cards.
         div(classes: 'showcase-footnote', [
-          span(classes: 'showcase-footnote-text', [Component.text('Prefer the app?')]),
+          span(classes: 'showcase-footnote-text', [Component.text(t.showcasePreferApp)]),
           a(
             href: data.playStoreUrl,
             classes: 'showcase-store',
             target: Target.blank,
             attributes: const {'rel': 'noopener'},
-            [iconPlay(size: 15), Component.text('Google Play')],
+            [iconPlay(size: 15), Component.text(t.badgePlayName)],
           ),
           a(
             href: data.appStoreUrl,
             classes: 'showcase-store',
             target: Target.blank,
             attributes: const {'rel': 'noopener'},
-            [iconApple(size: 15), Component.text('App Store')],
+            [iconApple(size: 15), Component.text(t.badgeAppleName)],
           ),
         ]),
       ]),
     ]);
   }
 
-  Component _buildItemCard(ShowcaseItem item, String variant, String orderUrl) {
+  Component _buildItemCard(ShowcaseItem item, String variant, String orderUrl, SiteStrings t) {
     return article(classes: 'card card--lift item-card', [
       div(classes: 'item-media', [
         img(
@@ -131,7 +133,7 @@ class ShowcaseSection extends StatelessComponent {
             href: orderUrl,
             classes: 'item-add',
             target: Target.blank,
-            attributes: {'rel': 'noopener', 'aria-label': 'Order ${item.title}'},
+            attributes: {'rel': 'noopener', 'aria-label': t.showcaseOrderAria.fill({'item': item.title})},
             [iconCart(size: 16)],
           ),
         ]),

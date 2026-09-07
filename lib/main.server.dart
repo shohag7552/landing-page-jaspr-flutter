@@ -14,6 +14,8 @@ import 'package:jaspr_router/jaspr_router.dart';
 // Imports the [App] component.
 import 'components/landing_root.dart';
 import 'components/navbar.dart' show kThemeStorageKey;
+import 'content/site_languages.dart';
+import 'content/site_strings.dart';
 import 'data/landing_data.dart';
 import 'data/landing_repository.dart';
 
@@ -77,7 +79,7 @@ Iterable<Component> _ogMeta(Map<String, String> tags) {
 String _localBusinessJsonLd(LandingData d) =>
     '{"@context":"https://schema.org","@type":"Store",'
     '"name":"${_esc(d.brandName)}",'
-    '"description":"Food and product delivery in ${_esc(d.city)}.",'
+    '"description":"${_esc(d.strings.jsonLdDescription.fill({'city': d.city}))}",'
     '"url":"${_esc(d.siteUrl)}",'
     '"telephone":"${_esc(d.phone)}",'
     '"email":"${_esc(d.email)}",'
@@ -99,6 +101,14 @@ String _esc(String value) => value
     .replaceAll('\n', ' ')
     .trim();
 
+/// Puts the script's own family in front of the default stacks, so Bengali or
+/// Arabic text renders while Latin text still uses the brand fonts.
+String _scriptFontCss(String stack) =>
+    ':root{--font-body:$stack,\'Inter\',system-ui,sans-serif;'
+    '--font-display:$stack,\'Outfit\',\'Inter\',system-ui,sans-serif}'
+    'body,.app-wrapper{font-family:var(--font-body)}'
+    'h1,h2,h3,h4,h5,h6,.hero-title,.section-title{font-family:var(--font-display)}';
+
 /// The brand colour is a value, not a stylesheet, so it is injected as a
 /// custom property override rather than templated into every rule.
 String _brandOverrideCss(String hex) => ':root{--brand-500:$hex}';
@@ -112,10 +122,12 @@ Future<void> main() async {
   // ever be switched to `mode: server` — the call site is identical either way.
   final data = await LandingRepository().fetch();
 
+  final language = languageFor(data.languageCode);
+
   runApp(
     Document(
       title: data.metaTitle,
-      lang: 'en',
+      lang: language.code,
       meta: {
         'description': data.metaDescription,
         'viewport': 'width=device-width, initial-scale=1.0',
@@ -142,18 +154,31 @@ Future<void> main() async {
           'og:image': data.ogImage,
           'og:image:width': '1200',
           'og:image:height': '630',
-          'og:image:alt': '${data.brandName} — food and product delivery in ${data.city}',
-          'og:locale': 'en_US',
+          'og:image:alt': data.strings.ogImageAlt.fill({'brand': data.brandName, 'city': data.city}),
+          'og:locale': language.ogLocale,
         }),
+        // Arabic and other right-to-left scripts mirror the whole layout.
+        // `dir` on <html> is what the browser needs; the matching CSS lives in
+        // lib/ui_kit.dart.
+        Document.html(attributes: {'dir': language.isRtl ? 'rtl' : 'ltr'}),
         link(href: data.siteUrl, rel: 'canonical'),
         link(href: 'https://fonts.googleapis.com', rel: 'preconnect'),
         link(href: 'https://fonts.gstatic.com', rel: 'preconnect', attributes: const {'crossorigin': ''}),
+        // Inter and Outfit cover Latin only. A language whose script they do
+        // not carry adds its own family, or the page renders as empty boxes.
         link(
           href:
               'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700'
-              '&family=Outfit:wght@500;600;700;800&display=swap',
+              '&family=Outfit:wght@500;600;700;800'
+              '${language.googleFontFamily != null ? '&family=${language.googleFontFamily}' : ''}'
+              '&display=swap',
           rel: 'stylesheet',
         ),
+        if (language.fontStack != null)
+          Component.element(
+            tag: 'style',
+            children: [RawText(_scriptFontCss(language.fontStack!))],
+          ),
         // Must run before first paint — do not add `defer` or `async`.
         script(content: _noFlashThemeScript),
         Component.element(tag: 'style', children: const [RawText(_reducedMotionCss)]),

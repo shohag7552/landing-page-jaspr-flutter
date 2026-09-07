@@ -12,7 +12,10 @@ import 'dart:convert';
 import 'package:jaspr/jaspr.dart';
 
 import '../content/site_content.dart' as defaults;
+import '../content/site_languages.dart';
 import '../content/site_links.dart' as links;
+import '../content/site_strings.dart';
+import '../content/strings/strings_en.dart';
 import 'appwrite_config.dart';
 
 /// One product as it appears in the Food/Shop showcase.
@@ -54,8 +57,12 @@ class ShowcaseItem {
   );
 }
 
+/// English, used for the built-in defaults.
+const _en = stringsEn;
+
 class LandingData {
   const LandingData({
+    required this.languageCode,
     required this.brandFirst,
     required this.brandSecond,
     required this.logoUrl,
@@ -117,6 +124,11 @@ class LandingData {
   });
 
   // Identity
+
+  /// The language the store picked in the panel. Drives every word on the
+  /// page, `<html lang>`, and page direction for right-to-left scripts.
+  final String languageCode;
+
   final String brandFirst;
   final String brandSecond;
 
@@ -214,6 +226,7 @@ class LandingData {
   /// would visibly flash to placeholder text and back on every load.
   Map<String, dynamic> toJson() => {
     'brandFirst': brandFirst,
+    'languageCode': languageCode,
     'brandSecond': brandSecond,
     'logoUrl': logoUrl,
     'city': city,
@@ -277,6 +290,7 @@ class LandingData {
     final base = LandingData.fallback();
     return LandingData(
       brandFirst: json['brandFirst'] as String? ?? base.brandFirst,
+      languageCode: json['languageCode'] as String? ?? base.languageCode,
       brandSecond: json['brandSecond'] as String? ?? base.brandSecond,
       logoUrl: json['logoUrl'] as String? ?? base.logoUrl,
       city: json['city'] as String? ?? base.city,
@@ -349,6 +363,12 @@ class LandingData {
   bool get hasTerms => termsHtml.isNotEmpty || (termsUrl.isNotEmpty && termsUrl != '#');
   bool get hasPrivacy => privacyHtml.isNotEmpty || (privacyUrl.isNotEmpty && privacyUrl != '#');
 
+  /// Copy for this page, in the store's chosen language.
+  SiteStrings get strings => languageFor(languageCode).strings;
+
+  /// Right-to-left scripts flip the whole layout.
+  bool get isRtl => languageFor(languageCode).isRtl;
+
   String get brandName => '$brandFirst $brandSecond';
   String get phoneHref => 'tel:${phone.replaceAll(RegExp(r'[^0-9+]'), '')}';
   String get emailHref => 'mailto:$email';
@@ -363,6 +383,7 @@ class LandingData {
   /// The page as it looks with nothing configured — also the fallback for
   /// every individual field that comes back blank.
   static LandingData fallback() => LandingData(
+    languageCode: kDefaultLanguage,
     brandFirst: defaults.kBrandFirst,
     brandSecond: defaults.kBrandSecond,
     logoUrl: '',
@@ -370,10 +391,10 @@ class LandingData {
     storeAddress: defaults.kStoreAddress,
     openingHours: defaults.kOpeningHours,
     deliveryRadius: defaults.kDeliveryRadiusKm,
-    heroBadge: 'Delivering across ${defaults.kCity} · Open ${defaults.kOpeningHours}',
-    heroTitle: 'Food and shopping,',
-    heroAccent: 'delivered',
-    heroSubtitle: 'Meals from our kitchen, products from our shop — one cart, one rider.',
+    heroBadge: _en.heroBadge.fill({'city': defaults.kCity, 'hours': defaults.kOpeningHours}),
+    heroTitle: _en.fallbackHeroTitle,
+    heroAccent: _en.fallbackHeroAccent,
+    heroSubtitle: _en.fallbackHeroSubtitle,
     heroImage: 'https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=1400&auto=format&fit=crop',
     ordersDelivered: defaults.kOrdersDelivered,
     avgDeliveryMinutes: defaults.kAvgDeliveryMinutes,
@@ -384,20 +405,12 @@ class LandingData {
     freeDeliveryOver: defaults.kFreeDeliveryOver,
     foodEnabled: true,
     shopEnabled: true,
-    foodTitle: 'Hot meals, made to order',
-    foodPoints: const [
-      'Breakfast, lunch and dinner',
-      'Customise before you order',
-      'Live prep and delivery time',
-    ],
-    shopTitle: 'Products, picked and packed',
-    shopPoints: const [
-      'Fashion, electronics and home',
-      'Flash sales and member offers',
-      'Live stock and easy returns',
-    ],
-    riderTitle: 'Tracked all the way.',
-    riderSubtitle: 'Every order goes to one of our own riders — not a stranger from a marketplace.',
+    foodTitle: _en.fallbackFoodTitle,
+    foodPoints: _en.fallbackFoodPoints,
+    shopTitle: _en.fallbackShopTitle,
+    shopPoints: _en.fallbackShopPoints,
+    riderTitle: _en.fallbackRiderTitle,
+    riderSubtitle: _en.fallbackRiderSubtitle,
     riderApplyUrl: links.kRiderApplyUrl,
     appFoodShot: '/images/app-food.png',
     appShopShot: '/images/app-shop.png',
@@ -416,13 +429,10 @@ class LandingData {
     termsHtml: '',
     privacyHtml: '',
     aboutHtml: '',
-    copyright: '© 2026 ${defaults.kBrandName}. All rights reserved.',
+    copyright: _en.fallbackCopyright.fill({'brand': defaults.kBrandName}),
     siteUrl: defaults.kSiteUrl,
-    metaTitle: '${defaults.kBrandName} — Order Food & Products Online | Fast Local Delivery',
-    metaDescription:
-        'Order food and products online from ${defaults.kBrandName} in ${defaults.kCity}. '
-        'Hot meals from our kitchen and everything from our shop, delivered to your door '
-        'with live rider tracking. Order on the web, or get the Android and iPhone app.',
+    metaTitle: _en.fallbackMetaTitle.fill({'brand': defaults.kBrandName}),
+    metaDescription: _en.fallbackMetaDescription.fill({'brand': defaults.kBrandName, 'city': defaults.kCity}),
     ogImage: '${defaults.kSiteUrl}/images/og-cover.jpg',
     brandHex: '#C6453E',
     showDelivery: true,
@@ -447,6 +457,11 @@ class LandingData {
     List<ShowcaseItem> foodItems = const [],
     List<ShowcaseItem> shopItems = const [],
   }) {
+    // Resolved first: every default below comes from this language, so a
+    // store with a half-filled landing setup still reads in its own language
+    // instead of dropping into English.
+    final language = languageFor((landing ?? const {})['language']?.toString());
+    final t = language.strings;
     final base = LandingData.fallback();
     final b = business ?? const {};
     final s = store ?? const {};
@@ -490,12 +505,12 @@ class LandingData {
 
     final city = pick(s, 'city', base.city);
     final address = pick(s, 'address', pick(b, 'store_location', base.storeAddress));
-    final hours = formatBusinessHours(b['business_hours'], base.openingHours);
+    final hours = formatBusinessHours(b['business_hours'], base.openingHours, t);
 
     final radiusRaw = b['max_delivery_radius'];
     final radius = radiusRaw == null
         ? base.deliveryRadius
-        : '${(radiusRaw is num ? radiusRaw : num.tryParse('$radiusRaw') ?? 0).toStringAsFixed(0)} km';
+        : '${(radiusRaw is num ? radiusRaw : num.tryParse('$radiusRaw') ?? 0).toStringAsFixed(0)} ${t.unitKm}';
 
     // A store running one module should not advertise the other.
     final foodEnabled = flag(b, 'is_food_module_enabled', base.foodEnabled);
@@ -505,6 +520,7 @@ class LandingData {
     final siteUrl = pick(l, 'site_url', base.siteUrl);
 
     return LandingData(
+      languageCode: language.code,
       brandFirst: brandFirst,
       brandSecond: brandSecond,
       logoUrl: pick(s, 'logo_url', ''),
@@ -512,10 +528,10 @@ class LandingData {
       storeAddress: address,
       openingHours: hours,
       deliveryRadius: radius,
-      heroBadge: pick(l, 'hero_badge_text', 'Delivering across $city · Open $hours'),
-      heroTitle: pick(l, 'hero_title', base.heroTitle),
-      heroAccent: pick(l, 'hero_title_accent', base.heroAccent),
-      heroSubtitle: pick(l, 'hero_subtitle', base.heroSubtitle),
+      heroBadge: pick(l, 'hero_badge_text', t.heroBadge.fill({'city': city, 'hours': hours})),
+      heroTitle: pick(l, 'hero_title', t.fallbackHeroTitle),
+      heroAccent: pick(l, 'hero_title_accent', t.fallbackHeroAccent),
+      heroSubtitle: pick(l, 'hero_subtitle', t.fallbackHeroSubtitle),
       heroImage: pick(l, 'hero_image_url', pick(s, 'cover_url', base.heroImage)),
       ordersDelivered: pick(l, 'stat_orders_delivered', base.ordersDelivered),
       avgDeliveryMinutes: pick(b, 'max_delivery_time', base.avgDeliveryMinutes),
@@ -526,12 +542,12 @@ class LandingData {
       freeDeliveryOver: money(b['free_delivery_above'], base.freeDeliveryOver),
       foodEnabled: foodEnabled,
       shopEnabled: shopEnabled,
-      foodTitle: pick(l, 'food_card_title', base.foodTitle),
-      foodPoints: list(l, 'food_card_points', base.foodPoints),
-      shopTitle: pick(l, 'shop_card_title', base.shopTitle),
-      shopPoints: list(l, 'shop_card_points', base.shopPoints),
-      riderTitle: pick(l, 'rider_title', base.riderTitle),
-      riderSubtitle: pick(l, 'rider_subtitle', base.riderSubtitle),
+      foodTitle: pick(l, 'food_card_title', t.fallbackFoodTitle),
+      foodPoints: list(l, 'food_card_points', t.fallbackFoodPoints),
+      shopTitle: pick(l, 'shop_card_title', t.fallbackShopTitle),
+      shopPoints: list(l, 'shop_card_points', t.fallbackShopPoints),
+      riderTitle: pick(l, 'rider_title', t.fallbackRiderTitle),
+      riderSubtitle: pick(l, 'rider_subtitle', t.fallbackRiderSubtitle),
       riderApplyUrl: pick(l, 'rider_apply_url', base.riderApplyUrl),
       appFoodShot: pick(l, 'app_screenshot_food_url', base.appFoodShot),
       appShopShot: pick(l, 'app_screenshot_shop_url', base.appShopShot),
@@ -550,10 +566,18 @@ class LandingData {
       termsHtml: pick(policy, 'terms_and_conditions_html', ''),
       privacyHtml: pick(policy, 'privacy_policy_html', ''),
       aboutHtml: pick(policy, 'about_us_html', ''),
-      copyright: pick(b, 'copyright_text', '© 2026 $resolvedName. All rights reserved.'),
+      copyright: pick(b, 'copyright_text', t.fallbackCopyright.fill({'brand': resolvedName})),
       siteUrl: siteUrl,
-      metaTitle: pick(l, 'meta_title', '$resolvedName — Order Food & Products Online | Fast Local Delivery'),
-      metaDescription: pick(l, 'meta_description', pick(s, 'description', base.metaDescription)),
+      metaTitle: pick(l, 'meta_title', t.fallbackMetaTitle.fill({'brand': resolvedName})),
+      metaDescription: pick(
+        l,
+        'meta_description',
+        // The store's own description wins; only fall back to the generic
+        // sentence, and translate that into the chosen language.
+        localised(s['description']).isEmpty
+            ? t.fallbackMetaDescription.fill({'brand': resolvedName, 'city': city})
+            : localised(s['description']),
+      ),
       ogImage: pick(l, 'og_image_url', pick(s, 'cover_url', '$siteUrl/images/og-cover.jpg')),
       brandHex: _normaliseHex(pick(l, 'brand_color', base.brandHex), base.brandHex),
       showDelivery: flag(l, 'show_delivery_section', base.showDelivery),
@@ -642,7 +666,7 @@ String localised(dynamic raw, {String language = 'en'}) {
 /// Reports the **most common** open day rather than the widest range across
 /// the week: a single late Tuesday should not advertise the whole week as
 /// open until midnight. Days that differ are still visible in the app.
-String formatBusinessHours(dynamic raw, String orElse) {
+String formatBusinessHours(dynamic raw, String orElse, SiteStrings t) {
   if (raw == null) return orElse;
   final text = raw.toString().trim();
   if (text.isEmpty) return orElse;
@@ -669,8 +693,8 @@ String formatBusinessHours(dynamic raw, String orElse) {
         .whereType<Map>()
         .map(
           (slot) =>
-              '${_clock(slot['open_hour'], slot['open_minute'])} – '
-              '${_clock(slot['close_hour'], slot['close_minute'])}',
+              '${_clock(slot['open_hour'], slot['open_minute'], t)} – '
+              '${_clock(slot['close_hour'], slot['close_minute'], t)}',
         )
         .join(', ');
 
@@ -687,10 +711,10 @@ String formatBusinessHours(dynamic raw, String orElse) {
   return best;
 }
 
-String _clock(dynamic hour, dynamic minute) {
+String _clock(dynamic hour, dynamic minute, SiteStrings t) {
   final h = hour is num ? hour.toInt() : int.tryParse('$hour') ?? 0;
   final m = minute is num ? minute.toInt() : int.tryParse('$minute') ?? 0;
-  final suffix = h < 12 ? 'am' : 'pm';
+  final suffix = h < 12 ? t.clockAm : t.clockPm;
   final display = h % 12 == 0 ? 12 : h % 12;
   final mm = m.toString().padLeft(2, '0');
   return '$display:$mm$suffix';
