@@ -161,6 +161,14 @@ Future<void> main() async {
         // `dir` on <html> is what the browser needs; the matching CSS lives in
         // lib/ui_kit.dart.
         Document.html(attributes: {'dir': language.isRtl ? 'rtl' : 'ltr'}),
+        // Favicons. The 32px is what a browser tab actually shows; the larger
+        // sizes are for bookmarks, Android home screens and the PWA manifest.
+        // The Apple icon is deliberately on white — iOS renders a transparent
+        // touch icon on black.
+        link(href: '/favicon-32.png', rel: 'icon', attributes: const {'sizes': '32x32', 'type': 'image/png'}),
+        link(href: '/favicon-96.png', rel: 'icon', attributes: const {'sizes': '96x96', 'type': 'image/png'}),
+        link(href: '/icon-192.png', rel: 'icon', attributes: const {'sizes': '192x192', 'type': 'image/png'}),
+        link(href: '/apple-touch-icon.png', rel: 'apple-touch-icon', attributes: const {'sizes': '180x180'}),
         link(href: data.siteUrl, rel: 'canonical'),
         link(href: 'https://fonts.googleapis.com', rel: 'preconnect'),
         link(href: 'https://fonts.gstatic.com', rel: 'preconnect', attributes: const {'crossorigin': ''}),

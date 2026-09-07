@@ -229,6 +229,28 @@ Two other places carry language:
 - `lib/content/site_content.dart` — the placeholder city, address and hours
   used before the store fills anything in
 
+### Favicon and app icons
+
+`web/` ships the icon set, all generated from `web/images/logo.png`:
+
+| File | Used for |
+|---|---|
+| `favicon-32.png` | the browser tab |
+| `favicon-96.png` | high-DPI tabs, bookmarks |
+| `icon-192.png`, `icon-512.png` | Android home screen, PWA |
+| `apple-touch-icon.png` | iOS home screen |
+
+To use your own: replace `web/images/logo.png`, then regenerate the five sizes
+from it. Two details worth keeping:
+
+- The logo is **centred on a square canvas** rather than stretched. A portrait
+  or landscape logo scaled straight into a square favicon comes out distorted.
+- The Apple icon is on a **white background**, not transparent. iOS composites
+  a transparent touch icon onto black.
+
+There is no `favicon.ico`. The `<link>` tags in `lib/main.server.dart` point at
+the PNGs, which every current browser prefers anyway.
+
 ### App screenshots
 
 `web/images/app-food.png` and `web/images/app-shop.png` are the phone mockups
