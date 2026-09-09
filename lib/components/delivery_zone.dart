@@ -28,10 +28,18 @@ class DeliveryZone extends StatelessComponent {
     return section(id: 'delivery', classes: 'section section--alt zone', [
       div(classes: 'container zone-grid', [
         div(classes: 'zone-map', [
-          div(classes: 'zone-rings', [
-            span(classes: 'zone-ring zone-ring--3', []),
-            span(classes: 'zone-ring zone-ring--2', []),
-            span(classes: 'zone-ring zone-ring--1', []),
+          // Decorative: it illustrates the radius, it is not a real map. Hidden
+          // from screen readers, which would otherwise announce a pile of
+          // empty spans between the heading and the area list.
+          div(classes: 'zone-rings', attributes: const {'aria-hidden': 'true'}, [
+            span(classes: 'zone-ring zone-ring--edge', []),
+            span(classes: 'zone-ring zone-ring--core', []),
+
+            // One coverage pulse travelling from the store out to the edge of
+            // the radius, and a second half a cycle behind it.
+            span(classes: 'zone-pulse zone-pulse--a', []),
+            span(classes: 'zone-pulse zone-pulse--b', []),
+
             span(classes: 'zone-pin', [iconMapPin(size: 22)]),
           ]),
           span(classes: 'zone-map-caption', [
@@ -77,6 +85,26 @@ class DeliveryZone extends StatelessComponent {
 
   @css
   static List<StyleRule> get styles => [
+    // The visual's own palette. Translucent brand colour that reads well on
+    // paper-white washes out to almost nothing on near-black, so dark mode
+    // pushes each of these up rather than reusing the shared alphas.
+    css('.zone').styles(
+      raw: {
+        '--zone-line-soft': 'color-mix(in srgb, var(--brand-500) 26%, transparent)',
+        '--zone-line-strong': 'color-mix(in srgb, var(--brand-500) 45%, transparent)',
+        '--zone-glow': 'color-mix(in srgb, var(--brand-500) 16%, transparent)',
+        '--zone-pulse-line': 'color-mix(in srgb, var(--brand-500) 70%, transparent)',
+      },
+    ),
+    css('html.dark-mode .zone').styles(
+      raw: {
+        '--zone-line-soft': 'color-mix(in srgb, var(--brand-500) 45%, transparent)',
+        '--zone-line-strong': 'color-mix(in srgb, var(--brand-500) 75%, transparent)',
+        '--zone-glow': 'color-mix(in srgb, var(--brand-500) 26%, transparent)',
+        '--zone-pulse-line': 'var(--brand-500)',
+      },
+    ),
+
     css('.zone-grid').styles(
       display: Display.grid,
       alignItems: AlignItems.center,
@@ -103,14 +131,30 @@ class DeliveryZone extends StatelessComponent {
     ),
     css('.zone-ring').styles(
       position: Position.absolute(),
-      raw: {'border-radius': '50%', 'border': '1px solid var(--brand-a28)'},
+      raw: {'border-radius': '50%', 'border': '1px solid var(--zone-line-soft)'},
     ),
-    css('.zone-ring--1').styles(width: 104.px, height: 104.px, backgroundColor: Color.variable('--brand-a10')),
-    css('.zone-ring--2').styles(width: 190.px, height: 190.px),
-    css('.zone-ring--3').styles(width: 276.px, height: 276.px),
+    // The store and its immediate surroundings. A soft glow rather than a flat
+    // fill: a solid disc of translucent brand colour turns muddy on a dark
+    // background, this stays clean in both themes.
+    css('.zone-ring--core').styles(
+      width: 104.px,
+      height: 104.px,
+      raw: {
+        'background': 'radial-gradient(circle, var(--zone-glow) 0%, transparent 72%)',
+        'border-color': 'var(--zone-line-strong)',
+      },
+    ),
+    // The edge of the delivery area, drawn as a boundary rather than a band.
+    css('.zone-ring--edge').styles(
+      width: 276.px,
+      height: 276.px,
+      raw: {'border-style': 'dashed'},
+    ),
+    // ── The pin ─────────────────────────────────────────────────────────
     css('.zone-pin').styles(
       display: Display.inlineFlex,
       position: Position.relative(),
+      zIndex: const ZIndex(2),
       alignItems: AlignItems.center,
       justifyContent: JustifyContent.center,
       width: 52.px,
@@ -119,6 +163,53 @@ class DeliveryZone extends StatelessComponent {
       color: Color.variable('--brand-on'),
       raw: {'border-radius': '50%', 'box-shadow': 'var(--shadow-brand)'},
     ),
+    // A halo that breathes under the pin. Pseudo-element rather than another
+    // span: it is pure decoration and should not exist in the DOM.
+    css('.zone-pin::before').styles(
+      position: Position.absolute(),
+      raw: {
+        'content': '""',
+        'inset': '-10px',
+        'border-radius': '50%',
+        'background': 'var(--zone-glow)',
+        'animation': 'zone-halo 3.2s ease-in-out infinite',
+      },
+    ),
+
+    // ── Coverage pulses ─────────────────────────────────────────────────
+    // Sized to the outer ring and scaled up from the pin, so each pulse
+    // traces exactly the area the store actually covers.
+    css('.zone-pulse').styles(
+      position: Position.absolute(),
+      width: 276.px,
+      height: 276.px,
+      raw: {
+        'inset': '0',
+        'margin': 'auto',
+        'border-radius': '50%',
+        'border': '1px solid var(--zone-pulse-line)',
+        'opacity': '0',
+        'animation': 'zone-pulse 5s cubic-bezier(0.22, 0.61, 0.36, 1) infinite',
+      },
+    ),
+    // Half a cycle behind, so only one line ever crosses the open band at a
+    // time. Three pulses on a 4.2s loop read as clutter, not as coverage.
+    css('.zone-pulse--b').styles(raw: {'animation-delay': '2.5s'}),
+
+    // ── Keyframes ───────────────────────────────────────────────────────
+    // `prefers-reduced-motion` is honoured globally (see main.server.dart):
+    // it collapses these to a single instant frame, which leaves the pulses
+    // invisible and the halo at rest — a clean static diagram.
+    css.keyframes('zone-pulse', {
+      // Starts at the pin's own size: 52px of 276px.
+      '0%': const Styles(raw: {'transform': 'scale(0.19)', 'opacity': '0'}),
+      '14%': const Styles(raw: {'opacity': '0.45'}),
+      '100%': const Styles(raw: {'transform': 'scale(1)', 'opacity': '0'}),
+    }),
+    css.keyframes('zone-halo', {
+      '0%, 100%': const Styles(raw: {'transform': 'scale(1)', 'opacity': '0.9'}),
+      '50%': const Styles(raw: {'transform': 'scale(1.18)', 'opacity': '0.35'}),
+    }),
     css('.zone-map-caption').styles(
       color: Color.variable('--ink-400'),
       fontSize: 0.88.rem,
@@ -186,9 +277,9 @@ class DeliveryZone extends StatelessComponent {
     ]),
     css.media(MediaQuery.screen(maxWidth: bpMd.px), [
       css('.zone-rings').styles(width: 220.px, height: 220.px),
-      css('.zone-ring--3').styles(width: 216.px, height: 216.px),
-      css('.zone-ring--2').styles(width: 150.px, height: 150.px),
-      css('.zone-ring--1').styles(width: 84.px, height: 84.px),
+      css('.zone-ring--edge').styles(width: 216.px, height: 216.px),
+      css('.zone-ring--core').styles(width: 84.px, height: 84.px),
+      css('.zone-pulse').styles(width: 216.px, height: 216.px),
       css('.zone-facts').styles(gap: Gap.all(16.px)),
       css('.zone-fact-value').styles(fontSize: 0.95.rem),
     ]),

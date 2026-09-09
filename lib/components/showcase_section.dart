@@ -26,7 +26,8 @@ class ShowcaseSection extends StatelessComponent {
     final showFood = data.foodEnabled && data.foodItems.isNotEmpty;
     final showShop = data.shopEnabled && data.shopItems.isNotEmpty;
     final bothTabs = showFood && showShop;
-    // Whichever tab is first must be the one checked on load.
+    // Whichever tab is first must be the one checked on load. Food wins
+    // whenever it is present, so the CSS below can treat it as the default.
     final foodFirst = showFood;
 
     return section(id: 'showcase', classes: 'section section--alt showcase', [
@@ -40,13 +41,18 @@ class ShowcaseSection extends StatelessComponent {
         // panels for `~` to reach them. Don't nest them.
         fieldset(classes: 'showcase-tabset', [
           legend(classes: 'sr-only', [Component.text(t.showcaseChooseCategory)]),
+          // `checked:` and not a raw `attributes: {'checked': 'checked'}`.
+          // The browser accepts that attribute, but Jaspr's client renderer
+          // reads it back on hydration and only counts the literal string
+          // 'true' as checked — anything else silently *un*checks the radio,
+          // which left both panels hidden and the section apparently empty.
           if (showFood)
             input(
               type: InputType.radio,
               id: 'tab-food',
               name: 'showcase-tab',
               classes: 'showcase-radio',
-              attributes: foodFirst ? const {'checked': 'checked'} : const {},
+              checked: foodFirst ? true : null,
             ),
           if (showShop)
             input(
@@ -54,7 +60,7 @@ class ShowcaseSection extends StatelessComponent {
               id: 'tab-shop',
               name: 'showcase-tab',
               classes: 'showcase-radio',
-              attributes: foodFirst ? const {} : const {'checked': 'checked'},
+              checked: foodFirst ? null : true,
             ),
           // One module means one list — the tab strip would be a control with
           // nothing to switch between.
@@ -185,9 +191,27 @@ class ShowcaseSection extends StatelessComponent {
     css('.showcase-panels--single .showcase-panel').styles(display: Display.grid),
     css('.showcase-panels').styles(raw: {'min-width': '0'}),
 
-    // The tab machinery.
-    css('#tab-food:checked ~ .showcase-panels .showcase-panel--food').styles(display: Display.grid),
+    // The default view, stated in CSS rather than left to `:checked`. A tab
+    // strip whose products only appear once something is checked is one
+    // stray hydration away from an empty section — this way the first tab's
+    // items are on screen even if no radio is checked at all.
+    css('.showcase-panel--food').styles(display: Display.grid),
+    css('.showcase-tabs label[for="tab-food"]').styles(
+      backgroundColor: Color.variable('--surface-card'),
+      color: Color.variable('--module-food'),
+      raw: {'box-shadow': 'var(--shadow-sm)'},
+    ),
+
+    // The tab machinery. Checking Shop is what moves the page off that
+    // default; checking Food puts it back.
+    css('#tab-shop:checked ~ .showcase-panels .showcase-panel--food').styles(display: Display.none),
     css('#tab-shop:checked ~ .showcase-panels .showcase-panel--shop').styles(display: Display.grid),
+    css('#tab-food:checked ~ .showcase-panels .showcase-panel--food').styles(display: Display.grid),
+    css('#tab-shop:checked ~ .showcase-tabs label[for="tab-food"]').styles(
+      backgroundColor: Colors.transparent,
+      color: Color.variable('--ink-500'),
+      raw: {'box-shadow': 'none'},
+    ),
     css('#tab-food:checked ~ .showcase-tabs label[for="tab-food"]').styles(
       backgroundColor: Color.variable('--surface-card'),
       color: Color.variable('--module-food'),
