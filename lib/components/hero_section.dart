@@ -49,7 +49,7 @@ class HeroSection extends StatelessComponent {
           div(classes: 'hero-actions', [
             a(
               href: data.webAppUrl,
-              classes: 'btn btn-primary btn-lg',
+              classes: 'btn btn-primary btn-lg hero-cta',
               target: Target.blank,
               attributes: const {'rel': 'noopener'},
               [
@@ -84,7 +84,7 @@ class HeroSection extends StatelessComponent {
           // The live-tracking panel does the rider story above the fold, for
           // free, and is module-neutral — it works for a curry or a crate of
           // milk.
-          div(classes: 'tracking-panel', [
+          div(classes: 'tracking-panel hero-float hero-float--panel', [
             div(classes: 'panel-topline', [
               span(classes: 'panel-label', [Component.text(t.trackOrderRef)]),
               span(classes: 'panel-status', [Component.text(t.trackOnTheWay)]),
@@ -94,7 +94,7 @@ class HeroSection extends StatelessComponent {
               span(classes: 'route-bar complete', []),
               span(classes: 'route-point active', []),
               span(classes: 'route-bar complete', []),
-              span(classes: 'route-point active', []),
+              span(classes: 'route-point active current', []),
               span(classes: 'route-bar', []),
               span(classes: 'route-point', []),
             ]),
@@ -105,7 +105,7 @@ class HeroSection extends StatelessComponent {
             ]),
           ]),
 
-          div(classes: 'notification-card', [
+          div(classes: 'notification-card hero-float hero-float--notif', [
             div(classes: 'icon-tile icon-tile--sm notif-icon', [iconBell(size: 19)]),
             div(classes: 'notif-body', [
               span(classes: 'notif-title', [Component.text(t.notifTitle)]),
@@ -217,6 +217,72 @@ class HeroSection extends StatelessComponent {
         columns: GridTracks([GridTrack(TrackSize.fr(1)), GridTrack(TrackSize.fr(1))]),
       ),
     ),
+    // ── Primary CTA ─────────────────────────────────────────────────────
+    // Deliberately the same geometry as its neighbour — the equal-width grid
+    // above only works if the two buttons stay the same height and radius.
+    // Everything here is depth and finish, not size, so "Order now" reads as
+    // the richer of two equals rather than as the bigger one.
+    css('.hero-cta').styles(
+      position: Position.relative(),
+      overflow: Overflow.hidden,
+      raw: {
+        // A diagonal fill has a light source; a flat one does not. Both stops
+        // derive from --brand-500, so this still re-skins from one token.
+        'background-image': 'linear-gradient(135deg, var(--brand-500) 0%, var(--brand-600) 100%)',
+        // Layered rather than a single blur: a tight contact shadow to seat
+        // the button on the page, a wide brand-tinted one for the glow, and
+        // an inset top highlight to round the upper edge.
+        'box-shadow':
+            '0 1px 2px rgba(17, 24, 39, 0.16), '
+                '0 12px 28px var(--brand-a28), '
+                'inset 0 1px 0 rgba(255, 255, 255, 0.22)',
+        // Keeps the sheen's negative z-index inside the button instead of
+        // letting it slip behind the hero's background.
+        'isolation': 'isolate',
+      },
+    ),
+    // The sheen. Parked off the left edge and swept across on hover — the
+    // same specular pass a physical button gets when you tilt it.
+    css('.hero-cta::after').styles(
+      position: Position.absolute(),
+      transition: const Transition('transform', duration: Duration(milliseconds: 750)),
+      raw: {
+        'content': '""',
+        'top': '0',
+        'bottom': '0',
+        'left': '-40%',
+        'width': '35%',
+        'background': 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.30), transparent)',
+        'transform': 'translateX(0) skewX(-18deg)',
+        // Paints above the button's own fill but below its label.
+        'z-index': '-1',
+        'pointer-events': 'none',
+      },
+    ),
+    css('.hero-cta:hover').styles(
+      transform: Transform.translate(y: (-3).px),
+      raw: {
+        'box-shadow':
+            '0 2px 4px rgba(17, 24, 39, 0.18), '
+                '0 20px 40px var(--brand-a28), '
+                'inset 0 1px 0 rgba(255, 255, 255, 0.28)',
+      },
+    ),
+    css('.hero-cta:hover::after').styles(
+      raw: {'transform': 'translateX(420%) skewX(-18deg)'},
+    ),
+    // Presses *into* the page. Without this the button lifts on hover and
+    // then has nowhere to go on click, which reads as unresponsive.
+    css('.hero-cta:active').styles(
+      transform: Transform.translate(y: (-1).px),
+      transition: const Transition('all', duration: Duration(milliseconds: 90)),
+      raw: {'box-shadow': '0 1px 2px rgba(17, 24, 39, 0.20), 0 6px 14px var(--brand-a28)'},
+    ),
+    // Keyboard users get the ring; mouse users do not.
+    css('.hero-cta:focus-visible').styles(
+      raw: {'outline': '3px solid var(--brand-a28)', 'outline-offset': '3px'},
+    ),
+
     css('.hero-store-glyphs').styles(
       display: Display.inlineFlex,
       alignItems: AlignItems.center,
@@ -373,6 +439,75 @@ class HeroSection extends StatelessComponent {
       lineHeight: 1.45.em,
     ),
 
+    // ── Floating panels ─────────────────────────────────────────────────
+    // The two cards sit over the photo and should read as hovering above it
+    // rather than glued to it. Both ride the same idea — a slow vertical
+    // drift with a fractional tilt — on deliberately unequal periods, so they
+    // never fall into step and start looking mechanical.
+    //
+    // Only `transform` is animated. Animating `top` or `box-shadow` would
+    // relayout or repaint the card on every frame; a transform is handed to
+    // the compositor and costs nothing.
+    //
+    // `prefers-reduced-motion` is honoured globally (see main.server.dart) —
+    // it collapses these to one instant frame, leaving both cards at rest.
+    css('.hero-float').styles(
+      // On the base rule, not on :hover — a transition declared only in the
+      // hover state eases the shadow in and then snaps it back out.
+      transition: const Transition('box-shadow', duration: Duration(milliseconds: 260)),
+      raw: {
+        'animation-iteration-count': 'infinite',
+        'animation-timing-function': 'cubic-bezier(0.45, 0.05, 0.55, 0.95)',
+        'will-change': 'transform',
+      },
+    ),
+    // 7s and 5.6s share no common multiple worth noticing, so the pair keeps
+    // drifting in and out of phase instead of syncing up.
+    css('.hero-float--panel').styles(
+      raw: {'animation-name': 'hero-float-panel', 'animation-duration': '7s'},
+    ),
+    // Starts a beat later and travels slightly further: the smaller card
+    // reads as lighter, and staggering the entry stops them pumping together.
+    css('.hero-float--notif').styles(
+      raw: {
+        'animation-name': 'hero-float-notif',
+        'animation-duration': '5.6s',
+        'animation-delay': '-1.8s',
+      },
+    ),
+    // Hovering settles the card and lifts it towards the reader. Pausing
+    // rather than cancelling means it resumes from where it stopped instead
+    // of snapping back to the top of the cycle.
+    css('.hero-float:hover').styles(
+      raw: {'animation-play-state': 'paused', 'box-shadow': 'var(--shadow-lift)'},
+    ),
+    css.keyframes('hero-float-panel', {
+      '0%, 100%': const Styles(raw: {'transform': 'translate3d(0, 0, 0) rotate(0deg)'}),
+      '50%': const Styles(raw: {'transform': 'translate3d(0, -12px, 0) rotate(-0.35deg)'}),
+    }),
+    css.keyframes('hero-float-notif', {
+      '0%, 100%': const Styles(raw: {'transform': 'translate3d(0, 0, 0) rotate(0deg)'}),
+      '50%': const Styles(raw: {'transform': 'translate3d(0, -14px, 0) rotate(0.4deg)'}),
+    }),
+
+    // The rider's current position, pulsing outward. This is the one dot on
+    // the route that is meant to look live.
+    css('.route-point.current').styles(position: Position.relative()),
+    css('.route-point.current::after').styles(
+      position: Position.absolute(),
+      raw: {
+        'content': '""',
+        'inset': '0',
+        'border-radius': '50%',
+        'background': 'var(--brand-500)',
+        'animation': 'hero-ping 2.4s cubic-bezier(0.22, 0.61, 0.36, 1) infinite',
+      },
+    ),
+    css.keyframes('hero-ping', {
+      '0%': const Styles(raw: {'transform': 'scale(1)', 'opacity': '0.55'}),
+      '70%, 100%': const Styles(raw: {'transform': 'scale(2.6)', 'opacity': '0'}),
+    }),
+
     // ── Responsive ──────────────────────────────────────────────────────
     css.media(MediaQuery.screen(maxWidth: bpLg.px), [
       css('.hero').styles(padding: Spacing.only(top: 116.px, bottom: 72.px)),
@@ -399,6 +534,9 @@ class HeroSection extends StatelessComponent {
         margin: Spacing.only(top: 16.px),
       ),
       css('.notification-card').styles(display: Display.none),
+      // In flow the drift would shunt the panel against the copy below it,
+      // and a card that is no longer over the photo has nothing to float on.
+      css('.hero-float').styles(raw: {'animation': 'none'}),
     ]),
     css.media(MediaQuery.screen(maxWidth: bpSm.px), [
       css('.hero').styles(padding: Spacing.only(top: 92.px, bottom: 46.px)),
