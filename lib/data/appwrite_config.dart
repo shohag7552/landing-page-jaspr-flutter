@@ -21,18 +21,18 @@ const kAppwriteEndpoint = String.fromEnvironment(
 
 const kAppwriteProjectId = String.fromEnvironment(
   'APPWRITE_PROJECT_ID',
-  defaultValue: '694d7ed80012589bdb9c',
+  defaultValue: '6aa44c20000b0b73b432',
 );
 
 const kAppwriteDatabaseId = String.fromEnvironment(
   'APPWRITE_DATABASE_ID',
-  defaultValue: 'food_delivery_db',
+  defaultValue: '6aa44dc40005d989a0e4',
 );
 
 /// Bucket holding product and marketing images.
 const kAppwriteBucketId = String.fromEnvironment(
   'APPWRITE_BUCKET_ID',
-  defaultValue: '694d812100305bf791d7',
+  defaultValue: '6aa44e8d0013091f9c27',
 );
 
 /// Table ids, mirroring `AppwriteConfig` in the store panel.
