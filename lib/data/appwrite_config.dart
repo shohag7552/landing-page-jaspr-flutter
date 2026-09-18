@@ -16,7 +16,7 @@ library;
 
 const kAppwriteEndpoint = String.fromEnvironment(
   'APPWRITE_ENDPOINT',
-  defaultValue: 'https://sgp.cloud.appwrite.io/v1',
+  defaultValue: 'https://fra.cloud.appwrite.io/v1',
 );
 
 const kAppwriteProjectId = String.fromEnvironment(
